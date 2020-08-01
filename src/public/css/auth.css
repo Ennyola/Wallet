@@ -1,40 +1,31 @@
 .logo {
     font-family: 'Lily Script One', cursive;
-    color: #A1168A;
 }
 
 .login {
-    background: linear-gradient(180deg, #6445BD 0%, rgba(255, 255, 255, 0) 100%), #FFFFFF;
     height: 100vh;
+    width: 100vw;
     overflow: hidden;
-    color: white;
 }
 
-.login>div {
-    display: flex;
-    justify-content: center;
+.login .logo {
+    color: #A1168A;
+    position: relative;
 }
 
-.form {
-    margin-top: 70px;
+.login .row>div:first-child {
+    height: 100vh;
+    background-image: url('../images/20-banknote-on-black-leather-bag-3943732.jpg');
+    background-size: cover;
+    background-blend-mode: soft-light;
 }
 
-.form h3 {
-    color: #3E2978;
-    font-style: italic;
-    font-weight: bold;
-    font-size: 40px;
-    padding-bottom: 40px;
-    text-align: center;
+.login form {
+    padding: 50px;
 }
 
-.login label {
-    color: #2f3fbe
-}
-
-input {
-    border-bottom: 1px solid #2f3fbe !important;
-    width: 100% !important;
+.signup .logo {
+    color: #A1168A;
 }
 
 .signup {
@@ -87,7 +78,7 @@ input {
     background-blend-mode: soft-light;
 }
 
-.signup .welcome-text-signup {
+.welcome-text {
     position: absolute;
     top: 40%;
     left: 30%;
@@ -95,7 +86,7 @@ input {
 }
 
 @media (max-width:767px) {
-    .logo {
+    .signup .logo {
         color: #EEAADD;
     }
     .signup form h4 {

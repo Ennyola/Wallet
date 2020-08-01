@@ -1,24 +1,37 @@
 import '../public/css/auth.css'
 import React from 'react'
-
-import logo from '../public/images/ENNET.png'
 import { MDBInput } from "mdbreact";
+import {Link} from 'react-router-dom'
+
 
 
 const login = () => {
     return(
         <div className = "login">
-            <img src={logo} alt="logo"/>
+            <div className="row">
+                <div className="col-md-6">
+                <h1 className = "logo"> ENNET </h1>
+                    <div className = "welcome-text">
+                        <h1> Welcome to ENNET.</h1>
+                     </div>
+                </div>
+                <div className="col-md-6">
+                    <div>
+                        <form className = "form">
+                            <h5> Ready to Save? Login</h5>
+                            <MDBInput  className = "form-control" type = "email" hint = "Email" />
+                            <MDBInput  className = "form-control" type = "password" hint = "Password" />
+                            <button className = "btn btn-primary"> Login</button>
 
-            <div>
-                <form className = "form">
-                    <h3> Login</h3>
-                    <MDBInput  className = "form-control" type = "email" hint = "username" />
-                    <MDBInput  className = "form-control" type = "password" hint = "password" />
-                    <button className = "btn btn-primary"> Login</button>
-
-                </form>
+                        </form>
+                       <div> 
+                            Don't have an account with us yet? Register <Link to = "/signup"> here </Link>
+                       </div>
+                    </div>
+                </div>
             </div>
+
+            
             
             
         </div>
