@@ -1,0 +1,121 @@
+.logo {
+    font-family: 'Lily Script One', cursive;
+    color: #A1168A;
+}
+
+.login {
+    background: linear-gradient(180deg, #6445BD 0%, rgba(255, 255, 255, 0) 100%), #FFFFFF;
+    height: 100vh;
+    overflow: hidden;
+    color: white;
+}
+
+.login>div {
+    display: flex;
+    justify-content: center;
+}
+
+.form {
+    margin-top: 70px;
+}
+
+.form h3 {
+    color: #3E2978;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 40px;
+    padding-bottom: 40px;
+    text-align: center;
+}
+
+.login label {
+    color: #2f3fbe
+}
+
+input {
+    border-bottom: 1px solid #2f3fbe !important;
+    width: 100% !important;
+}
+
+.signup {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.signup form {
+    padding: 20px;
+    margin-top: 60px;
+}
+
+.signup form h4 {
+    color: #A1168A;
+}
+
+.signup span {
+    font-family: 'Lily Script One';
+    color: #3E2978;
+}
+
+.signup input {
+    border-bottom: 1px solid #EEAADD !important;
+}
+
+.signup button {
+    float: right;
+    border-radius: 45px;
+    border-color: #A1168A !important;
+    color: #A1168A !important;
+}
+
+.signup button:hover {
+    color: #EEAADD !important;
+    background-color: #A1168A !important;
+    border-color: white !important;
+}
+
+.signup .row>div:first-child {
+    padding: 45px;
+}
+
+.signup .row>div:last-child {
+    height: 100vh;
+    position: relative;
+    background-color: #A1168A;
+    background-image: url('../images/opened-laptop-on-table-1128240.jpg');
+    background-size: cover;
+    background-blend-mode: soft-light;
+}
+
+.signup .welcome-text-signup {
+    position: absolute;
+    top: 40%;
+    left: 30%;
+    color: white;
+}
+
+@media (max-width:767px) {
+    .logo {
+        color: #EEAADD;
+    }
+    .signup form h4 {
+        color: #EEAADD;
+    }
+    .signup span {
+        color: white;
+    }
+    .signup {
+        background-color: #A1168A;
+    }
+    .signup .row>div:last-child {
+        display: none;
+    }
+    .signup button {
+        background-color: #EEAADD !important;
+    }
+    .signup button:hover {
+        color: #EEAADD !important;
+        background-color: #A1168A !important;
+        border-color: white !important;
+    }
+}

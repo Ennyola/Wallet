@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^7.2.1",
     "faker": "^4.1.0",
     "graphql": "^15.3.0",
+    "mdbreact": "^4.27.0",
     "react": "^16.13.1",
     "react-burger-menu": "^2.7.0",
     "react-dom": "^16.13.1",
