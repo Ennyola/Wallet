@@ -2,19 +2,23 @@ html {
     font-family: 'Roboto', sans-serif;
 }
 
+.logo {
+    font-family: 'Lily Script One', cursive;
+}
+
 .header {
-    background: linear-gradient(0deg, #6445BD, #6445BD), #2329B3;
-    padding: 15px 30px;
+    padding: 10px 30px;
     display: flex;
     justify-content: space-between;
     color: white;
+    overflow: hidden;
+    width: 100vw;
+    position: fixed;
 }
 
-
-/* [alt="logo"] {
-    width: 100px !important;
-    height: 40px !important;
-} */
+.header .logo {
+    color: #A1168A;
+}
 
 .header [alt="user-image"] {
     width: 30px !important;
@@ -36,4 +40,10 @@ html {
 .header #user-name {
     padding-left: 10px;
     margin-left: 4px;
+    color: black;
+}
+
+.sidebar {
+    position: fixed;
+    top: 100px;
 }

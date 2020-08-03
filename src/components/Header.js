@@ -4,9 +4,9 @@ import {image} from 'faker'
 import logo from '../public/images/ENNET.png'
 const Header = ()=>{
     return(
-        <div className = "header" >
+        <div className = "header shadow" >
             <div>
-                <img className = "navbar-brand" src={logo} alt="logo"/>
+                <h1 className = "logo">ENNET</h1>
             </div>
            <div>
                 <span className = "user-info">
