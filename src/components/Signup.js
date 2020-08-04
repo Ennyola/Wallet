@@ -1,47 +1,52 @@
-import React, { useState} from 'react'
+import React, { useState, useEffect} from 'react'
 import {MDBInput,MDBBtn} from 'mdbreact'
 import {Link} from 'react-router-dom'
 import {gql, useMutation, useQuery} from '@apollo/client'
 
 import wallet from  '../public/images/crop-man-getting-dollars-from-wallet-4386433.jpg'
+import getUserQuery from '../queries/getUser'
 import '../public/css/auth.css'
-const Signup =()=>{
+
+
+const Signup =(props)=>{
         let [firstName, SetFirstName] = useState(""),
             [lastName, SetLastName] = useState(""),
             [email, SetEmail] = useState(""),
             [password, SetPassword] = useState(""),
             [verifyPassword, SetVerifyPassword] = useState("")
 
- 
-
-
-
+        const {data:userData, error:userError, refetch} = useQuery(getUserQuery)
+        if (userData){
+            const {user} = userData
+            if (user){
+                props.history.push('/dashboard')
+            }
+        }
+        
         const [registerUser, {data, error, loading}] = useMutation(mutation)
         if(loading){
-            console.log("it is loading")
-            console.log(data)
+            return(
+                <div>Loading...</div>
+            )
         }
         if(data){
-            console.log(data)
             const {token} = data.createUser.tokenAuth
             localStorage.setItem('token', token)
+            refetch()     
         }
         if(error){
-            console.log(error)
+            return(
+                <div>{error.message}</div>
+            )
         }  
-
-        
 
         const onSubmit =(e)=>{
             e.preventDefault()
             registerUser({
-                variables:{firstName, lastName, email,password}
+                variables:{firstName, lastName, email,password},
+               
             })
-        }
-
-    
-
-            
+        }     
         
         return(
             <div className = "signup">
