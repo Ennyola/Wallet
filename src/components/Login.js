@@ -1,11 +1,52 @@
 import '../public/css/auth.css'
-import React from 'react'
+import React, {useState} from 'react'
 import { MDBInput } from "mdbreact";
 import {Link} from 'react-router-dom'
 
+import { useMutation, useQuery, gql} from '@apollo/client'
+import getUserQuery from '../queries/getUser'
 
 
-const login = () => {
+const Login = (props) => {
+
+
+    let [email, SetEmail] = useState(""),
+        [password, SetPassword] = useState("")
+
+
+    const {data, error, refetch} = useQuery(getUserQuery)
+    if(data){
+        const{user} = data
+        if(user){
+            props.history.push('/dashboard')
+        }
+    }
+    if (error){
+
+    }
+    const [loginUser, {data:mutationData, loading :mutationLoading, error:mutationError}] = useMutation(mutation)
+
+    if(mutationLoading){
+        return( <div>Loading...</div> )
+    }
+    if(mutationData){
+        const {token} = mutationData.tokenAuth
+        localStorage.setItem('token', token)
+        refetch()
+    }
+    
+    
+    
+    const onSubmit =(e)=>{
+        e.preventDefault()
+        loginUser({
+            variables:{email,password},
+           
+        })
+    } 
+
+
+
     return(
         <div className = "login">
             <div className="row">
@@ -17,10 +58,22 @@ const login = () => {
                 </div>
                 <div className="col-md-6">
                     <div>
-                        <form className = "form">
+                        <form onSubmit= {onSubmit} className = "form">
                             <h5> Ready to Save? Login</h5>
-                            <MDBInput  className = "form-control" type = "email" hint = "Email" />
-                            <MDBInput  className = "form-control" type = "password" hint = "Password" />
+
+                            <MDBInput 
+                            onChange = {e=>{SetEmail(e.target.value)}}
+                            value = {email}
+                            className = "form-control"
+                            type = "email" 
+                            hint = "Email" />
+
+                            <MDBInput  
+                            onChange = {e=>{SetPassword(e.target.value)}}
+                            value = {password}
+                            className = "form-control" 
+                            type = "password" 
+                            hint = "Password" />
                             <button className = "btn btn-primary"> Login</button>
 
                         </form>
@@ -29,13 +82,18 @@ const login = () => {
                        </div>
                     </div>
                 </div>
-            </div>
-
-            
-            
-            
+            </div>       
         </div>
     )
 }
 
-export default login
+const mutation = gql`
+mutation LogUser($email : String!, $password: String! ){
+    tokenAuth(username:$email, password:$password){
+      token
+    }
+  }
+  
+`
+
+export default Login
