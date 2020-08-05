@@ -6,6 +6,9 @@ html {
     font-family: 'Lily Script One', cursive;
 }
 
+
+/* header style */
+
 .header {
     padding: 10px 30px;
     display: flex;
@@ -43,7 +46,32 @@ html {
     color: black;
 }
 
+
+/* sidebar Styles */
+
 .sidebar {
     position: fixed;
     top: 100px;
+}
+
+.sidebar li {
+    position: relative;
+    list-style-type: none;
+    right: 43px;
+    padding-left: 35px;
+    width: 131%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 18px;
+}
+
+.sidebar .fas {
+    position: relative;
+    right: 20px;
+}
+
+.sidebar li:hover {
+    background-color: #A1168A;
+    color: white;
+    cursor: pointer;
 }
