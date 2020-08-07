@@ -12,8 +12,14 @@ class Dashboard extends Component{
                     <SideBar/>
                 </div>
                 <div className = "body">
-                    <h3 id = "overview">Account Overview</h3>
+                    <h4 id = "overview">Account Overview</h4>
+
                     <div id = "fund-div">
+                        <span id = "current-balance">
+                            Current Balance <br/>
+                            ₦0.00
+                        </span>
+
                         <button className = "btn btn-primary" id ="fund-wallet">
                             Fund Wallet
                         </button>
@@ -21,7 +27,7 @@ class Dashboard extends Component{
 
                     <div className = "account-summary">
                         <div className= "summary">
-                            <p>Current Balance</p>
+                            <p>Available Balance</p>
                             <p>N0.00</p>  
                         </div>
                         <div className= "summary">
@@ -33,9 +39,10 @@ class Dashboard extends Component{
                             <p>N0.00</p>  
                         </div>
                         <div className= "summary">
-                            <p>Available Balance</p>
+                            <p>Total Money Added</p>
                             <p>N0.00</p>  
                         </div>
+                        
                     </div>
                     
                 </div>  
