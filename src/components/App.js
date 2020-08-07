@@ -13,6 +13,7 @@ import Dashboard from './Dashboard'
 
 const link = new createHttpLink({
   uri : 'http://127.0.0.1:8000/graphiql/',
+  credentials: 'same-origin'
 })
 
 const authLink = setContext((_, { headers }) => {
