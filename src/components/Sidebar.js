@@ -8,9 +8,9 @@ class Sidebar extends Component {
                 <ul >
                     <Link to ="/dashboard"> <li><i class="fas fa-home"></i>Home</li></Link>
                     <Link to = "/Transactions">    <li><i class="fas fa-exchange-alt"></i>Transactions</li></Link>
-                    <Link>  <li><i class="fas fa-credit-card"></i>Funds</li> </Link> 
-                    <Link>  <li><i class="fas fa-info"></i>Help</li></Link>
-                    <Link>   <li><i class="fas fa-bell"></i>Notifications</li> </Link>
+                    <Link to = "/funds">  <li><i class="fas fa-credit-card"></i>Funds</li> </Link> 
+                    <Link to = "/help">  <li><i class="fas fa-info"></i>Help</li></Link>
+                    <Link to = "/notifications">   <li><i class="fas fa-bell"></i>Notifications</li> </Link>
                 </ul>
             </div>
         )

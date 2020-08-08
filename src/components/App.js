@@ -10,6 +10,7 @@ import { setContext } from 'apollo-link-context'
 import Login from './Login'
 import Signup from './Signup'
 import Dashboard from './Dashboard'
+import Funds from './Funds'
 
 const link = new createHttpLink({
   uri : 'http://127.0.0.1:8000/graphiql/',
@@ -41,6 +42,7 @@ const App = ()=> {
           <Route path = "/login" component = {Login}/>
           <Route path = "/signup" component = {Signup}/>
           <Route path = "/dashboard" component = {Dashboard} />   
+          <Route path = "/funds" component = {Funds}/>
       </BrowserRouter>
     </ApolloProvider>
       

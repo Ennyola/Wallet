@@ -8,9 +8,9 @@ class Dashboard extends Component{
         return(
             <div className = "dashboard">
                 <Header/>
-                <div>
+                
                     <SideBar/>
-                </div>
+                
                 <div className = "body">
                     <h4 id = "overview">Account Overview</h4>
 
