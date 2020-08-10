@@ -1,7 +1,6 @@
 import React from 'react'
 import {image} from 'faker'
 
-import logo from '../public/images/ENNET.png'
 const Header = ()=>{
     return(
         <div className = "header shadow" >
@@ -10,7 +9,7 @@ const Header = ()=>{
             </div>
            <div>
                 <span className = "user-info">
-                    <img src={image.avatar()} alt="user-image"/>
+                    <img src={image.avatar()} alt="user-icon"/>
                     <span id = "user-name">ENIOLA MEDUNOYE</span>
                 </span>
                 <i className="fas fa-angle-down"></i>

@@ -11,6 +11,7 @@ import Login from './Login'
 import Signup from './Signup'
 import Dashboard from './Dashboard'
 import Funds from './Funds'
+import requireAuth from './requireAuth'
 
 const link = new createHttpLink({
   uri : 'http://127.0.0.1:8000/graphiql/',
@@ -41,8 +42,8 @@ const App = ()=> {
       <BrowserRouter>
           <Route path = "/login" component = {Login}/>
           <Route path = "/signup" component = {Signup}/>
-          <Route path = "/dashboard" component = {Dashboard} />   
-          <Route path = "/funds" component = {Funds}/>
+          <Route path = "/dashboard" component = { requireAuth(Dashboard)} />   
+          <Route path = "/funds" component = {requireAuth(Funds)}/>
       </BrowserRouter>
     </ApolloProvider>
       

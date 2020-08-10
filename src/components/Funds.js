@@ -1,9 +1,12 @@
 import React from 'react'
+import {useQuery, gql} from '@apollo/client'
 
 import Header from './Header'
 import SideBar from './Sidebar'
 
 const Funds =(props)=>{
+
+
     return(
         <div className = "funds">
             <Header/>
@@ -11,5 +14,7 @@ const Funds =(props)=>{
         </div>
     )
 }
+
+const query = gql
 
 export default Funds
