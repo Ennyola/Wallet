@@ -6,15 +6,27 @@ import SideBar from './Sidebar'
 
 const Funds =(props)=>{
 
-
+    const {data, error, loading} = useQuery(query)
     return(
         <div className = "funds">
             <Header/>
             <SideBar/>
+            <div className = "">
+
+            </div>
         </div>
     )
 }
 
-const query = gql
+const query = gql`
+query getFunds{
+    funds{
+      id
+      moneyAdded
+      currentBalance
+      previousBalance
+      moneyRemoved
+    }
+  }`
 
 export default Funds
