@@ -89,7 +89,6 @@ html {
 /* dahboard styles */
 
 .dashboard {
-    height: 1000px;
     background-color: #f4f7fa;
 }
 
@@ -139,15 +138,20 @@ html {
 
 .summary {
     padding: 20px;
-    border-radius: 10px;
+    /* border-radius: 10px; */
     width: 267px;
     height: 133px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
-    margin: 30px;
+    box-shadow: 2px 4px 3px rgba(0, 0, 0, 0.2);
+    /* margin: 30px; */
+    text-align: center;
 }
 
 
 /* transaction styles */
+
+.transactions {
+    background-color: #f4f7fa;
+}
 
 .transactions h4 {
     text-align: center;
@@ -173,4 +177,19 @@ html {
     margin: 40px;
     border-radius: 10px;
     padding: 40px;
+}
+
+
+/* funds Styles */
+
+.funds {
+    background-color: #f4f7fa;
+    height: 1000px;
+}
+
+.funds h4 {
+    color: #A1168A;
+    text-align: center;
+    font-weight: bold;
+    margin-right: 100px;
 }
