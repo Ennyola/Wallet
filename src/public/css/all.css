@@ -93,7 +93,7 @@ html {
     background-color: #f4f7fa;
 }
 
-.dashboard>.body {
+.body {
     padding-top: 97px;
     padding-left: 220px;
 }
@@ -144,4 +144,33 @@ html {
     height: 133px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
     margin: 30px;
+}
+
+
+/* transaction styles */
+
+.transactions h4 {
+    text-align: center;
+    margin-right: 100px;
+    color: #A1168A;
+    font-weight: bold;
+    margin-top: 6px;
+}
+
+.transaction-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.transaction {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    color: white;
+    background: linear-gradient( #EEAADD, #A1168A);
+    width: 300px;
+    margin: 40px;
+    border-radius: 10px;
+    padding: 40px;
 }
