@@ -1,29 +1,77 @@
-import React, {Component } from 'react'
+import React, {useState} from 'react'
+import { MDBInput } from 'mdbreact';
+import { PaystackButton } from 'react-paystack'
 
 import Header from './Header'
 import SideBar from './Sidebar'
 
-class Dashboard extends Component{
-    render(){
+const Dashboard =()=>{
+
+      let  [amount, setAmount] = useState()
+      let [fundwallet, setFundWallet] = useState(false)
+
+
+        const showForm=()=>{
+
+            const exitForm = ()=>{
+                return(
+                    <div className = "overlay" style = "">
+
+                    </div>
+                )
+                
+            }
+            
+            return(
+                <div className = "overlay">
+                    <div className = "fundwallet-form">
+                   
+                     <div className = "form">
+                        <i class="fas fa-times" onClick = {exitForm}></i>
+                        <MDBInput 
+                        onChange = {e=>{setAmount(e.target.value)}}
+                        value = {amount}
+                        hint = {"Amount"}
+                        type = "number"/>
+
+
+                        <PaystackButton
+                        className = "paystack-button"
+                        email = {"medunoyeeni@gmail.com"} 
+                        amount = {amount*100}
+                        publicKey = {"pk_test_78d9cf26ee96f7b50fddb3f5353344f4e44f9226"} 
+                        text = {"Fund"}
+                        onSuccess = {()=> alert("Transaction Succesful")}
+                        onClose = {()=>alert("Don't Go")}
+                        />
+                        </div>
+                       
+                    </div>
+                </div>
+            )
+            
+
+        }
         return(
             <div className = "dashboard">
+                {showForm()}
                 <Header/>
-                
-                    <SideBar/>
+                <SideBar/>
                 
                 <div className = "body">
                     <h4 id = "overview">Account Overview</h4>
-
                     <div id = "fund-div">
                         <span id = "current-balance">
                             Current Balance <br/>
                             ₦0.00
                         </span>
 
-                        <button className = "btn btn-primary" id ="fund-wallet">
+                        <button onClick = {e=>{setFundWallet(true)}}  className = "btn btn-primary" id ="fund-wallet">
                             Fund Wallet
                         </button>
                     </div>
+
+                    
 
                     <div className = "account-summary">
                         <div className= "summary">
@@ -53,6 +101,6 @@ class Dashboard extends Component{
 
             </div>
         )
-    }
 }
+
 export default Dashboard
