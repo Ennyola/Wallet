@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState,useEffect, createRef} from 'react'
 import { MDBInput } from 'mdbreact';
 import { PaystackButton } from 'react-paystack'
 
@@ -7,23 +7,24 @@ import SideBar from './Sidebar'
 
 const Dashboard =()=>{
 
-      let  [amount, setAmount] = useState()
-      let [fundwallet, setFundWallet] = useState(false)
+      let  [amount, setAmount] = useState("")
+     
+      let overlayRef = createRef()
+      console.log(typeof(amount))
+
+      const exitForm = ()=>{
+        overlayRef.current.style.display = "none"
+        setAmount("")
+        
+  }
+
+        return(
+            <div className = "dashboard"> 
+                <Header/>
+                <SideBar/>
 
 
-        const showForm=()=>{
-
-            const exitForm = ()=>{
-                return(
-                    <div className = "overlay" style = "">
-
-                    </div>
-                )
-                
-            }
-            
-            return(
-                <div className = "overlay">
+                <div ref = {overlayRef} className = "overlay">
                     <div className = "fundwallet-form">
                    
                      <div className = "form">
@@ -41,23 +42,22 @@ const Dashboard =()=>{
                         amount = {amount*100}
                         publicKey = {"pk_test_78d9cf26ee96f7b50fddb3f5353344f4e44f9226"} 
                         text = {"Fund"}
-                        onSuccess = {()=> alert("Transaction Succesful")}
-                        onClose = {()=>alert("Don't Go")}
+                        onSuccess = {()=> {
+                            overlayRef.current.style.display = "none"
+                            setAmount("")
+                            alert("Transaction Succesful")
+                        }}
+                        onClose = {()=>{
+                            overlayRef.current.style.display = "none"
+                            setAmount("")
+                            alert("Don't Go")}}
                         />
                         </div>
                        
                     </div>
                 </div>
-            )
-            
-
-        }
-        return(
-            <div className = "dashboard">
-                {showForm()}
-                <Header/>
-                <SideBar/>
                 
+
                 <div className = "body">
                     <h4 id = "overview">Account Overview</h4>
                     <div id = "fund-div">
@@ -66,7 +66,12 @@ const Dashboard =()=>{
                             ₦0.00
                         </span>
 
-                        <button onClick = {e=>{setFundWallet(true)}}  className = "btn btn-primary" id ="fund-wallet">
+                        <button 
+                        onClick = {e=>{
+                            
+                            overlayRef.current.style.display = "block"
+                            }}  
+                        className = "btn btn-primary" id ="fund-wallet">
                             Fund Wallet
                         </button>
                     </div>
