@@ -3,10 +3,11 @@ import {useQuery, gql} from '@apollo/client'
 
 import Header from './Header'
 import SideBar from './Sidebar'
+import getTransactionQuery from '../queries/getTransaction'
 
 const Transactions = (props)=>{
 
-    const {data, loading, error} = useQuery(query)
+    const {data, loading, error} = useQuery(getTransactionQuery)
     
     
     const displayTransactions = ()=>{
@@ -43,14 +44,5 @@ const Transactions = (props)=>{
     )
 }
 
-const query = gql`
-query getTransactions{
-    transactions{
-      id
-      moneySaving
-      moneySpending
-        timeOfTransaction
-    }
-  }`
 
 export default Transactions

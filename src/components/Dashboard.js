@@ -1,22 +1,27 @@
 import React, {useState,useEffect, createRef} from 'react'
 import { MDBInput } from 'mdbreact';
 import { PaystackButton } from 'react-paystack'
+import {useMutation, gql} from '@apollo/client'
 
 import Header from './Header'
 import SideBar from './Sidebar'
+import FundWalletMutation from '../mutations/fundWallet'
+import getTransactionQuery from '../queries/getTransaction'
+import getFundsQuery from '../queries/getFunds'
 
 const Dashboard =()=>{
 
       let  [amount, setAmount] = useState("")
-     
       let overlayRef = createRef()
-      console.log(typeof(amount))
-
       const exitForm = ()=>{
         overlayRef.current.style.display = "none"
         setAmount("")
+        }
+
+        const [fundWallet, {data, loading}] = useMutation(FundWalletMutation)
         
-  }
+
+        
 
         return(
             <div className = "dashboard"> 
@@ -45,6 +50,16 @@ const Dashboard =()=>{
                         onSuccess = {()=> {
                             overlayRef.current.style.display = "none"
                             setAmount("")
+                            fundWallet({
+                                variables:{amount},
+                                refetchQueries:[{
+                                    query: getTransactionQuery,
+                                },{
+                                    query: getFundsQuery
+                                }
+                                ]
+                            
+                            })
                             alert("Transaction Succesful")
                         }}
                         onClose = {()=>{

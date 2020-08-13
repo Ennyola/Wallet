@@ -1,13 +1,15 @@
 import React from 'react'
-import {useQuery, gql} from '@apollo/client'
+import {useQuery} from '@apollo/client'
 
 import Header from './Header'
 import SideBar from './Sidebar'
 
+import getFundsQuery from '../queries/getFunds'
+
 const Funds =(props)=>{
 
-    const {data, error, loading} = useQuery(query)
-
+    const {data, error, loading} = useQuery(getFundsQuery)
+    
 
 
     return(
@@ -24,15 +26,5 @@ const Funds =(props)=>{
     )
 }
 
-const query = gql`
-query getFunds{
-    funds{
-      id
-      moneyAdded
-      currentBalance
-      previousBalance
-      moneyRemoved
-    }
-  }`
 
 export default Funds
