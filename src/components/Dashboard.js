@@ -74,6 +74,9 @@ const Dashboard =()=>{
                 
 
                 <div className = "body">
+                
+
+                
                     <h4 id = "overview">Account Overview</h4>
                     <div id = "fund-div">
                         <span id = "current-balance">
@@ -118,7 +121,7 @@ const Dashboard =()=>{
                
                 
              
-
+                            
             </div>
         )
 }

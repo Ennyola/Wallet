@@ -17,7 +17,7 @@ html {
     overflow: hidden;
     width: 100vw;
     position: fixed;
-    background-color: white;
+    background-color: #E5C1CD;
 }
 
 .header .logo {
@@ -52,21 +52,28 @@ html {
 
 .sidebar {
     position: fixed;
-    top: 90px;
-    background-color: white;
+    top: 70px;
+    background-color: #E5C1CD;
     height: 100vh;
+}
+
+.sidebar ul {
+    position: relative;
+    top: 20px;
 }
 
 .sidebar li {
     position: relative;
     list-style-type: none;
-    right: 41px;
+    right: 40px;
     padding-left: 35px;
+    padding-right: 10px;
     padding-top: 20px;
     padding-bottom: 20px;
     font-size: 18px;
-    width: 128%;
+    width: 123%;
     color: #A1168A;
+    border: 4px solid #E5C1CD
 }
 
 .sidebar .fas {
@@ -76,9 +83,9 @@ html {
 }
 
 .sidebar li:hover {
-    background-color: #A1168A;
-    color: white;
+    border-left: 4px solid #453495;
     cursor: pointer;
+    color: white;
 }
 
 .sidebar li:hover .fas {
@@ -200,8 +207,8 @@ html {
     /* border-radius: 10px; */
     width: 267px;
     height: 133px;
-    box-shadow: 2px 4px 3px rgba(0, 0, 0, 0.2);
-    /* margin: 30px; */
+    box-shadow: 2px 4px 2px rgba(0, 0, 0, 0.2);
+    margin: 10px;
     text-align: center;
 }
 
@@ -209,7 +216,7 @@ html {
 /* transaction styles */
 
 .transactions {
-    background-color: #f4f7fa;
+    background-color: white;
 }
 
 .transactions h4 {
@@ -229,10 +236,10 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 150px;
+    height: 200px;
     color: white;
-    background: linear-gradient( #EEAADD, #A1168A);
-    width: 300px;
+    background: linear-gradient(to bottom right, #A1168A, #453495, #E5C1CD);
+    width: 350px;
     margin: 40px;
     border-radius: 10px;
     padding: 40px;

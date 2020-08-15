@@ -15,7 +15,7 @@ const Transactions = (props)=>{
             const {transactions} = data
             return transactions.map(({id,moneySaving, moneySpending, timeOfTransaction})=>{
                 return(
-                  <div className = "transaction" key = {id}>
+                  <div className = "transaction shadow-lg" key = {id}>
                    Money Added - {moneySaving} <br/>
                    Money Deducted - {moneySpending} <br/>
                    Time of Transaction - {timeOfTransaction} <br/>
