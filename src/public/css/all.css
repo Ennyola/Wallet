@@ -171,6 +171,18 @@ html {
 #current-balance {
     color: #A1168A;
     font-weight: bold;
+    margin-left: 40px;
+}
+
+#current-balance div {
+    color: black;
+    opacity: .5;
+}
+
+#current-balance span {
+    font-size: 23px;
+    color: green;
+    opacity: .7;
 }
 
 #fund-div {
@@ -199,17 +211,33 @@ html {
 .account-summary {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 30px;
+    margin-top: 40px;
 }
 
 .summary {
     padding: 20px;
     /* border-radius: 10px; */
-    width: 267px;
-    height: 133px;
-    box-shadow: 2px 4px 2px rgba(0, 0, 0, 0.2);
-    margin: 10px;
-    text-align: center;
+    width: 250px;
+    height: 150px;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
+    margin: 20px;
+    font-weight: 400;
+    border-radius: 10px;
+    transition: .7s all ease;
+}
+
+.summary:hover {
+    background-color: #A1168A;
+    margin-top: 40px;
+}
+
+.summary p {
+    font-size: 15px;
+}
+
+.summary span {
+    color: green;
+    font-size: 22px;
 }
 
 
@@ -258,4 +286,16 @@ html {
     text-align: center;
     font-weight: bold;
     margin-right: 100px;
+}
+
+@media (max-width:950px) {
+    .sidebar {
+        display: none;
+    }
+    .body {
+        padding-left: 30px;
+    }
+    .account-summary {
+        justify-content: center;
+    }
 }

@@ -1,7 +1,7 @@
 import React, {useState,useEffect, createRef} from 'react'
 import { MDBInput } from 'mdbreact';
 import { PaystackButton } from 'react-paystack'
-import {useMutation, gql} from '@apollo/client'
+import {useMutation, gql, useQuery} from '@apollo/client'
 
 import Header from './Header'
 import SideBar from './Sidebar'
@@ -11,24 +11,35 @@ import getFundsQuery from '../queries/getFunds'
 
 const Dashboard =()=>{
 
-      let  [amount, setAmount] = useState("")
-      let overlayRef = createRef()
-      const exitForm = ()=>{
+    let  [amount, setAmount] = useState("")
+
+    let overlayRef = createRef()
+    
+    const {data : fundsQuery, loading: fundsLoading} = useQuery(getFundsQuery)
+
+    const { data : transactionQuery, loading:transLoading} = useQuery(getTransactionQuery)
+
+    const [fundWallet, {data, loading}] = useMutation(FundWalletMutation)
+    const exitForm = ()=>{
         overlayRef.current.style.display = "none"
         setAmount("")
-        }
+    }
 
-        const [fundWallet, {data, loading}] = useMutation(FundWalletMutation)
-        
+    if (fundsLoading && transLoading) {
+        return( 
+        <div>Loading...</div>
+        )
+    }
 
-        
+    const {currentBalance,moneyAdded,moneyRemoved} = fundsQuery.funds
+
 
         return(
             <div className = "dashboard"> 
                 <Header/>
                 <SideBar/>
 
-
+                {/* paystack form's markup */}
                 <div ref = {overlayRef} className = "overlay">
                     <div className = "fundwallet-form">
                    
@@ -74,19 +85,15 @@ const Dashboard =()=>{
                 
 
                 <div className = "body">
-                
-
-                
                     <h4 id = "overview">Account Overview</h4>
                     <div id = "fund-div">
                         <span id = "current-balance">
-                            Current Balance <br/>
-                            ₦0.00
+                           <div >Current Balance</div>  
+                            <span> ₦ {currentBalance}</span>
                         </span>
 
                         <button 
-                        onClick = {e=>{
-                            
+                        onClick = {e=>{ 
                             overlayRef.current.style.display = "block"
                             }}  
                         className = "btn btn-primary" id ="fund-wallet">
@@ -99,21 +106,20 @@ const Dashboard =()=>{
                     <div className = "account-summary">
                         <div className= "summary">
                             <p>Available Balance</p>
-                            <p>N0.00</p>  
+                            <span>N0.00</span>  
                         </div>
                         <div className= "summary">
                             <p>Money Funded</p>
-                            <p>N0.00</p>  
+                            <span>+₦{moneyAdded}</span> 
                         </div>
                         <div className= "summary"> 
                             <p>Money Deducted</p>
-                            <p>N0.00</p>  
+                            <span className = "text-danger">-{moneyRemoved}</span>
                         </div>
                         <div className= "summary">
                             <p>Total Money Added</p>
-                            <p>N0.00</p>  
-                        </div>
-                        
+                            <span>0.00</span> 
+                        </div>         
                     </div>
                     
                 </div>  
