@@ -31,8 +31,17 @@ const Dashboard =()=>{
         )
     }
 
-    const {currentBalance,moneyAdded,moneyRemoved} = fundsQuery.funds
-
+    const {currentBalance,moneyAdded,moneyRemoved, previousBalance} = fundsQuery.funds
+   
+    const getTotalMoneyAdded = ()=>{
+        if(transactionQuery){
+         
+            const {transactions} =transactionQuery
+            const totalMoneyAdded =  transactions.map(({moneySaving})=> moneySaving)
+            return totalMoneyAdded.reduce((a,b)=> a+b).toFixed(2)
+            
+    }
+    }
 
         return(
             <div className = "dashboard"> 
@@ -89,7 +98,7 @@ const Dashboard =()=>{
                     <div id = "fund-div">
                         <span id = "current-balance">
                            <div >Current Balance</div>  
-                            <span> ₦ {currentBalance}</span>
+                            <span> ₦ {currentBalance.toFixed(2)}</span>
                         </span>
 
                         <button 
@@ -105,20 +114,20 @@ const Dashboard =()=>{
 
                     <div className = "account-summary">
                         <div className= "summary">
-                            <p>Available Balance</p>
-                            <span>N0.00</span>  
+                            <p>Previous Balance</p>
+                            <span>₦{previousBalance.toFixed(2)}</span>  
                         </div>
                         <div className= "summary">
                             <p>Money Funded</p>
-                            <span>+₦{moneyAdded}</span> 
+                            <span>+₦{moneyAdded.toFixed(2)}</span> 
                         </div>
                         <div className= "summary"> 
                             <p>Money Deducted</p>
-                            <span className = "text-danger">-{moneyRemoved}</span>
+                            <span className = "text-danger">-{moneyRemoved.toFixed(2)}</span>
                         </div>
                         <div className= "summary">
                             <p>Total Money Added</p>
-                            <span>0.00</span> 
+                            <span>₦{getTotalMoneyAdded()}</span> 
                         </div>         
                     </div>
                     
