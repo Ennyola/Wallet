@@ -20,20 +20,22 @@ const Transactions = (props)=>{
               const [transactionDate, transactionTime] = timeOfTransaction.split('T')
               
              const time = transactionTime.slice(0,15).split('.')[0]
-             const utc = transactionTime.slice(15)  
-              console.log(date.parse(`${transactionDate} ${time} GMT${utc}`, 'YYYY-MM-DD...'))
-
+             const utc = transactionTime.slice(15)    
+             const dateTimeString = date.parse(`${transactionDate} ${time} GMT${utc.replace(':','')}`, 'YYYY-MM-DD HH:mm:ss [GMT]Z')
+             console.log(dateTimeString)
+   
               
                 return(
                   <div className = "transaction shadow-lg" key = {id}>
                     <div className = "left">
                       <span>Money Added </span> <br/>
-                      <span> Date</span>
+                      <br/><br/>
+                      <span> {`${dateTimeString.getMonth()} / ${dateTimeString.getFullYear().toString().slice(2)}`}</span>
                     </div>
                     
                     <div className = "right">
                       <span>₦{moneySaving.toFixed(2)} </span> <br/>
-                      {/* <span>{timeOfTransaction} </span> <br/> */}
+                       {/* <span>{dateTimeString.toUTCString()} </span> <br/>  */}
                     </div>
                     
                     {/* Money Deducted - {moneySpending.toFixed(2)} <br/> */}
