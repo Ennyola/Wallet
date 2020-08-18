@@ -22,24 +22,31 @@ const Transactions = (props)=>{
              const time = transactionTime.slice(0,15).split('.')[0]
              const utc = transactionTime.slice(15)    
              const dateTimeString = date.parse(`${transactionDate} ${time} GMT${utc.replace(':','')}`, 'YYYY-MM-DD HH:mm:ss [GMT]Z')
-             console.log(dateTimeString)
-   
-              
+            //  console.log(dateTimeString.toUTCString())
+            //  console.log(dateTimeString.toString())
+            const utcDay = dateTimeString.toUTCString().slice(0, 16)
+            const utcTime = dateTimeString.toUTCString().slice(17,25)
+            // console.log(utcTime)           
                 return(
                   <div className = "transaction shadow-lg" key = {id}>
                     <div className = "left">
                       <span>Money Added </span> <br/>
                       <br/><br/>
-                      <span> {`${dateTimeString.getMonth()} / ${dateTimeString.getFullYear().toString().slice(2)}`}</span>
+                      <br/>
+                      <span>
+                        {utcDay}
+                      </span>
+                      
                     </div>
                     
                     <div className = "right">
                       <span>₦{moneySaving.toFixed(2)} </span> <br/>
+                      <br/><br/><br/>
                        {/* <span>{dateTimeString.toUTCString()} </span> <br/>  */}
-                    </div>
-                    
-                    {/* Money Deducted - {moneySpending.toFixed(2)} <br/> */}
-                    
+                       {/* <span> {`${dateTimeString.getMonth()} / ${dateTimeString.getFullYear().toString().slice(2)}`}</span> */}
+                       <span>{utcTime}</span>
+                    </div>           
+                    {/* Money Deducted - {moneySpending.toFixed(2)} <br/> */}            
                   </div>
                 )         
 
