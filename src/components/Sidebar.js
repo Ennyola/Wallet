@@ -17,7 +17,7 @@ class Sidebar extends Component {
                     <Link to = "/help">  <i className="fas fa-info"></i>Help</Link>
                     <Link to = "/notifications">   <i className="fas fa-bell"></i>Notifications </Link>
                                       {/* <Link to = "/funds">  <i className="fas fa-credit-card"></i>Funds </Link>  */}
-                <button onClick = {onClick}>Logout</button>
+                    <a onClick = {onClick}>Logout</a>
             </div>
         )
     }

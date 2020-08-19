@@ -10,10 +10,9 @@ const Header = ()=>{
            <div>
                 <span className = "user-info">
                     <img src={image.avatar()} alt="user-icon"/>
-                    <span id = "user-name">ENIOLA MEDUNOYE</span>
+                    <span id = "user-name">ENIOLA</span>
                 </span>
                 <i className="fas fa-angle-down"></i>
-                
            </div> 
 
             
