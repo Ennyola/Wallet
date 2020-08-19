@@ -11,13 +11,12 @@ class Sidebar extends Component {
         }
         return(
             <div className = "sidebar">
-                <ul >
-                    <Link to ="/dashboard"> <li><i className="fas fa-home"></i>Home</li></Link>
-                    <Link to = "/transactions">    <li><i className="fas fa-exchange-alt"></i>Transactions</li></Link>
-                    {/* <Link to = "/funds">  <li><i className="fas fa-credit-card"></i>Funds</li> </Link>  */}
-                    <Link to = "/help">  <li><i className="fas fa-info"></i>Help</li></Link>
-                    <Link to = "/notifications">   <li><i className="fas fa-bell"></i>Notifications</li> </Link>
-                </ul>
+                
+                    <Link to ="/dashboard"> <i className="fas fa-home"></i>Home</Link>
+                    <Link to = "/transactions">    <i className="fas fa-exchange-alt"></i>Transactions</Link>
+                    <Link to = "/help">  <i className="fas fa-info"></i>Help</Link>
+                    <Link to = "/notifications">   <i className="fas fa-bell"></i>Notifications </Link>
+                                      {/* <Link to = "/funds">  <i className="fas fa-credit-card"></i>Funds </Link>  */}
                 <button onClick = {onClick}>Logout</button>
             </div>
         )
