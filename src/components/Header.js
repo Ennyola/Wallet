@@ -3,7 +3,7 @@ import {image} from 'faker'
 
 const Header = ()=>{
     return(
-        <div className = "header shadow" >
+        <div className = "header" >
             <div>
                 <h1 className = "logo">ENNET</h1>
             </div>
