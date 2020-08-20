@@ -11,6 +11,7 @@ class Help extends Component{
                 <Sidebar/>
                 <div className = "body">
                     <h4 className = "help-text">Help</h4>
+                    
                     <ul>
                         <li>
                             Thank you for using Ennet. As you might as well have seen, this is an E-wallet designed to automate the process of saving.<br/> 

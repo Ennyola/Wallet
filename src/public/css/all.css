@@ -39,11 +39,19 @@ html {
 .header div:nth-child(2) {
     padding: 10px 10px;
     display: inline;
+    margin-right: 0px;
 }
 
 .header div:nth-child(2) .fas {
     display: inline;
     cursor: pointer;
+    padding: 10px 10px;
+}
+
+.header div:nth-child(2) .fas:active {
+    background-color: rgba(0, 0, 0, .1);
+    border-radius: 200px;
+    opacity: .8;
 }
 
 .header #user-name {
@@ -371,6 +379,27 @@ html {
     color: #A1168A;
     font-weight: bold;
 }
+
+
+/* Account Style */
+
+.account .account-image {
+    width: 250px;
+    height: 250px;
+    border-radius: 180px;
+    position: relative;
+    left: 30%;
+    background-color: rgba(0, 0, 0, .7);
+}
+
+.account .account-image img {
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    mix-blend-mode: darken;
+}
+
+.account .account-image img:hover {}
 
 @media (max-width:950px) {
     .sidebar {
