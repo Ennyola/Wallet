@@ -322,7 +322,7 @@ html {
 }
 
 .transactions .left .utcDay,
-.utcTime {
+.localeTimeString {
     position: relative;
     top: 80px;
 }

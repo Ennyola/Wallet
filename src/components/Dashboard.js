@@ -2,6 +2,7 @@ import React, {useState,useEffect, createRef} from 'react'
 import { MDBInput } from 'mdbreact';
 import { PaystackButton } from 'react-paystack'
 import {useMutation, gql, useQuery} from '@apollo/client'
+import date from 'date-and-time'
 
 import Header from './Header'
 import SideBar from './Sidebar'
@@ -10,8 +11,9 @@ import getTransactionQuery from '../queries/getTransaction'
 import getFundsQuery from '../queries/getFunds'
 
 const Dashboard =()=>{
-
     let  [amount, setAmount] = useState("")
+
+    
 
     let overlayRef = createRef()
     
@@ -24,7 +26,13 @@ const Dashboard =()=>{
         overlayRef.current.style.display = "none"
         setAmount("")
     }
-
+    const getDate=() =>{
+        const dateObj = new Date()
+        const date = dateObj.toLocaleDateString()
+        const time = dateObj.toTimeString()
+        const dateAndTime = `${date},${time}`
+        return dateAndTime
+    }
     if (fundsLoading && transLoading) {
         return( 
         <div>Loading...</div>
@@ -71,14 +79,15 @@ const Dashboard =()=>{
                             overlayRef.current.style.display = "none"
                             setAmount("")
                             fundWallet({
-                                variables:{amount},
-                                refetchQueries:[{
+                                variables:{amount, timeOfTransaction: getDate()},
+                                refetchQueries:[
+                                    {
                                     query: getTransactionQuery,
-                                },{
+                                    },
+                                    {
                                     query: getFundsQuery
-                                }
-                                ]
-                            
+                                    }
+                                ]    
                             })
                             alert("Transaction Succesful")
                         }}
