@@ -389,7 +389,6 @@ html {
     border-radius: 180px;
     position: relative;
     left: 30%;
-    border: 2px solid red;
 }
 
 .account .account-image img {
@@ -405,7 +404,6 @@ html {
     z-index: +1;
     height: 100%;
     border-radius: inherit;
-    display: none;
     cursor: pointer;
 }
 

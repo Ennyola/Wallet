@@ -105,4 +105,7 @@
         background-color: #A1168A !important;
         border-color: white !important;
     }
+    .login .row>div:first-child {
+        display: none;
+    }
 }
