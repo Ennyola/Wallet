@@ -4,18 +4,7 @@ import {Route, BrowserRouter, } from 'react-router-dom'
 import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client'
 import {createHttpLink} from 'apollo-link-http'
 import { setContext } from 'apollo-link-context'
-
-
-
-import Login from './Login'
-import Signup from './Signup'
-import Dashboard from './Dashboard'
-import Funds from './Funds'
-import requireAuth from './requireAuth'
-import Transactions from './Transaction'
-import Help from './Help'
-import Notifications from './Notification'
-import Account from './Account';
+import Routes from "../routes/routes"
 
 const link = new createHttpLink({
   uri : 'http://127.0.0.1:8000/graphiql/',
@@ -43,16 +32,7 @@ const App = ()=> {
   return (
     <div className="App">
     <ApolloProvider client = {client}>
-      <BrowserRouter>
-          <Route path = "/login" component = {Login}/>
-          <Route path = "/signup" component = {Signup}/>
-          <Route path = "/dashboard" component = { requireAuth(Dashboard)} />   
-          <Route path = "/funds" component = {requireAuth(Funds)}/>
-          <Route path = "/transactions" component = {requireAuth(Transactions)}/>
-          <Route path = "/help" component = {requireAuth(Help)}/>
-          <Route path = "/notifications" component = {requireAuth(Notifications)}/>
-          <Route path  ="/account" component = {requireAuth(Account)}/>
-      </BrowserRouter>
+      <Routes/>
     </ApolloProvider>
       
       

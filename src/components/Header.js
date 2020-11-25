@@ -1,20 +1,41 @@
 import React from 'react'
 import {image} from 'faker'
 import {Link} from 'react-router-dom'
+import styled from "styled-components"
 
 
-const onClick=(e)=>{
-    e.preventDefault()
-    console.log('hr')
-    localStorage.clear()
-    window.location.reload()
-}
+const BurgerButton = styled.span`
+ .fa-bars{
+    position: relative;
+    top: 2px;
+    font-size: 24px;
+    padding: 8px;
+    color: purple;
+    height: 70%;
+    display: none;
+
+    :active{
+        background: rgba(255, 255, 255, 0.19);
+        border-radius: 90px;
+    }
+    :hover {
+    cursor: pointer;
+    }
+
+    @media(max-width:950px){
+            display:block  
+    }
+ }
+
+`
 
 const Header = ()=>{
     
     return(
         <div className = "header" >
+            
             <div>
+            <BurgerButton> <i className="fas fa-bars"></i></BurgerButton>
                 <h1 className = "logo">ENNET</h1>
             </div>
            
