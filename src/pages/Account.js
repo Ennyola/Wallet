@@ -2,8 +2,6 @@ import React,{createRef, useState} from 'react';
 import {MDBPopover} from 'mdbreact'
 import {Image, Video, Transformation, CloudinaryContext} from 'cloudinary-react';
 
-import Header from './Header'
-import Sidebar from './Sidebar'
 
 import photo from '../public/images/opened-laptop-on-table-1128240.jpg'
 const Account = ()=>{
@@ -72,7 +70,6 @@ const Account = ()=>{
 
     return(
         <div className = "account" onClick = {clickBody}>
-            <Header/>
            
             <div className="body">
                 <div onMouseEnter = {hoverOverImage} onMouseLeave = {leaveImage} className = "account-image">

@@ -30,12 +30,20 @@ const BurgerButton = styled.span`
 `
 
 const Header = ()=>{
+
+    const openSidebar = (e)=>{
+       const sidebar =  document.querySelector(".sidebar")
+    //    e.currentTarget.classList.toggle("invisible")
+       sidebar.classList.toggle("open")
+
+
+    }
     
     return(
         <div className = "header" >
             
             <div>
-            <BurgerButton> <i className="fas fa-bars"></i></BurgerButton>
+            <BurgerButton onClick = {openSidebar} id = "burger-wrapper"> <i className="fas fa-bars"></i></BurgerButton>
                 <h1 className = "logo">ENNET</h1>
             </div>
            

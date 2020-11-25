@@ -40,6 +40,18 @@ html {
     display: flex;
 }
 
+.open {
+    margin-left: 0 !important;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.close {
+    display: none;
+}
+
 
 /* .header div:nth-child(1) .fa-bars {
     position: relative;
@@ -86,38 +98,6 @@ html {
 
 
 /* sidebar Styles */
-
-.sidebar {
-    position: fixed;
-    top: 70px;
-    background-color: #E5C1CD;
-    height: 100vh;
-}
-
-.sidebar a {
-    position: relative;
-    font-size: 18px;
-    color: #A1168A;
-    display: block;
-    padding: 30px 30px;
-    transition: .5s all ease;
-    top: 20px
-}
-
-.sidebar .fas {
-    position: relative;
-    right: 10px;
-}
-
-.sidebar a:hover {
-    cursor: pointer;
-    color: white;
-    background-color: #A1168A;
-}
-
-.sidebar li:hover .fas {
-    color: white;
-}
 
 
 /* dahboard styles */
@@ -444,9 +424,6 @@ html {
 .account .account-image img:hover {}
 
 @media (max-width:950px) {
-    .sidebar {
-        display: none;
-    }
     .body {
         padding-left: 0px;
         margin: 0px

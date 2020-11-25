@@ -1,14 +1,10 @@
 import React, {Component} from 'react'
 
-import Header from './Header'
-import Sidebar from './Sidebar'
 
 class Help extends Component{
     render(){
         return(
             <div className = "help">
-                <Header/>
-                <Sidebar/>
                 <div className = "body">
                     <h4 className = "help-text">Help</h4>
                     

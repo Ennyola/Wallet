@@ -1,9 +1,6 @@
 import React from 'react'
 import {useQuery} from '@apollo/client'
 
-import Header from './Header'
-import SideBar from './Sidebar'
-
 import getFundsQuery from '../queries/getFunds'
 
 const Funds =(props)=>{
@@ -22,8 +19,6 @@ const Funds =(props)=>{
 
     return(
         <div className = "funds">
-            <Header/>
-            <SideBar/>
             <div className = "body">
               <h4>Funds</h4>
               <div className = "my-funds">

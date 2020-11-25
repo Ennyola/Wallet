@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { Route, BrowserRouter, } from 'react-router-dom'
 
-import Login from '../components/Login'
-import Signup from '../components/Signup'
-import Dashboard from '../components/Dashboard'
-import Funds from '../components/Funds'
+import Login from '../pages/Login'
+import Signup from '../pages/Signup'
+import Dashboard from '../pages/Dashboard'
+import Funds from '../pages/Funds'
 import requireAuth from '../components/requireAuth'
-import Transactions from '../components/Transaction'
-import Help from '../components/Help'
-import Notifications from '../components/Notification'
-import Account from '../components/Account';
+import Transactions from '../pages/Transaction'
+import Help from '../pages/Help'
+import Notifications from '../pages/Notification'
+import Account from '../pages/Account';
 import PrivateRoute from "./utils/PrivateRoute"
 import DashboardLayout from "../layout/dashboardlayout"
 

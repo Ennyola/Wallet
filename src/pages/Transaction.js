@@ -1,8 +1,6 @@
 import React from 'react'
 import {useQuery, gql} from '@apollo/client'
 
-import Header from './Header'
-import SideBar from './Sidebar'
 import getTransactionQuery from '../queries/getTransaction'
 import date from 'date-and-time'
 
@@ -59,8 +57,6 @@ const Transactions = (props)=>{
 
     return(
         <div className = "transactions">
-            <Header/>
-            <SideBar/>
             <div className = "body">
               <h4>Transactions</h4>
                 <div className = "transaction-list">

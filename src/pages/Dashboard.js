@@ -4,8 +4,6 @@ import { PaystackButton } from 'react-paystack'
 import {useMutation, gql, useQuery} from '@apollo/client'
 import date from 'date-and-time'
 
-import Header from './Header'
-import SideBar from './Sidebar'
 import FundWalletMutation from '../mutations/fundWallet'
 import getTransactionQuery from '../queries/getTransaction'
 import getFundsQuery from '../queries/getFunds'
@@ -38,9 +36,12 @@ const Dashboard =()=>{
         <div>Loading...</div>
         )
     }
+     
+    const currentBalance = fundsQuery?.funds?.currentBalance
+    const moneyAdded = fundsQuery?.funds?.moneyAdded
+    const moneyRemoved = fundsQuery?.funds?.moneyRemoved
+    const previousBalance = fundsQuery?.funds?.previousBalance
 
-    const {currentBalance,moneyAdded,moneyRemoved, previousBalance} = fundsQuery.funds
-   
     const getTotalMoneyAdded = ()=>{
         if(transactionQuery){
          
@@ -53,8 +54,7 @@ const Dashboard =()=>{
 
         return(
             <div className = "dashboard"> 
-                <Header/>
-                <SideBar/>
+                
 
                 {/* paystack form's markup */}
                 <div ref = {overlayRef} className = "overlay">
