@@ -14,10 +14,9 @@ html {
     display: flex;
     justify-content: space-between;
     color: black;
-    overflow: hidden;
     width: 100vw;
     position: fixed;
-    background-color: #E5C1CD;
+    background-color: #f4f7fa;
     z-index: +1;
     flex-wrap: nowrap;
 }
@@ -32,9 +31,7 @@ html {
     border-radius: 45px;
 }
 
-.header .user-info {
-    margin-right: 40px;
-}
+.header .user-info {}
 
 .header div:nth-child(1) {
     display: flex;
@@ -48,52 +45,17 @@ html {
     visibility: hidden;
 }
 
+.show {
+    display: block !important;
+}
+
 .close {
     display: none;
 }
 
-
-/* .header div:nth-child(1) .fa-bars {
-    position: relative;
-    top: 2px;
-    font-size: 24px;
-    padding: 8px;
-    color: purple;
-    height: 70%;
-    display: none;
-}
-
-.header div:nth-child(1) .fa-bars:hover {
-    cursor: pointer;
-}
-
-.header div:nth-child(1) .fa-bars:active {
-    background: rgba(255, 255, 255, 0.19);
-    border-radius: 90px;
-} */
-
 .header div:nth-child(2) {
     padding: 10px 10px;
-    display: inline;
-    margin-right: 0px;
-}
-
-.header div:nth-child(2) .fas {
-    display: inline;
-    cursor: pointer;
-    padding: 10px 10px;
-}
-
-.header div:nth-child(2) .fas:active {
-    background-color: rgba(0, 0, 0, .1);
-    border-radius: 200px;
-    opacity: .8;
-}
-
-.header #user-name {
-    padding-left: 10px;
-    margin-left: 4px;
-    color: black;
+    /* margin-right: 30px; */
 }
 
 
@@ -103,7 +65,7 @@ html {
 /* dahboard styles */
 
 .dashboard {
-    background-color: #f4f7fa;
+    background-color: #ffffff;
     height: 1000px;
 }
 
@@ -124,6 +86,7 @@ html {
     width: 100%;
     height: 100%;
     z-index: +1;
+    display: none;
 }
 
 .fundwallet-form {
@@ -226,7 +189,7 @@ html {
     /* border-radius: 10px; */
     width: 250px;
     height: 150px;
-    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
+    box-shadow: 0 .2rem .7rem rgba(0, 0, 0, .15);
     margin: 20px;
     font-weight: 400;
     border-radius: 10px;
