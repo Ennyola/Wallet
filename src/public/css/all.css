@@ -26,9 +26,10 @@ html {
 }
 
 .header [alt="user-icon"] {
-    width: 30px !important;
-    height: 30px !important;
+    width: 30px;
+    height: 30px;
     border-radius: 45px;
+    object-fit: cover;
 }
 
 .header .user-info {}
