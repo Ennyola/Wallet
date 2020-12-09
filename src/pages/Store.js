@@ -72,7 +72,7 @@ export default () => {
     const [data, setData] = useState([])
     const [page, setPage] = useState(1)
     const fetchPhotos = async ()=>{
-        const data = await (await fetch(`https://api.unsplash.com/search/photos/?query=cars&client_id=oAZ8DyQ4FRcZKSz3083vOLdX7yCv3uEJhGTigrC5wi0&page=${page}&per_page=20`)).json()
+        const data = await (await fetch(`https://api.unsplash.com/search/photos/?query=shoes&client_id=oAZ8DyQ4FRcZKSz3083vOLdX7yCv3uEJhGTigrC5wi0&page=${page}&per_page=20`)).json()
         setData(data)
     }
 
@@ -80,14 +80,18 @@ export default () => {
         
         return(
             <ImageWrapper>
-            {data?.results?.map(({id, urls, alt_description})=>(
-                <Link key={id} to = {`/store/${id}`}>
+            {data?.results?.map(({id, urls, alt_description})=>{
+                const random = Math.floor(Math.random() * 900000)+1000
+                return(
+                    <Link key={id} to = {`/store/${id}&${random}`}>
                     <img  src={urls.small} alt={alt_description}/>
                     <p>{alt_description}</p>
-                    <strong>₦{Math.floor(Math.random() * 900000)+1000}</strong>
+                    <strong>₦{random}</strong>
                 </Link>
+                )
                 
-            ))
+                
+            })
             }
             </ImageWrapper>
         )

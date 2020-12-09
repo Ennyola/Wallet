@@ -14,7 +14,7 @@ import Store from "../pages/Store"
 import PrivateRoute from "./utils/PrivateRoute"
 import DashboardLayout from "../layout/dashboardlayout"
 import ItemPage from "../pages/ItemPage"
-
+import Cart from "../pages/cart"
 export default ()=>{
     return(
         <BrowserRouter>
@@ -30,6 +30,7 @@ export default ()=>{
             <PrivateRoute path  ="/account" layout = {DashboardLayout} component = {requireAuth(Account)}/>
             <PrivateRoute path= "/transactions" layout = {DashboardLayout}  component = {requireAuth(Transactions)}/>
             <PrivateRoute path = "/store/:id" layout = {DashboardLayout} component = {ItemPage} />
+            <PrivateRoute path = "/cart" layout = {DashboardLayout} component = {requireAuth(Cart)}/>
           </Switch>
       </BrowserRouter>
     )
