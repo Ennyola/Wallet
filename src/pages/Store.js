@@ -31,7 +31,9 @@ const Wrapper = styled.div`
         cursor: pointer;
         text-align: center;
         
-        outline:none
+        outline:none;
+        
+    
         }
     .current-page-link,
     .next-link,
@@ -40,6 +42,7 @@ const Wrapper = styled.div`
         width: 100%;
         display: block;
         /* padding:10px; */
+        
         }
     .active {
       background-color: #A1168A;
@@ -52,8 +55,9 @@ const Wrapper = styled.div`
 const ImageWrapper  = styled.div`
     padding:30px;
     display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
+    grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
     grid-row-gap:40px;
+    grid-column-gap:80px;
     
     p, strong{
         color: black !important;
@@ -107,11 +111,7 @@ export default () => {
 
     const handlePageClick = (data) => {
         console.log(data.selected)
-        // let offset = Math.ceil(selected * this.props.perPage);
         setPage(data.selected+1)
-        // this.setState({ offset: offset }, () => {
-        //   this.loadCommentsFromServer();
-        // });
       };
 
  

@@ -52,15 +52,64 @@ const SideBar = styled.div`
 
 
 class Sidebar extends Component {
+    state ={
+        links: [
+            {
+              id: 1,
+              name: "Home",
+              to: "/dashboard",
+              className: "side_nav_item"
+            },
+            {
+              id: 2,
+              name: "Transactions",
+              to: "/transactions",
+              className: "side_nav_item"
+            },
+            {
+              id: 3,
+              name: "Store",
+              to: "/store",
+              className: "side_nav_item"
+            },
+            {
+              id: 4,
+              name: "Help",
+              to: "/help",
+              className: "side_nav_item"
+            },
+            {
+                id: 5,
+                name: "Notifications",
+                to: "/notifications",
+                className: "side_nav_item"
+              }
+          ],
+          activeLink: null
+      
+    } 
+
+     handleClick = (id)=>{
+        this.setState({activeLink:id})
+    }
+
     render(){
-       
+
         return(
-            <SideBar className = "sidebar">  
-                    <Link to ="/dashboard" className = "active"> <i className="fas fa-home"></i>Home</Link>
+            <SideBar className = "sidebar"> 
+                {
+                    this.state.links.map((link)=>(
+                        <Link onClick={()=>this.handleClick(link.id)} to={link.to} key={link.id} 
+                        className = {link.className + (link.id === this.state.activeLink ? " active":"")}>
+                            {link.name}
+                        </Link>
+                    ))
+                } 
+                    {/* <Link to ="/dashboard" className = "active"> <i className="fas fa-home"></i>Home</Link>
                     <Link to = "/transactions">    <i className="fas fa-exchange-alt"></i>Transactions</Link>
-                    <Link to = "/store"><i class="fas fa-store"></i>Store</Link>
+                    <Link to = "/store"><i className="fas fa-store"></i>Store</Link>
                     <Link to = "/help">  <i className="fas fa-info"></i>Help</Link>
-                    <Link to = "/notifications">   <i className="fas fa-bell"></i>Notifications </Link>     
+                    <Link to = "/notifications">   <i className="fas fa-bell"></i>Notifications </Link>      */}
             </SideBar>
         )
     }

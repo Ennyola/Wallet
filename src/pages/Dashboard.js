@@ -121,8 +121,7 @@ const Dashboard =()=>{
                         </button>
                     </div>
 
-                    
-
+                
                     <div className = "account-summary">
                         <div className= "summary">
                             <p>Previous Balance</p>
@@ -142,11 +141,7 @@ const Dashboard =()=>{
                         </div>         
                     </div>
                     
-                </div>  
-                   
-               
-                
-             
+                </div>     
                             
             </div>
         )

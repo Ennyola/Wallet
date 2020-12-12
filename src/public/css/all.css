@@ -2,6 +2,10 @@ html {
     font-family: 'Roboto', sans-serif;
 }
 
+body {
+    padding: 0;
+}
+
 .logo {
     font-family: 'Lily Script One', cursive;
 }
