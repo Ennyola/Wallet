@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import {Link} from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
+import NumberFormat from 'react-number-format';
 
 
 const Wrapper = styled.div`
@@ -24,6 +25,21 @@ const Grid = styled.div`
         font-weight: 400;
         font-size:19px;
     }
+    button{
+        min-width:200px;
+        height:40px;
+        border-radius:20px;
+        background-color: #A1168A;
+        color:white;
+        border:1px solid transparent;  
+        transition:0.3s all ease-in;
+    }
+    button:hover{
+        background-color: white;
+        color: #A1168A;
+        border:1px solid #A1168A;
+
+    }
 
 `
 const Price = styled.div`
@@ -33,7 +49,7 @@ const Price = styled.div`
 
 export default (props)=>{
 
-    const [price, setPrice] = useState(props.match.params.id.split("&")[1])
+    const [price] = useState(props.match.params.id.split("&")[1])
     const [result, setResult] = useState({})
      
     const getItem = async ()=>{
@@ -45,17 +61,15 @@ export default (props)=>{
         getItem()
        
     },[])
+
     const addToCart=()=>{
         const items = localStorage?.ennet_cart ? JSON.parse(localStorage?.ennet_cart) :[]
         console.log(items)
         const index = items.findIndex((item)=> item.id === result.id)
         index === -1 ? items.push({...result, price}): (items[index] = {...result, price})
-
-
-        localStorage.setItem("ennet_cart", JSON.stringify(items))
-        console.log(JSON.parse(localStorage?.ennet_cart))
+        localStorage.setItem("ennet_cart", JSON.stringify(items))   
     }
-    console.log(result)
+
     return(
         <Wrapper>
            <Grid>
@@ -63,10 +77,10 @@ export default (props)=>{
                <div>
                     <p id = "item-desc">{result?.alt_description}</p>
                     <Price>
-                        <p>₦{price}</p>
-                        <p>₦{parseInt(price)+2000} 30%</p>
+                    <NumberFormat value={price} displayType={'text'} thousandSeparator={true} prefix={'₦'}  /> <br/>
+                    <NumberFormat value={parseInt(price)+2000} displayType={'text'} thousandSeparator={true} prefix={'₦'}  />
                     </Price>
-                    <button onClick = {addToCart}>Add to cart</button>
+                    <button onClick = {addToCart}>ADD TO CART</button>
                </div>
                
 

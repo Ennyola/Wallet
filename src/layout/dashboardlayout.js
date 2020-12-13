@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import  SideBar from "../components/Sidebar"
 import Header from "../components/Header"
-export default ({children})=>{
+export default (props)=>{
     return(
         <div>
             <Header/>
-            <SideBar/>
-            {children}
+            <SideBar activeLink = {props.activeLink}/>
+            {props.children}
         </div>
     )
 }

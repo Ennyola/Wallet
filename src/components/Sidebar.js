@@ -85,7 +85,7 @@ class Sidebar extends Component {
                 className: "side_nav_item"
               }
           ],
-          activeLink: null
+          activeLink: this.props.activeLink
       
     } 
 
@@ -94,7 +94,6 @@ class Sidebar extends Component {
     }
 
     render(){
-
         return(
             <SideBar className = "sidebar"> 
                 {

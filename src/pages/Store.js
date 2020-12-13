@@ -15,35 +15,34 @@ const Wrapper = styled.div`
         font-weight: bold;
         margin-top: 6px;  
     }
+
     .pagination {
     display: flex;
     justify-content: flex-end;
     position:relative;
     right:30px;
 
-    .current-page,
-    .break,
-    .next,
-    .previous {
+    li {
         border: 1px solid  #A1168A;
         border-radius: 5px;
         margin-left: 20px;
         cursor: pointer;
         text-align: center;
-        
         outline:none;
-        
     
         }
-    .current-page-link,
+        li a{
+            display:block;
+            width:100%;
+            padding:10px;
+        }
+    /* .current-page-link,
     .next-link,
     .previous-link,
     .break-link {
         width: 100%;
         display: block;
-        /* padding:10px; */
-        
-        }
+        } */
     .active {
       background-color: #A1168A;
       color: #fff;
@@ -126,7 +125,7 @@ export default () => {
             breakLabel={'...'}
             pageClassName={"current-page"}
             activeClassName={"active"}
-            previousClassName={"previous page"}
+            previousClassName={"previous-page"}
             nextLinkClassName={"next-link"}
             breakLinkClassName={"break-link"}
             previousLinkClassName={"previous-link"}

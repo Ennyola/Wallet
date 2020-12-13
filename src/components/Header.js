@@ -82,7 +82,7 @@ const Header = ()=>{
                     {/* <span id = "user-name">ENIOLA</span> */}
                     <DropDownMenu className="dropMenu" >
                         <Link to = "/account" > Account Setting</Link>
-                        <Link onClick >Logout</Link>
+                        <Link to = "">Logout</Link>
                     </DropDownMenu>
                 </span>
                 

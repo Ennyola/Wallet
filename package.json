@@ -17,6 +17,7 @@
     "react": "^16.13.1",
     "react-burger-menu": "^2.7.0",
     "react-dom": "^16.13.1",
+    "react-number-format": "^4.4.1",
     "react-paginate": "^6.5.0",
     "react-paystack": "^3.0.1",
     "react-router-dom": "^5.2.0",

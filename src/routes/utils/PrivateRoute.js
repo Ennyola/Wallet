@@ -4,6 +4,7 @@ import { Route, BrowserRouter, } from 'react-router-dom'
 export default ({
     component: Component,
     layout: Layout,
+    activeLink,
     ...rest
 })=>{
     return(
@@ -12,7 +13,7 @@ export default ({
             {...rest}
             render = {((props)=>{
                 return(
-                    <Layout>
+                    <Layout activeLink = {activeLink}>
                         <Component {...props}/>
                     </Layout>
                 )

@@ -1,7 +1,4 @@
-import React, {useEffect} from 'react'
-import { useQuery } from '@apollo/client'
-
-import getUserQuery from '../queries/getUser'
+import React from 'react'
 
 export default (WrappedComponent) => {
     const RequireAuth = (props) => {
