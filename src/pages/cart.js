@@ -120,14 +120,7 @@ export default ()=>{
         )
     
     }
-    // const getSearchesData = async ()=>{
-    //     console.log(items)
-    //    const random =  Math.floor(Math.random() * 20)+1
-
-    //    const data = await (await fetch(`https://api.unsplash.com/search/photos/?query=shoes&client_id=oAZ8DyQ4FRcZKSz3083vOLdX7yCv3uEJhGTigrC5wi0&page=${random}&per_page=10`)).json()
-    //    setSearchData(data)
-        
-    // }
+   
     useEffect(()=>{
         getItemforStorage()
 
@@ -203,12 +196,7 @@ export default ()=>{
                         <p>{total}</p>
                         <button onClick={toggleModal}>Checkout</button>
                     </Checkout>
-                    {/* <SearchedItems>
-                        <h4>People Also Searched For</h4>
-                        <div>
-                            {}
-                        </div>
-                    </SearchedItems> */}
+                    
                 </div>
                 
             </Wrapper>
