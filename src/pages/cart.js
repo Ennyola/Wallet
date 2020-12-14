@@ -116,7 +116,7 @@ export default ()=>{
         cart = await JSON.parse(localStorage.getItem("ennet_cart"))
         setItems(cart)
         setTotal(()=> 
-            cart.reduce((acc, item)=> acc + Number(item?.price*item?.qty),0)
+            cart.reduce((acc, item)=> acc + Number(item?.price*item?.quantity),0)
         )
     
     }
@@ -172,7 +172,7 @@ export default ()=>{
                             </tr>
                         </thead>
                         <tbody>
-                            {items?.map(({id, urls,alt_description, price, qty, downloads})=>(
+                            {items?.map(({id, urls,alt_description, price, quantity, downloads})=>(
                                 <tr key = {id}>
                                     <td className = "item-cell">
                                         <img src={urls.small} alt={alt_description}/>
@@ -182,9 +182,9 @@ export default ()=>{
                                             <Delete onClick = {()=>{deleteItem(id)}} ><i class="far fa-trash-alt"></i>Delete</Delete>
                                         </div>
                                     </td>
-                                    <td>2</td>
+                                    <td>{quantity}</td>
                                     <td>{price}</td>
-                                    <td>{2 * price}</td>
+                                    <td>{quantity * price}</td>
                                 </tr>
                             ))}
                         

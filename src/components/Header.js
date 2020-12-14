@@ -1,5 +1,4 @@
 import React from 'react'
-import faker from 'faker'
 import {Link} from 'react-router-dom'
 import styled from "styled-components"
 
@@ -79,7 +78,6 @@ const Header = ()=>{
            <div>
                 <span className= "user-info">
                     <img src={image} alt="user-icon"/>
-                    {/* <span id = "user-name">ENIOLA</span> */}
                     <DropDownMenu className="dropMenu" >
                         <Link to = "/account" > Account Setting</Link>
                         <Link to = "">Logout</Link>
@@ -89,10 +87,7 @@ const Header = ()=>{
                 <DropDown onClick = {openDropdown} className = "dropdown">           
                     <i className="fas fa-angle-down"  ></i>
                 </DropDown>
-           </div> 
-           
-      
-            
+           </div>       
         </div>
     )
 }

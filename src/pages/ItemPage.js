@@ -14,7 +14,7 @@ const Wrapper = styled.div`
 const Grid = styled.div`
     position:relative;
     left:10%;
-    /* padding:30px 60px; */
+    margin-top:30px;
     display:grid;
     grid-template-columns: repeat(2, minmax(300px,150px));
     grid-template-rows:repeat(1, 1fr);
@@ -27,6 +27,10 @@ const Grid = styled.div`
         p{
             margin-top:20px;
             font-weight:400;
+        }
+        i{
+            font-weight:900;
+            padding-right:5px;
         }
     }
 
@@ -79,7 +83,14 @@ const Price = styled.div`
 `
 const SearchedItems = styled.div`
     margin-top:90px;
+    
 
+`
+
+const Input = styled.input`
+    min-width:200px;
+    margin:20px 0px;
+    padding:8px;
 
 `
 
@@ -89,6 +100,7 @@ export default (props)=>{
     const [price] = useState(props.match.params.id.split("&")[1])
     const [result, setResult] = useState({})
     const [searchesData, setSearchesData] = useState({})
+    const [quantity, setQuantity] = useState("")
      
     const getItem = async ()=>{
         const id = props.match.params.id.split("&")[0]
@@ -97,7 +109,6 @@ export default (props)=>{
     }
 
      const getSearchesData = async ()=>{
-        console.log(result)
        const random =  Math.floor(Math.random() * 20)+1
        const data = await (await fetch(`https://api.unsplash.com/search/photos/?query=shoes&client_id=oAZ8DyQ4FRcZKSz3083vOLdX7yCv3uEJhGTigrC5wi0&page=${random}&per_page=10`)).json()
        setSearchesData(data?.results)
@@ -119,7 +130,7 @@ export default (props)=>{
         const items = localStorage?.ennet_cart ? JSON.parse(localStorage?.ennet_cart) :[]
         console.log(items)
         const index = items.findIndex((item)=> item.id === result.id)
-        index === -1 ? items.push({...result, price}): (items[index] = {...result, price})
+        index === -1 ? items.push({...result, price,quantity}): (items[index] = {...result, price, quantity})
         localStorage.setItem("ennet_cart", JSON.stringify(items))   
     }
 
@@ -144,9 +155,7 @@ export default (props)=>{
                     <Price>
                         {getValueAfterPercentage(parseInt(price))}
                     </Price>
-                    {/* <select placeholder = "Select Quantity" >
-                        <option></option>
-                    </select> */}
+                    <Input placeholder= {"Select Quantity"} type={"Number"} value = {quantity} onChange={(e)=> setQuantity(Number(e.target.value))}/>
                     <button onClick = {addToCart}>ADD TO CART</button>
                 </div>
             </Grid>
