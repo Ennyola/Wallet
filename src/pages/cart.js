@@ -184,7 +184,7 @@ export default ()=>{
                                     </td>
                                     <td>{quantity}</td>
                                     <td>{price}</td>
-                                    <td>{quantity * price}</td>
+                                    <td>{Number(quantity) * price}</td>
                                 </tr>
                             ))}
                         

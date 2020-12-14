@@ -1,6 +1,5 @@
 import '../public/css/all.css'
 import React from 'react';
-import {Route, BrowserRouter, } from 'react-router-dom'
 import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client'
 import {createHttpLink} from 'apollo-link-http'
 import { setContext } from 'apollo-link-context'
@@ -31,11 +30,9 @@ const client =  new ApolloClient({
 const App = ()=> {
   return (
     <div className="App">
-    <ApolloProvider client = {client}>
-      <Routes/>
-    </ApolloProvider>
-      
-      
+      <ApolloProvider client = {client}>
+        <Routes/>
+      </ApolloProvider>
     </div>
   );
 }

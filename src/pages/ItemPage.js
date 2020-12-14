@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import {Link} from 'react-router-dom'
-import { ToastContainer, toast } from 'react-toastify';
 import NumberFormat from 'react-number-format';
+import {Wrapper} from "../components/styles"
+import notify from "../utils/toast"
 
 
-const Wrapper = styled.div`
-    padding-top: 97px;
-    padding-left: 180px;
-    overflow: hidden;
-`
+import SearchedItems from "../components/SearchedItems"
+
 
 const Grid = styled.div`
     position:relative;
-    left:10%;
+    left:18%;
     margin-top:30px;
     display:grid;
     grid-template-columns: repeat(2, minmax(300px,150px));
@@ -81,11 +78,7 @@ const Price = styled.div`
         
     }
 `
-const SearchedItems = styled.div`
-    margin-top:90px;
-    
 
-`
 
 const Input = styled.input`
     min-width:200px;
@@ -96,51 +89,42 @@ const Input = styled.input`
 
 
 export default (props)=>{
-
     const [price] = useState(props.match.params.id.split("&")[1])
     const [result, setResult] = useState({})
-    const [searchesData, setSearchesData] = useState({})
     const [quantity, setQuantity] = useState("")
-     
+    const [random] = useState(Math.floor(Math.random()*30+1))
     const getItem = async ()=>{
         const id = props.match.params.id.split("&")[0]
         const data = await (await fetch(`https://api.unsplash.com/photos/${id}?client_id=oAZ8DyQ4FRcZKSz3083vOLdX7yCv3uEJhGTigrC5wi0`)).json()
         setResult(data)
     }
-
-     const getSearchesData = async ()=>{
-       const random =  Math.floor(Math.random() * 20)+1
-       const data = await (await fetch(`https://api.unsplash.com/search/photos/?query=shoes&client_id=oAZ8DyQ4FRcZKSz3083vOLdX7yCv3uEJhGTigrC5wi0&page=${random}&per_page=10`)).json()
-       setSearchesData(data?.results)
-        
-    }
-    useEffect(()=>{
-        getItem()
-        
-    },[])
-    useEffect(()=>{
-        getSearchesData()
-        
-    },[])
-
-    // console.log(result)
-    console.log(searchesData)
-
     const addToCart=()=>{
+        if(!quantity){
+            notify("Please select a Quantity", "error")
+            return
+        }
         const items = localStorage?.ennet_cart ? JSON.parse(localStorage?.ennet_cart) :[]
         console.log(items)
         const index = items.findIndex((item)=> item.id === result.id)
         index === -1 ? items.push({...result, price,quantity}): (items[index] = {...result, price, quantity})
-        localStorage.setItem("ennet_cart", JSON.stringify(items))   
+        localStorage.setItem("ennet_cart", JSON.stringify(items))
+        props.history.push("/cart")
     }
 
     const getValueAfterPercentage = (value)=>{
-        const random = Math.floor(Math.random()*30+1)
         const priceMinusPercentage = value-(value*(random/100))
-    return([<p><NumberFormat value={Math.floor(priceMinusPercentage)} displayType={'text'} thousandSeparator={true} prefix={'₦'}  /> </p>,
-            <p><NumberFormat value={value} displayType={'text'} thousandSeparator={true} prefix={'₦'}  /> <span>-{random}%</span></p> ]
-        )
+        return([<p><NumberFormat value={Math.floor(priceMinusPercentage)} displayType={'text'} thousandSeparator={true} prefix={'₦'}  /> </p>,
+                <p><NumberFormat value={value} displayType={'text'} thousandSeparator={true} prefix={'₦'}  /> <span>-{random}%</span></p> ]
+            )
     }
+    
+
+   
+
+    useEffect(()=>{
+     getItem()
+    },[])
+
     
 
     return(
@@ -150,21 +134,18 @@ export default (props)=>{
                     <img src={result?.urls?.small} alt={result?.alt_description}/>
                     <p><i><NumberFormat value={result?.downloads} displayType={'text'} thousandSeparator={true}  /></i> People bought this</p>
                 </div>
+
                 <div>
                     <p id = "item-desc">{result?.alt_description}</p>
                     <Price>
                         {getValueAfterPercentage(parseInt(price))}
                     </Price>
-                    <Input placeholder= {"Select Quantity"} type={"Number"} value = {quantity} onChange={(e)=> setQuantity(Number(e.target.value))}/>
+
+                    <Input placeholder= {"Select Quantity"} type={"Number"} value = {quantity} onChange={(e)=> setQuantity(e.target.value)}/>
                     <button onClick = {addToCart}>ADD TO CART</button>
                 </div>
             </Grid>
-            <SearchedItems>
-                    <h4>People Also Searched For</h4>
-                    <div>
-                        {}
-                    </div>
-            </SearchedItems>
+            <SearchedItems result = {result}/>
         </Wrapper>
     )
 
