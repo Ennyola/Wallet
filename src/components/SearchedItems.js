@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react"
 import styled from "styled-components"
 import {Link, withRouter} from 'react-router-dom'
+import NumberFormat from 'react-number-format';
 
 const SearchedItems = styled.div`
     margin-top:90px;
@@ -31,15 +32,11 @@ const SearchedItems = styled.div`
 `
 
 const Search  = (props)=>{
-    const tags = props?.result?.tags
-    console.log(props)
     const [results, setResults] = useState([])
     const getSearchesData = async ()=>{
-        console.log(tags)
-        if(tags){
-            
-            const random =  Math.floor(Math.random() * tags?.length)+0
-            const itemToSearch = tags[random].title
+        if( props.tags &&  props.tags.length !== 0){
+            const random =  Math.floor(Math.random() * props?.tags?.length)+0
+            const itemToSearch = props?.tags[random].title
             const data = await (await fetch(`https://api.unsplash.com/search/photos/?query=${itemToSearch}s&client_id=oAZ8DyQ4FRcZKSz3083vOLdX7yCv3uEJhGTigrC5wi0&page=${random}&per_page=10`)).json()
             setResults(data?.results)
         }
@@ -48,31 +45,36 @@ const Search  = (props)=>{
 
     useEffect(()=>{
         getSearchesData()
-    },[tags])
+    },[props?.tags])
 
     const goToPage = (id,random)=>{
         props.history.push(`/store/${id}&${random}`)
         window.location.reload()
     }
-
-    console.log(results)
     return(
         <SearchedItems>
-            <h4>
-                People Also Checked
-            </h4>
-            <div>
-                {results?.map(({id, urls, alt_description})=>{
-                    const random = Math.floor(Math.random() * 900000)+1000
-                    return(
-                        <span key={id} onClick={()=> goToPage(id,random)} to = {`/store/${id}&${random}`}>
-                            <img  src={urls.thumb} alt={alt_description}/>
-                            <p>{alt_description}</p>
-                            <strong>₦{random}</strong>
-                        </span>
-                    )
-                })}
-            </div>
+        {
+            props.tags &&  props.tags.length !== 0 &&
+                <> 
+                    <h4>
+                        People Also Checked
+                    </h4>
+                    <div>
+                        {results?.map(({id, urls, alt_description})=>{
+                            const random = Math.floor(Math.random() * 900000)+1000
+                            return(
+                                <span key={id} onClick={()=> goToPage(id,random)} to = {`/store/${id}&${random}`}>
+                                    <img  src={urls.thumb} alt={alt_description}/>
+                                    <p>{alt_description}</p>
+                                    <strong><NumberFormat value={random} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  /></strong>
+                                </span>
+                            )
+                        })}
+                    </div>
+                </>
+
+        }
+            
         </SearchedItems>
     )
     

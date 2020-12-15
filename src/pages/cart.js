@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react"
 import styled from "styled-components"
+import NumberFormat from 'react-number-format';
 
 const Wrapper = styled.div`
     padding-top: 97px;
@@ -19,8 +20,10 @@ const TopText = styled.div`
 `;
 const Table = styled.table`
     position: relative;
-    left:4
-    0px;
+    left:40px;
+    th:not(#item-header){
+        text-align:center;
+    }
     .item-cell{
         display:flex;
         img{
@@ -28,11 +31,19 @@ const Table = styled.table`
             height:60px;
             width:70px;
         }
+        div{
+
+        }
         #desc{
-            padding:20px;
-            word-wrap:break-word;
-            font-weight:600;
+            padding:0px 22px;
+            margin-top:9px;
+            /* word-wrap:break-word; */
             width:100%;
+            p{ 
+                font-weight:400;
+                font-size:16px;
+                text-transform:capitalize;
+            }
         }
     }
     tbody{
@@ -95,8 +106,11 @@ const Modal = styled.div`
 
 const Checkout = styled.div`
     width:77%;
-    display:flex;
-    justify-content:flex-end;
+    float:right;
+    p{
+        font-weight:bold;
+        color:green;
+    }
     button{
         background-color:#A1168A;
         color: #fff;
@@ -172,19 +186,19 @@ export default ()=>{
                             </tr>
                         </thead>
                         <tbody>
-                            {items?.map(({id, urls,alt_description, price, quantity, downloads})=>(
+                            {items?.map(({id, urls,alt_description, price, quantity})=>(
                                 <tr key = {id}>
                                     <td className = "item-cell">
                                         <img src={urls.small} alt={alt_description}/>
                                         <div id = "desc">
-                                            {alt_description} <br/>
-                                            <span>{downloads} bought this item</span>
+                                           <p>{alt_description} </p>
                                             <Delete onClick = {()=>{deleteItem(id)}} ><i class="far fa-trash-alt"></i>Delete</Delete>
                                         </div>
                                     </td>
-                                    <td>{quantity}</td>
-                                    <td>{price}</td>
-                                    <td>{Number(quantity) * price}</td>
+                                    
+                                    <td><NumberFormat value={quantity} displayType={'text'} thousandSeparator={true}  /></td>
+                                    <td><NumberFormat value={price} displayType={'text'} thousandSeparator={true} prefix ={"₦"} /></td>
+                                    <td><NumberFormat value={Number(quantity) * price} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  /></td>
                                 </tr>
                             ))}
                         
@@ -193,7 +207,7 @@ export default ()=>{
                         
                     </Table>
                     <Checkout>
-                        <p>{total}</p>
+                        <p><NumberFormat value={total} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  /></p>
                         <button onClick={toggleModal}>Checkout</button>
                     </Checkout>
                     

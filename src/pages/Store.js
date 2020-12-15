@@ -3,6 +3,7 @@ import styled from "styled-components"
 import ReactPaginate from 'react-paginate';
 import {Link} from 'react-router-dom'
 import {Wrapper} from "../components/styles"
+import NumberFormat from 'react-number-format';
 
 const ImageWrapper  = styled.div`
     padding:30px;
@@ -10,6 +11,7 @@ const ImageWrapper  = styled.div`
     grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
     grid-row-gap:40px;
     grid-column-gap:80px;
+    place-items:center;
     
     p, strong{
         color: black !important;
@@ -42,7 +44,7 @@ export default () => {
                     <Link key={id} to = {`/store/${id}&${random}`}>
                         <img  src={urls.small} alt={alt_description}/>
                         <p>{alt_description}</p>
-                        <strong>₦{random}</strong>
+                        <strong><NumberFormat value={random} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  /></strong>
                     </Link>
                 )
                 

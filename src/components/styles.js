@@ -4,6 +4,7 @@ import styled from "styled-components"
 export const Wrapper = styled.div `
     padding-top: 97px;
     padding-left: 180px;
+    padding-right:30px;
     overflow: hidden;
     h4{
         text-align: center;
@@ -44,6 +45,10 @@ export const Wrapper = styled.div `
       color: #fff;
     }
 
+    }
+    @media (max-width:950px){
+        padding-left: 0px;
+        padding-right:10px;
     }
 
 `

@@ -13,6 +13,7 @@ const Grid = styled.div`
     left:18%;
     margin-top:30px;
     display:grid;
+    padding:30px;
     grid-template-columns: repeat(2, minmax(300px,150px));
     grid-template-rows:repeat(1, 1fr);
     >div:nth-child(1){
@@ -53,22 +54,26 @@ const Grid = styled.div`
 
         }
     }
+    @media(max-width:780px){
+        /* grid-template-columns: repeat(1, minmax(300px,150px));
+        justify-items:center */
+    }
     
     
 
 `
 const Price = styled.div`
-    p:first-child{
+    span:nth-child(1){
         font-weight:bold;
         font-size:24px;
     }
-    p:last-child span:first-child{
+     span:nth-child(3){
         color:rgba(0,0,0,0.5);
         text-decoration:line-through;
         font-size:18px;
 
     }
-    p:last-child span:last-child{
+    span:nth-child(4){
         margin:0px 10px;
         color:#f68b1e;
         background-color:#fcefe9;
@@ -113,9 +118,13 @@ export default (props)=>{
 
     const getValueAfterPercentage = (value)=>{
         const priceMinusPercentage = value-(value*(random/100))
-        return([<p><NumberFormat value={Math.floor(priceMinusPercentage)} displayType={'text'} thousandSeparator={true} prefix={'₦'}  /> </p>,
-                <p><NumberFormat value={value} displayType={'text'} thousandSeparator={true} prefix={'₦'}  /> <span>-{random}%</span></p> ]
-            )
+        return(
+            <div>
+                <NumberFormat value={Math.floor(priceMinusPercentage)} displayType={'text'} thousandSeparator={true} prefix={'₦'}  /> <br/> 
+                <NumberFormat value={value} displayType={'text'} thousandSeparator={true} prefix={'₦'}  /> 
+                <span>-{random}%</span>
+            </div> 
+        )
     }
     
 
@@ -145,7 +154,7 @@ export default (props)=>{
                     <button onClick = {addToCart}>ADD TO CART</button>
                 </div>
             </Grid>
-            <SearchedItems result = {result}/>
+            <SearchedItems tags = {result?.tags}/>
         </Wrapper>
     )
 
