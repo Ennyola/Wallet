@@ -1,6 +1,9 @@
 import React, {useState, useEffect} from "react"
 import styled from "styled-components"
 import NumberFormat from 'react-number-format';
+import {useMutation} from "@apollo/client"
+
+import {PAY_AMOUNT} from "../mutations/MakeTransaction"
 
 const Wrapper = styled.div`
     padding-top: 97px;
@@ -21,9 +24,7 @@ const TopText = styled.div`
 const Table = styled.table`
     position: relative;
     left:40px;
-    th:not(#item-header){
-        text-align:center;
-    }
+    overflow:auto;
     .item-cell{
         display:flex;
         img{
@@ -37,7 +38,6 @@ const Table = styled.table`
         #desc{
             padding:0px 22px;
             margin-top:9px;
-            /* word-wrap:break-word; */
             width:100%;
             p{ 
                 font-weight:400;
@@ -50,6 +50,10 @@ const Table = styled.table`
         tr{
             background-color:#eee;
             border-bottom:20px solid white;
+        }
+        tr:last-child{
+            background-color:#fff;
+            border-bottom:0px solid white;
         }
         td{
             border:3px solid white;
@@ -104,24 +108,28 @@ const Modal = styled.div`
     }
 `
 
-const Checkout = styled.div`
-    width:77%;
-    float:right;
+const Checkout = styled.td`
+    position:relative;
+    left:20px;
+    padding:0px 10px !important;
     p{
         font-weight:bold;
         color:green;
     }
     button{
-        background-color:#A1168A;
-        color: #fff;
+        background-color:#fff;
+        color: #A1168A;
         border-radius:15px;
-        padding:0px 20px;
-        border:1px solid transparent;
+        padding:5px 20px;
+        border:2px solid #A1168A;
+        outline:none;
+        position:relative;
+        right:5px;
     }
 
 `
 
-export default ()=>{
+export default (props)=>{
     document.title = "Cart"
     const [items, setItems] =useState([])
     const [total, setTotal] = React.useState();
@@ -130,9 +138,17 @@ export default ()=>{
         cart = await JSON.parse(localStorage.getItem("ennet_cart"))
         setItems(cart)
         setTotal(()=> 
-            cart.reduce((acc, item)=> acc + Number(item?.price*item?.quantity),0)
+            cart?.reduce((acc, item)=> acc + Number(item?.price*item?.quantity),0)
         )
     
+    }
+
+    const [pay, {data, loading}] = useMutation(PAY_AMOUNT)
+
+    if(data){
+        localStorage.removeItem("ennet_cart");
+        props.history.push("/dashboard")
+        
     }
    
     useEffect(()=>{
@@ -158,14 +174,28 @@ export default ()=>{
             modal.classList.toggle('close')
         }
      }
+
+     const getDate=() =>{
+        const dateObj = new Date()
+        const date = dateObj.toLocaleDateString()
+        const time = dateObj.toTimeString()
+        const dateAndTime = `${date},${time}`
+        console.log(dateAndTime)
+        return dateAndTime
+    }
+     
     return(
         <>
             <Modal onClick = {closeModal} className = "checkout-modal close">
                 <div>
-                    <i onClick = {toggleModal} class="fas fa-times"></i>
+                    <i onClick = {toggleModal} className="fas fa-times"></i>
                     <p>Your Current Balance :2000000</p>
-                    <div>Amount to be paid : {total}</div>
-                    <button>Pay</button> 
+                    <div>Amount to be paid : <NumberFormat value={total} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  /></div>
+                    <button
+                    onClick ={()=> pay({
+                        variables:{amount:total, timeOfTransaction:getDate()}
+                    })}
+                    >Pay</button> 
                 </div> 
             </Modal>
             <Wrapper>
@@ -174,44 +204,57 @@ export default ()=>{
                 <TopText>
                     Cart
                 </TopText>
-                
-                <div className = "cart-body">
-                    <Table>
-                        <thead>
-                            <tr>
-                                <th> <span id = "item-header">Item</span> </th>
-                                <th>Quantity</th>
-                                <th>Price</th>
-                                <th>Subtotal</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {items?.map(({id, urls,alt_description, price, quantity})=>(
-                                <tr key = {id}>
-                                    <td className = "item-cell">
-                                        <img src={urls.small} alt={alt_description}/>
-                                        <div id = "desc">
-                                           <p>{alt_description} </p>
-                                            <Delete onClick = {()=>{deleteItem(id)}} ><i class="far fa-trash-alt"></i>Delete</Delete>
-                                        </div>
-                                    </td>
-                                    
-                                    <td><NumberFormat value={quantity} displayType={'text'} thousandSeparator={true}  /></td>
-                                    <td><NumberFormat value={price} displayType={'text'} thousandSeparator={true} prefix ={"₦"} /></td>
-                                    <td><NumberFormat value={Number(quantity) * price} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  /></td>
+                {items ? (
+                    <div className = "cart-body"> 
+                        <Table>
+                            <thead>
+                                <tr>
+                                    <th> <span id = "item-header">Item</span> </th>
+                                    <th className ="text-center">Quantity</th>
+                                    <th className ="text-center">Price</th>
+                                    <th className ="text-center">Subtotal</th>
                                 </tr>
-                            ))}
+                            </thead>
+                            <tbody>
+                                {items?.map(({id, urls,alt_description, price, quantity})=>(
+                                    <tr key = {id}>
+                                        <td className = "item-cell">
+                                            <img src={urls.small} alt={alt_description}/>
+                                            <div id = "desc">
+                                                <p>{alt_description} </p>
+                                                <Delete onClick = {()=>{deleteItem(id)}} ><i className="far fa-trash-alt"></i>Delete</Delete>
+                                            </div>
+                                        </td>
+                                        
+                                        <td><NumberFormat value={quantity} displayType={'text'} thousandSeparator={true}  /></td>
+                                        <td><NumberFormat value={price} displayType={'text'} thousandSeparator={true} prefix ={"₦"} /></td>
+                                        <td><NumberFormat value={Number(quantity) * price} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  /></td>
+                                    </tr>
+                                ))}
+                            
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <Checkout>
+                                        <p><NumberFormat value={total} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  /></p>
+                                        <button onClick={toggleModal}>Checkout</button>
+                                    </Checkout>
+                                   
+                                </tr>
+                            </tbody>
+                            
+                        </Table>
                         
                         
-                        </tbody>
-                        
-                    </Table>
-                    <Checkout>
-                        <p><NumberFormat value={total} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  /></p>
-                        <button onClick={toggleModal}>Checkout</button>
-                    </Checkout>
-                    
-                </div>
+                    </div>
+                    ):(
+                        <div className ="text-center">
+                            No items to Display
+                        </div>
+                    ) 
+                    }
+                
                 
             </Wrapper>
         </>

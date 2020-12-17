@@ -4,7 +4,7 @@ import { PaystackButton } from 'react-paystack'
 import {useMutation, gql, useQuery} from '@apollo/client'
 import date from 'date-and-time'
 
-import FundWalletMutation from '../mutations/fundWallet'
+import {FUND_WALLET} from '../mutations/MakeTransaction'
 import getTransactionQuery from '../queries/getTransaction'
 import getFundsQuery from '../queries/getFunds'
 
@@ -17,7 +17,7 @@ const Dashboard =()=>{
 
     const { data : transactionQuery, loading:transLoading} = useQuery(getTransactionQuery)
 
-    const [fundWallet, {data, loading}] = useMutation(FundWalletMutation)
+    const [fundWallet, {data, loading}] = useMutation(FUND_WALLET)
     const exitForm = (e)=>{
         const overlay = document.querySelector(".overlay")
         overlay.style.display ="none"
@@ -29,6 +29,7 @@ const Dashboard =()=>{
         const date = dateObj.toLocaleDateString()
         const time = dateObj.toTimeString()
         const dateAndTime = `${date},${time}`
+        console.log(dateAndTime)
         return dateAndTime
     }
     if (fundsLoading && transLoading) {
@@ -36,7 +37,7 @@ const Dashboard =()=>{
         <div>Loading...</div>
         )
     }
-     
+    
     const currentBalance = fundsQuery?.funds?.currentBalance
     const moneyAdded = fundsQuery?.funds?.moneyAdded
     const moneyRemoved = fundsQuery?.funds?.moneyRemoved

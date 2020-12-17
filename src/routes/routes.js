@@ -23,14 +23,14 @@ export default ()=>{
             <Route path = "/signup" component = {Signup}/>
             <PrivateRoute path = "/dashboard" layout = {DashboardLayout} component = { requireAuth(Dashboard)} activeLink = {1} />   
             <PrivateRoute path = "/funds" layout = {DashboardLayout} component = {requireAuth(Funds)}/>
-            <PrivateRoute path = "/help" layout = {DashboardLayout} component = {requireAuth(Help)} activeLink = {4}/>
-            <PrivateRoute path = "/notifications" layout = {DashboardLayout} component = {requireAuth(Notifications)} activeLink = {5}/>
+            <PrivateRoute path = "/help" layout = {DashboardLayout} component = {requireAuth(Help)} activeLink = {5}/>
+            <PrivateRoute path = "/notifications" layout = {DashboardLayout} component = {requireAuth(Notifications)} activeLink = {6}/>
             <PrivateRoute path = "/store/:id" layout = {DashboardLayout} component = {requireAuth(ItemPage)} />
             <PrivateRoute path = "/store" layout = {DashboardLayout} component = {requireAuth(Store)} activeLink = {3}/>
             <PrivateRoute path  ="/account" layout = {DashboardLayout} component = {requireAuth(Account)}/>
             <PrivateRoute path= "/transactions" layout = {DashboardLayout}  component = {requireAuth(Transactions)} activeLink = {2}/>
             <PrivateRoute path = "/store/:id" layout = {DashboardLayout} component = {ItemPage} />
-            <PrivateRoute path = "/cart" layout = {DashboardLayout} component = {requireAuth(Cart)}/>
+            <PrivateRoute path = "/cart" layout = {DashboardLayout} component = {requireAuth(Cart)} activeLink = {4}/>
           </Switch>
       </BrowserRouter>
     )

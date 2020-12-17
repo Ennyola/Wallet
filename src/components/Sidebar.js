@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 import styled from "styled-components"
 
 
+
 const SideBar = styled.div`
     
     position: fixed;
@@ -26,7 +27,7 @@ const SideBar = styled.div`
     padding: 25px 30px;
     transition: .5s all ease;
     top: 20px;
-    margin-top:6px;
+    margin-top:2px;
 }
 
  .fas {
@@ -58,31 +59,44 @@ class Sidebar extends Component {
               id: 1,
               name: "Home",
               to: "/dashboard",
-              className: "side_nav_item"
+              className: "side_nav_item",
+              iconClassName: "fas fa-home"
             },
             {
               id: 2,
               name: "Transactions",
               to: "/transactions",
-              className: "side_nav_item"
+              className: "side_nav_item",
+              iconClassName: "fas fa-exchange-alt"
             },
             {
               id: 3,
               name: "Store",
               to: "/store",
-              className: "side_nav_item"
+              className: "side_nav_item",
+              iconClassName: "fas fa-store"
             },
             {
-              id: 4,
+              id :4,
+              name: "Cart",
+              to: "/cart",
+              className: "side_nav_item",
+              iconClassName: "fas fa-cart"
+            },
+
+            {
+              id: 5,
               name: "Help",
               to: "/help",
-              className: "side_nav_item"
+              className: "side_nav_item",
+              iconClassName: "fas fa-info"
             },
             {
-                id: 5,
+                id: 6,
                 name: "Notifications",
                 to: "/notifications",
-                className: "side_nav_item"
+                className: "side_nav_item",
+                iconClassName: "fas fa-bell"
               }
           ],
           activeLink: this.props.activeLink
@@ -100,6 +114,7 @@ class Sidebar extends Component {
                     this.state.links.map((link)=>(
                         <Link onClick={()=>this.handleClick(link.id)} to={link.to} key={link.id} 
                         className = {link.className + (link.id === this.state.activeLink ? " active":"")}>
+                        <i className = {link.iconClassName}></i>
                             {link.name}
                         </Link>
                     ))
