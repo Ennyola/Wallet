@@ -62,12 +62,8 @@ export default () => {
     },[page])
 
     const handlePageClick = (data) => {
-        console.log(data.selected)
         setPage(data.selected+1)
       };
-
- 
-    console.log(data)
     return(
         <Wrapper>
             <h4>Store</h4>

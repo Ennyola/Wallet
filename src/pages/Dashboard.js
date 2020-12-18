@@ -1,23 +1,20 @@
-import React, {useState,useEffect, createRef} from 'react'
+import React, {useState,useEffect, createRef, useContext} from 'react'
 import { MDBInput } from 'mdbreact';
 import { PaystackButton } from 'react-paystack'
 import {useMutation, gql, useQuery} from '@apollo/client'
-import date from 'date-and-time'
+import NumberFormat from 'react-number-format';
 
 import {FUND_WALLET} from '../mutations/MakeTransaction'
 import getTransactionQuery from '../queries/getTransaction'
 import getFundsQuery from '../queries/getFunds'
+import {FundsContext} from "../context/funds"
 
 const Dashboard =()=>{
     let  [amount, setAmount] = useState("")
+    const {currentBalance,fundsLoading, moneyAdded,moneyRemoved,previousBalance,transactionQuery,transLoading} = useContext(FundsContext)
 
+    const [fundWallet] = useMutation(FUND_WALLET)
     
-    
-    const {data : fundsQuery, loading: fundsLoading} = useQuery(getFundsQuery)
-
-    const { data : transactionQuery, loading:transLoading} = useQuery(getTransactionQuery)
-
-    const [fundWallet, {data, loading}] = useMutation(FUND_WALLET)
     const exitForm = (e)=>{
         const overlay = document.querySelector(".overlay")
         overlay.style.display ="none"
@@ -29,7 +26,6 @@ const Dashboard =()=>{
         const date = dateObj.toLocaleDateString()
         const time = dateObj.toTimeString()
         const dateAndTime = `${date},${time}`
-        console.log(dateAndTime)
         return dateAndTime
     }
     if (fundsLoading && transLoading) {
@@ -37,31 +33,22 @@ const Dashboard =()=>{
         <div>Loading...</div>
         )
     }
-    
-    const currentBalance = fundsQuery?.funds?.currentBalance
-    const moneyAdded = fundsQuery?.funds?.moneyAdded
-    const moneyRemoved = fundsQuery?.funds?.moneyRemoved
-    const previousBalance = fundsQuery?.funds?.previousBalance
 
     const getTotalMoneyAdded = ()=>{
         if(transactionQuery){
-         
             const {transactions} =transactionQuery
             const totalMoneyAdded =  transactions.map(({moneySaving})=> moneySaving)
             return totalMoneyAdded.reduce((a,b)=> a+b).toFixed(2)
-            
-    }
+        }
     }
 
         return(
             <div className = "dashboard"> 
-                
-
                 {/* paystack form's markup */}
                 <div className = "overlay">
                     <div className = "fundwallet-form">
                         <div className = "form">
-                                <i class="fas fa-times" onClick = {exitForm}></i>
+                                <i className="fas fa-times" onClick = {exitForm}></i>
                                 <MDBInput 
                                 onChange = {e=>{setAmount(e.target.value)}}
                                 value = {amount}
@@ -107,16 +94,16 @@ const Dashboard =()=>{
                     <div id = "fund-div">
                         <span id = "current-balance">
                            <div >Current Balance</div>  
-                            <span> ₦ {currentBalance?.toFixed(2)}</span>
+                            <NumberFormat value={currentBalance?.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  />
                         </span>
 
                         <button 
                         onClick ={(e)=>{
-                            
                             const overlay = document.querySelector(".overlay")
                             overlay.style.display ="block"
                         }}  
-                        className = "btn btn-primary" id ="fund-wallet"
+                        className = "btn btn-primary" 
+                        id ="fund-wallet"
                         >
                             Fund Wallet
                         </button>
@@ -126,19 +113,22 @@ const Dashboard =()=>{
                     <div className = "account-summary">
                         <div className= "summary">
                             <p>Previous Balance</p>
-                            <span>₦{previousBalance?.toFixed(2)}</span>  
+                            <NumberFormat value={previousBalance?.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  />
+                     
                         </div>
                         <div className= "summary">
                             <p>Money Funded</p>
-                            <span>+₦{moneyAdded?.toFixed(2)}</span> 
+                            <NumberFormat value={moneyAdded?.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  />
+                     
                         </div>
                         <div className= "summary"> 
                             <p>Money Deducted</p>
-                            <span className = "text-danger">-{moneyRemoved?.toFixed(2)}</span>
+                            <NumberFormat className = "text-danger" value={moneyRemoved?.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  />
+                     
                         </div>
                         <div className= "summary">
                             <p>Total Money Added</p>
-                            <span>₦{getTotalMoneyAdded()}</span> 
+                            <NumberFormat value={getTotalMoneyAdded()} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  />
                         </div>         
                     </div>
                     
