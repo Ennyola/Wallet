@@ -1,9 +1,11 @@
-import React, {useState, useEffect} from "react"
+import React, {useState, useEffect, useContext} from "react"
 import styled from "styled-components"
 import NumberFormat from 'react-number-format';
 import {useMutation} from "@apollo/client"
 
 import {PAY_AMOUNT} from "../mutations/MakeTransaction"
+import {FundsContext} from "../context/funds"
+import notify from "../utils/toast"
 
 const Wrapper = styled.div`
     padding-top: 97px;
@@ -82,12 +84,30 @@ const Modal = styled.div`
     >div{
         background-color:#fff;
         border-radius:10px;
-        padding:80px 20px;
+        padding:100px 10px;
         position:absolute;
         left:40%;
         top:20%;
-        width:300px;
+        width:350px;
         text-align:center;
+        div:nth-of-type(1){
+            font-weight:400;
+
+            span{
+                color:green;
+            }
+            
+        }
+        div:nth-of-type(2){
+            margin-top:20px;
+            font-weight:400;
+
+            span{
+                color:red;
+            }
+            
+        }
+        
         i{
             color:red;
             cursor:pointer;
@@ -96,6 +116,7 @@ const Modal = styled.div`
             top:20px;
             right:20px;
         }
+        
 
         button{
             margin-top:30px;
@@ -131,6 +152,7 @@ const Checkout = styled.td`
 
 export default (props)=>{
     document.title = "Cart"
+    const {currentBalance} = useContext(FundsContext)
     const [items, setItems] =useState([])
     const [total, setTotal] = React.useState();
     const getItemforStorage = async ()=>{
@@ -143,12 +165,11 @@ export default (props)=>{
     
     }
 
-    const [pay, {data, loading}] = useMutation(PAY_AMOUNT)
+    const [pay, {data}] = useMutation(PAY_AMOUNT)
 
     if(data){
         localStorage.removeItem("ennet_cart");
-        props.history.push("/dashboard")
-        
+        props.history.push("/dashboard") 
     }
    
     useEffect(()=>{
@@ -183,24 +204,32 @@ export default (props)=>{
         console.log(dateAndTime)
         return dateAndTime
     }
-     
+    
     return(
         <>
             <Modal onClick = {closeModal} className = "checkout-modal close">
                 <div>
                     <i onClick = {toggleModal} className="fas fa-times"></i>
-                    <p>Your Current Balance :2000000</p>
+                    <div>Current Balance : <NumberFormat value={currentBalance} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  /></div>
                     <div>Amount to be paid : <NumberFormat value={total} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  /></div>
                     <button
-                    onClick ={()=> pay({
+                    onClick ={()=>{
+                        if(total>currentBalance){
+                            const modal = document.querySelector(".checkout-modal")
+                            notify("Insufficent Funds. Please Fund Wallet or Delete Items From Cart","error")
+                            modal.classList.toggle('close')
+                            return
+
+                        }
+                        pay({
                         variables:{amount:total, timeOfTransaction:getDate()}
-                    })}
+                         })
+                    }}
                     >Pay</button> 
                 </div> 
             </Modal>
-            <Wrapper>
-            
 
+            <Wrapper>
                 <TopText>
                     Cart
                 </TopText>

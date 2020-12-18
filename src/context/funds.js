@@ -14,15 +14,13 @@ export const FundsContext = createContext({})
 export const FundsContextProvider = ({children})=>{
     const {data : fundsQuery, loading: fundsLoading} = useQuery(getFundsQuery)
     const {data : transactionQuery, loading:transLoading} = useQuery(getTransactionQuery)
-
-    
     return(
         <FundsContext.Provider
         value = {{
             currentBalance :fundsQuery?.funds?.currentBalance,
             moneyAdded:fundsQuery?.funds?.moneyAdded,
-            moneyRemoved:fundsQuery?.funds?.moneyAdded,
-            previousBalance:fundsQuery?.funds?.moneyAdded,
+            moneyRemoved:fundsQuery?.funds?.moneyRemoved,
+            previousBalance:fundsQuery?.funds?.previousBalance,
             transactionQuery,
             fundsLoading,
             transLoading

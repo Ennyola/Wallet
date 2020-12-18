@@ -19,6 +19,7 @@ const SearchedItems = styled.div`
             width:250px ;
             height:150px;
             object-fit: cover;
+            border-radius: 9px;   
         }
         span{
             cursor:pointer;
