@@ -1,6 +1,7 @@
 import React, {useContext} from 'react'
 import {useMutation} from '@apollo/client'
 import NumberFormat from 'react-number-format';
+import styled from "styled-components"
 
 import {FUND_WALLET} from '../mutations/MakeTransaction'
 import getTransactionQuery from '../queries/getTransaction'
@@ -8,8 +9,19 @@ import getFundsQuery from '../queries/getFunds'
 import {FundsContext} from "../context/funds"
 import {PaystackForm} from "../components/PaystackForm"
 import {AccountSummary} from "../components/AccountSummary"
+import {Wrapper} from "../components/styles"
+
+const DashboardWrapper = styled.div`
+    /* padding-top: 97px;
+    padding-left: 200px;
+    padding-right:30px;
+    background-color:#fff;
+    height:1000px; */
+
+`
 
 const Dashboard =()=>{
+    document.title="Home"
     const {currentBalance,fundsLoading, moneyAdded,moneyRemoved,previousBalance,transactionQuery,transLoading} = useContext(FundsContext)
 
     const [fundWallet] = useMutation(FUND_WALLET)
@@ -52,40 +64,39 @@ const Dashboard =()=>{
     }
        
         return(
-            <div className = "dashboard"> 
-                {/* paystack form's markup */}
-                <PaystackForm fundWallet = {addToWallet}/>
+                <Wrapper> 
+                    <PaystackForm fundWallet = {addToWallet}/>
 
-                <div className = "body">
-                    <h4 id = "overview">Account Overview</h4>
-                    <div id = "fund-div">
-                        <span id = "current-balance">
-                           <div >Current Balance</div>  
-                            <NumberFormat value={currentBalance?.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  />
-                        </span>
+                    <div>
+                        <h4 id = "overview">Account Overview</h4>
+                        <div id = "fund-div">
+                            <span id = "current-balance">
+                            <div >Current Balance</div>  
+                                <NumberFormat value={currentBalance?.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  />
+                            </span>
 
-                        <button 
-                        onClick ={(e)=>{
-                            const overlay = document.querySelector(".overlay")
-                            overlay.style.display ="block"
-                        }}  
-                        className = "btn btn-primary" 
-                        id ="fund-wallet"
-                        >
-                            Fund Wallet
-                        </button>
-                    </div>
+                            <button 
+                            onClick ={(e)=>{
+                                const paystackForm = document.querySelector(".fundwallet-form")
+                                paystackForm.classList.remove("close")
+                            }}  
+                            className = "btn btn-primary" 
+                            id ="fund-wallet"
+                            >
+                                Fund Wallet
+                            </button>
+                        </div>
 
-                    <AccountSummary 
-                    previousBalance={previousBalance}
-                    moneyAdded={moneyAdded}
-                    moneyRemoved={moneyRemoved}
-                    getTotalMoneyAdded={getTotalMoneyAdded}
-                     />
-                    
-                </div>     
-                            
-            </div>
+                        <AccountSummary 
+                        previousBalance={previousBalance}
+                        moneyAdded={moneyAdded}
+                        moneyRemoved={moneyRemoved}
+                        getTotalMoneyAdded={getTotalMoneyAdded}
+                        />
+                        
+                    </div>     
+                                
+                </Wrapper>
         )
 }
 

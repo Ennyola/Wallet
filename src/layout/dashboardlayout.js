@@ -1,12 +1,16 @@
 import React from 'react';
 import  SideBar from "../components/Sidebar"
 import Header from "../components/Header"
+import styled from "styled-components"
+
+const Wrapper = styled.div`
+`
 export default (props)=>{
     return(
-        <div>
+        <Wrapper>
             <Header/>
             <SideBar activeLink = {props.activeLink}/>
             {props.children}
-        </div>
+        </Wrapper>
     )
 }

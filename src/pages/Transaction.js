@@ -2,6 +2,7 @@ import React from 'react'
 import {useQuery} from '@apollo/client'
 import NumberFormat from 'react-number-format';
 import date from 'date-and-time'
+import {Wrapper} from "../components/styles"
 
 
 import getTransactionQuery from '../queries/getTransaction'
@@ -11,7 +12,7 @@ import getTransactionQuery from '../queries/getTransaction'
 
 const Transactions = (props)=>{
     document.title = "Transactions"
-    const {data, loading, error} = useQuery(getTransactionQuery)
+    const {data} = useQuery(getTransactionQuery)
     
     
     const displayTransactions = ()=>{
@@ -28,7 +29,7 @@ const Transactions = (props)=>{
                   return(
                     <div className = "transaction shadow-lg" key = {id}> 
                       <div className="inner">
-                        <div class="flip-card-front">    
+                        <div className="flip-card-front">    
                           <div className = "left">
                             <span className = "moneyAdded-text">{moneySaving?"Money Added": "Money Spent"} </span> 
                             <span className = "utcDay">
@@ -55,14 +56,14 @@ const Transactions = (props)=>{
     
 
     return(
-        <div className = "transactions">
-            <div className = "body">
+        <Wrapper className = "transactions">
+            <div>
               <h4>Transactions</h4>
                 <div className = "transaction-list">
                   {displayTransactions()}
                 </div>
             </div>
-        </div>
+        </Wrapper>
     )
 }
 

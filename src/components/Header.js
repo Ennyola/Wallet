@@ -5,6 +5,30 @@ import styled from "styled-components"
 import image from "../public/images/IMG_20200605_171344.jpg"
 
 
+const HeaderWrapper = styled.div`
+    padding: 10px 30px;
+    display: flex;
+    justify-content: space-between;
+    color: black;
+    width: 100vw;
+    position: fixed;
+    top:0px;
+    background-color: #f4f7fa;
+    z-index: +1;
+    flex-wrap: nowrap;
+
+    .logo {
+    color: #A1168A;
+    margin-top:10px;
+    }
+    @media (max-width:950px){
+        .logo{
+            display:none
+        }
+    }
+
+`
+
 const BurgerButton = styled.span`
  .fa-bars{
     position: relative;
@@ -59,19 +83,20 @@ const Header = ()=>{
 
     const openSidebar = (e)=>{
        const sidebar =  document.querySelector(".sidebar")
-    //    e.currentTarget.classList.toggle("invisible")
-       sidebar.classList.toggle("open")
-    }
+       const sidebarWrapper = document.querySelector(".sidebar-wrap")
+       sidebar.classList.add("show")
+       sidebarWrapper.classList.add("overlay")
+    }       
     const openDropdown = (e)=>{
         const dropMenu  = document.querySelector(".dropMenu")
-        dropMenu.classList.toggle("show")
+        dropMenu.classList.toggle("open")
     }
     
     return(
-        <div className = "header" >
+        <HeaderWrapper className = "header" >
             <div>
                 <BurgerButton onClick = {openSidebar} id = "burger-wrapper"> <i className="fas fa-bars"></i></BurgerButton>
-                <h1 className = "logo">ENNET</h1>
+                <h2 className = "logo">ENNET</h2>
             </div>
            
        
@@ -88,7 +113,7 @@ const Header = ()=>{
                     <i className="fas fa-angle-down"  ></i>
                 </DropDown>
            </div>       
-        </div>
+        </HeaderWrapper>
     )
 }
 

@@ -3,9 +3,8 @@ import styled from "styled-components"
 
 export const Wrapper = styled.div `
     padding-top: 97px;
-    padding-left: 180px;
+    padding-left: 200px;
     padding-right:30px;
-    overflow: hidden;
     h4{
         text-align: center;
         margin-right: 100px;

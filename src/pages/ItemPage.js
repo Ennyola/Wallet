@@ -115,6 +115,7 @@ export default (props)=>{
         index === -1 ? items.push({...result, price,quantity}): (items[index] = {...result, price, quantity})
         localStorage.setItem("ennet_cart", JSON.stringify(items))
         props.history.push("/cart")
+        window.location.reload()
     }
 
     const getValueAfterPercentage = (value)=>{

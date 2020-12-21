@@ -43,7 +43,7 @@ export default () => {
                 return(
                     <Link key={id} to = {`/store/${id}&${random}`}>
                         <img  src={urls.small} alt={alt_description}/>
-                        <p>{alt_description.length>31 ? `(${alt_description.substring(0,32)})....`: alt_description}</p>
+                        <p>{alt_description?.length>31 ? `(${alt_description?.substring(0,32)})....`: alt_description}</p>
                         <strong><NumberFormat value={random} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  /></strong>
                     </Link>
                 )

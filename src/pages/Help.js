@@ -1,10 +1,11 @@
 import React, {Component} from 'react'
+import {Wrapper} from "../components/styles"
 
 
 class Help extends Component{
     render(){
         return(
-            <div className = "help">
+            <Wrapper className = "help">
                 <div className = "body">
                     <h4 className = "help-text">Help</h4>
                     
@@ -27,7 +28,7 @@ class Help extends Component{
                     </ul>
 
                 </div>
-            </div>
+            </Wrapper>
         )
     }
 }

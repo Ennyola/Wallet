@@ -29,7 +29,7 @@ export default ()=>{
             <PrivateRoute path = "/store" layout = {DashboardLayout} component = {requireAuth(Store)} activeLink = {3}/>
             <PrivateRoute path  ="/account" layout = {DashboardLayout} component = {requireAuth(Account)}/>
             <PrivateRoute path= "/transactions" layout = {DashboardLayout}  component = {requireAuth(Transactions)} activeLink = {2}/>
-            <PrivateRoute path = "/store/:id" layout = {DashboardLayout} component = {ItemPage} />
+            <PrivateRoute path = "/store/:id" layout = {DashboardLayout} component = {ItemPage}/>
             <PrivateRoute path = "/cart" layout = {DashboardLayout} component = {requireAuth(Cart)} activeLink = {4}/>
           </Switch>
       </BrowserRouter>

@@ -13,22 +13,6 @@ body {
 
 /* header style */
 
-.header {
-    padding: 10px 30px;
-    display: flex;
-    justify-content: space-between;
-    color: black;
-    width: 100vw;
-    position: fixed;
-    background-color: #f4f7fa;
-    z-index: +1;
-    flex-wrap: nowrap;
-}
-
-.header .logo {
-    color: #A1168A;
-}
-
 .header [alt="user-icon"] {
     width: 30px;
     height: 30px;
@@ -36,13 +20,11 @@ body {
     object-fit: cover;
 }
 
-.header .user-info {}
-
 .header div:nth-child(1) {
     display: flex;
 }
 
-.open {
+.show {
     margin-left: 0 !important;
 }
 
@@ -50,12 +32,12 @@ body {
     visibility: hidden;
 }
 
-.show {
+.open {
     display: block !important;
 }
 
 .close {
-    display: none;
+    display: none !important;
 }
 
 .header div:nth-child(2) {
@@ -69,16 +51,13 @@ body {
 
 /* dahboard styles */
 
-.dashboard {
-    background-color: #ffffff;
-    height: 1000px;
-}
 
+/* 
 .body {
     padding-top: 97px;
     padding-left: 180px;
     overflow: hidden;
-}
+} */
 
 #overview {
     text-align: center;
@@ -90,8 +69,9 @@ body {
     background-color: rgba(0, 0, 0, 0.4);
     width: 100%;
     height: 100%;
-    z-index: +1;
-    display: none;
+    z-index: +4;
+    /* display: none; */
+    padding-left: 0px !important;
 }
 
 .fundwallet-form {
@@ -101,6 +81,8 @@ body {
     flex-direction: row;
     border-radius: 10px;
     height: 100%;
+    position: absolute;
+    top: 100px;
 }
 
 .fundwallet-form .form {
@@ -183,62 +165,29 @@ body {
     transition: .4s all;
 }
 
-.account-summary {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 40px;
-}
-
-.summary {
-    padding: 20px;
-    /* border-radius: 10px; */
-    width: 250px;
-    height: 150px;
-    box-shadow: 0 .2rem .7rem rgba(0, 0, 0, .15);
-    margin: 20px;
-    font-weight: 400;
-    border-radius: 10px;
-    transition: .7s all ease;
-}
-
-.summary:hover {
-    background-color: #A1168A;
-    margin-top: 40px;
-    color: white !important
-}
-
-.summary p {
-    font-size: 13px;
-}
-
-.summary span {
-    color: green;
-    font-size: 20px;
-}
-
 
 /* transaction styles */
 
 .transactions h4 {
     text-align: center;
-    margin-right: 100px;
     color: #A1168A;
     font-weight: bold;
     margin-top: 6px;
+    padding: 10px 0px;
 }
 
 .transaction-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    grid-column-gap: 120px;
-    padding-right: 135px;
+    grid-template-columns: repeat(auto-fit, minmax(370px, 1fr));
+    grid-column-gap: 10px;
+    justify-items: center;
 }
 
 .transaction {
     height: 200px;
     color: white;
     background: linear-gradient(to bottom right, #A1168A, #453495, #E5C1CD);
-    width: 350px;
+    width: 370px;
     margin: 30px;
     border-radius: 10px;
     perspective: 1000px;

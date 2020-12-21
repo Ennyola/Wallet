@@ -6,14 +6,10 @@ import {useMutation} from "@apollo/client"
 import {PAY_AMOUNT} from "../mutations/MakeTransaction"
 import {FundsContext} from "../context/funds"
 import notify from "../utils/toast"
+import {Wrapper} from "../components/styles"
 
-const Wrapper = styled.div`
-    padding-top: 97px;
-    padding-left: 180px;
-    overflow: hidden;
-    .cart-body{
-        padding:10px 50px;
-    }
+const CartBody = styled.div`
+        padding:10px 50px;   
 `
 
 const TopText = styled.div`
@@ -150,6 +146,14 @@ const Checkout = styled.td`
 
 `
 
+const NoItem = styled.div`
+    text-align:center;
+    margin-top:30px;
+    font-weight:400;
+    font-size:20px;
+
+`
+
 export default (props)=>{
     document.title = "Cart"
     const {currentBalance} = useContext(FundsContext)
@@ -204,7 +208,6 @@ export default (props)=>{
         console.log(dateAndTime)
         return dateAndTime
     }
-    
     return(
         <>
             <Modal onClick = {closeModal} className = "checkout-modal close">
@@ -233,8 +236,8 @@ export default (props)=>{
                 <TopText>
                     Cart
                 </TopText>
-                {items ? (
-                    <div className = "cart-body"> 
+                {items && items?.length!==0 ? (
+                    <CartBody> 
                         <Table>
                             <thead>
                                 <tr>
@@ -271,16 +274,15 @@ export default (props)=>{
                                     </Checkout>
                                    
                                 </tr>
-                            </tbody>
-                            
+                            </tbody>     
                         </Table>
                         
                         
-                    </div>
+                    </CartBody>
                     ):(
-                        <div className ="text-center">
+                        <NoItem>
                             No items to Display
-                        </div>
+                        </NoItem>
                     ) 
                     }
                 
