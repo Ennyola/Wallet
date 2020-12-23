@@ -7,7 +7,7 @@ export const Wrapper = styled.div `
     padding-right:30px;
     h4{
         text-align: center;
-        margin-right: 100px;
+        /* margin-right: 100px; */
         color: #A1168A;
         font-weight: bold;
         margin-top: 6px;  

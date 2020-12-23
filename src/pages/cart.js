@@ -9,7 +9,8 @@ import notify from "../utils/toast"
 import {Wrapper} from "../components/styles"
 
 const CartBody = styled.div`
-        padding:10px 50px;   
+        /* padding:10px 50px;    */
+        overflow:auto;
 `
 
 const TopText = styled.div`
@@ -22,7 +23,7 @@ const TopText = styled.div`
 const Table = styled.table`
     position: relative;
     left:40px;
-    overflow:auto;
+    
     .item-cell{
         display:flex;
         img{
@@ -174,6 +175,7 @@ export default (props)=>{
     if(data){
         localStorage.removeItem("ennet_cart");
         props.history.push("/dashboard") 
+        window.location.reload()
     }
    
     useEffect(()=>{

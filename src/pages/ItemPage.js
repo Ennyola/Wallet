@@ -95,10 +95,11 @@ const Input = styled.input`
 
 
 export default (props)=>{
-    const [price] = useState(props.match.params.id.split("&")[1])
+    const [random] = useState(Math.floor(Math.random()*30+1))
     const [result, setResult] = useState({})
     const [quantity, setQuantity] = useState("")
-    const [random] = useState(Math.floor(Math.random()*30+1))
+    const [price] = useState(props.match.params.id.split("&")[1])
+    const [priceAfterPercentage] = useState(price-(price*(random/100)))
     const getItem = async ()=>{
         const id = props.match.params.id.split("&")[0]
         const data = await (await fetch(`https://api.unsplash.com/photos/${id}?client_id=oAZ8DyQ4FRcZKSz3083vOLdX7yCv3uEJhGTigrC5wi0`)).json()
@@ -112,17 +113,19 @@ export default (props)=>{
         const items = localStorage?.ennet_cart ? JSON.parse(localStorage?.ennet_cart) :[]
         console.log(items)
         const index = items.findIndex((item)=> item.id === result.id)
-        index === -1 ? items.push({...result, price,quantity}): (items[index] = {...result, price, quantity})
+        index === -1 ? items.push({...result, price:priceAfterPercentage,quantity}): (items[index] = {...result, price:priceAfterPercentage, quantity})
         localStorage.setItem("ennet_cart", JSON.stringify(items))
         props.history.push("/cart")
         window.location.reload()
     }
 
     const getValueAfterPercentage = (value)=>{
-        const priceMinusPercentage = value-(value*(random/100))
+        // console.log(props.match.params.id.split("&")[1])
+        // const priceMinusPercentage = value-(value*(random/100))
+        // console.log(priceAfterPercentage)
         return(
             <div>
-                <NumberFormat value={Math.floor(priceMinusPercentage)} displayType={'text'} thousandSeparator={true} prefix={'₦'}  /> <br/> 
+                <NumberFormat value={Math.floor(priceAfterPercentage)} displayType={'text'} thousandSeparator={true} prefix={'₦'}  /> <br/> 
                 <NumberFormat value={value} displayType={'text'} thousandSeparator={true} prefix={'₦'}  /> 
                 <span>-{random}%</span>
             </div> 

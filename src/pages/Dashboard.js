@@ -57,15 +57,23 @@ const Dashboard =()=>{
 
     const getTotalMoneyAdded = ()=>{
         if(transactionQuery){
-            const {transactions} =transactionQuery
-            const totalMoneyAdded =  transactions.map(({moneySaving})=> moneySaving)
-            return totalMoneyAdded.reduce((a,b)=> a+b).toFixed(2)
+            const transactions = transactionQuery?.transactions
+            let totalMoney 
+            if(transactions.length!==0){
+                const totalMoneyAdded =  transactions.map(({moneySaving})=> moneySaving)
+                totalMoney = totalMoneyAdded.reduce((a,b)=> a+b).toFixed(2)
+            }else{
+                totalMoney = 0.00.toFixed(2)
+            }
+            return totalMoney
         }
     }
        
         return(
-                <Wrapper> 
-                    <PaystackForm fundWallet = {addToWallet}/>
+            <>
+                <PaystackForm fundWallet = {addToWallet}/>
+                <Wrapper className = "dashboard-wrapper"> 
+                    
 
                     <div>
                         <h4 id = "overview">Account Overview</h4>
@@ -79,6 +87,7 @@ const Dashboard =()=>{
                             onClick ={(e)=>{
                                 const paystackForm = document.querySelector(".fundwallet-form")
                                 paystackForm.classList.remove("close")
+                                
                             }}  
                             className = "btn btn-primary" 
                             id ="fund-wallet"
@@ -97,6 +106,7 @@ const Dashboard =()=>{
                     </div>     
                                 
                 </Wrapper>
+            </>
         )
 }
 

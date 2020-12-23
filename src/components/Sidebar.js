@@ -10,7 +10,6 @@ const Overlay = styled.div`
 `
 
 const SideBar = styled.div`
-    
     position: fixed;
     top: 70px;
     /* background-color: #E5C1CD; */
@@ -32,6 +31,10 @@ const SideBar = styled.div`
     .active{
         color: white;
         background-color: #A1168A;
+        #cart-length{
+          color: #A1168A;
+          background-color:#fff;
+        }
     }
 
  a {
@@ -49,10 +52,11 @@ const SideBar = styled.div`
         border-radius:50px;
         top: 18px;
         left:34px;
-				background-color:red;
+				background-color:#A1168A;
         color:white;
         font-size:11px;
     }
+    
 }
 
  .fas,.fab {
@@ -64,6 +68,10 @@ const SideBar = styled.div`
     cursor: pointer;
     color: white;
     background-color: #A1168A;
+    #cart-length{
+      color: #A1168A;
+      background-color:#fff;
+    }
 }
 
  li:hover .fas {
@@ -141,13 +149,13 @@ class Sidebar extends Component {
             //   className: "side_nav_item",
               iconClassName: "fas fa-info"
             },
-            // {
-            //     id: 6,
-            //     name: "Notifications",
-            //     to: "/notifications",
-            //     // className: "side_nav_item",
-            //     iconClassName: "fas fa-bell"
-            //   }
+            {
+                id: 6,
+                name: "Notifications",
+                to: "/notifications",
+                // className: "side_nav_item",
+                iconClassName: "fas fa-bell"
+              }
           ], 
           activeLink: this.props.activeLink,
           itemCount:""
@@ -174,9 +182,14 @@ class Sidebar extends Component {
       }
     }
 
-    componentDidMount(){
-        this.setState({itemCount: JSON.parse(localStorage?.ennet_cart)?.length || this.state.itemCount})
-    
+     componentDidMount(){
+       if(localStorage.ennet_cart === undefined){   
+         this.setState({itemCount:this.state.itemCount})
+       }  
+       else{
+        this.setState({itemCount: JSON.parse(localStorage?.ennet_cart)?.length})
+       } 
+      
     }
 
     render(){

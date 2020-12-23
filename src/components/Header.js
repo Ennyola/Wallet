@@ -6,13 +6,13 @@ import image from "../public/images/IMG_20200605_171344.jpg"
 
 
 const HeaderWrapper = styled.div`
+    position: fixed;
+    top:0px;
     padding: 10px 30px;
     display: flex;
     justify-content: space-between;
     color: black;
     width: 100vw;
-    position: fixed;
-    top:0px;
     background-color: #f4f7fa;
     z-index: +1;
     flex-wrap: nowrap;
@@ -92,6 +92,12 @@ const Header = ()=>{
         dropMenu.classList.toggle("open")
     }
     
+    const logout = (e)=>{
+        e.preventDefault()
+        localStorage.removeItem("token")
+        window.location.reload()
+    }
+    
     return(
         <HeaderWrapper className = "header" >
             <div>
@@ -105,7 +111,7 @@ const Header = ()=>{
                     <img src={image} alt="user-icon"/>
                     <DropDownMenu className="dropMenu" >
                         <Link to = "/account" > Account Setting</Link>
-                        <Link to = "">Logout</Link>
+                        <Link to = "" onClick={logout}>Logout</Link>
                     </DropDownMenu>
                 </span>
                 

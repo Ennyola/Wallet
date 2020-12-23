@@ -24,20 +24,29 @@ const ImageWrapper  = styled.div`
         border-radius: 5px;   
     }
 `
+const StoreError = styled.div`
+    text-align:center;
+    margin-top:60px;
+    font-weight:400;
+    font-size:24px;
+    color:red;
+    /* position:relative;
+    right:30px; */
+`
 
 
 export default () => {
-    const [data, setData] = useState([])
+    const [data, setData] = useState({})
     const [page, setPage] = useState(1)
     const fetchPhotos = async ()=>{
-        const data = await (await fetch(`https://api.unsplash.com/search/photos/?query=shoes&client_id=oAZ8DyQ4FRcZKSz3083vOLdX7yCv3uEJhGTigrC5wi0&page=${page}&per_page=20`)).json()
-        setData(data)
+        const response = await (await fetch(`https://api.unsplash.com/search/photos/?query=shoes&client_id=oAZ8DyQ4FRcZKSz3083vOLdX7yCv3uEJhGTigrC5wi0&page=${page}&per_page=20`)).json()
+        setData(response)
     }
 
     const displayData = ()=>{
         
         return(
-            <ImageWrapper>
+            <ImageWrapper key = {1}>
             {data?.results?.map(({id, urls, alt_description})=>{
                 const random = Math.floor(Math.random() * 900000)+1000
                 return(
@@ -66,24 +75,35 @@ export default () => {
       };
     return(
         <Wrapper>
-            <h4>Store</h4>
-            {displayData()}
-            <ReactPaginate
-            previousLabel={'<'}
-            nextLabel={'>'}
-            breakLabel={'...'}
-            pageClassName={"current-page"}
-            activeClassName={"active"}
-            previousClassName={"previous-page"}
-            nextLinkClassName={"next-link"}
-            breakLinkClassName={"break-link"}
-            previousLinkClassName={"previous-link"}
-            pageCount={data.total_pages}
-            marginPagesDisplayed={2}
-            pageRangeDisplayed={2}
-            onPageChange={handlePageClick}
-            containerClassName={'pagination'}
-            />
+        
+            <h4>Store</h4>            
+            {Object.entries(data).length!==0 ? ([
+                displayData(),
+                <ReactPaginate
+                key ={2}
+                previousLabel={'<'}
+                nextLabel={'>'}
+                breakLabel={'...'}
+                pageClassName={"current-page"}
+                activeClassName={"active"}
+                previousClassName={"previous-page"}
+                nextLinkClassName={"next-link"}
+                breakLinkClassName={"break-link"}
+                previousLinkClassName={"previous-link"}
+                pageCount={data.total_pages}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={2}
+                onPageChange={handlePageClick}
+                containerClassName={'pagination'}
+                />
+            ]) :(
+                <StoreError>
+                    Error showing Store
+                </StoreError>
+            )
+            }
+            
+            
         </Wrapper>
     )
 }

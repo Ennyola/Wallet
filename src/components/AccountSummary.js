@@ -45,16 +45,16 @@ export const AccountSummary =(props)=>{
         <Wrapper>
             <div className= "summary">
                 <p>Previous Balance</p>
-                <NumberFormat value={props?.previousBalance?.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  />
+                <NumberFormat value={props?.previousBalance?.toFixed(2)||0.00.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  />
             </div>
             <div className= "summary">
                 <p>Money Funded</p>
-                <NumberFormat value={props?.moneyAdded?.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  />
+                <NumberFormat value={props?.moneyAdded?.toFixed(2)||0.00.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  />
         
             </div>
             <div className= "summary"> 
                 <p>Money Deducted</p>
-                <NumberFormat className = "text-danger" value={props?.moneyRemoved?.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  />
+                <NumberFormat className = "text-danger" value={props?.moneyRemoved?.toFixed(2)|| 0.00.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  />
         
             </div>
             <div className= "summary">
