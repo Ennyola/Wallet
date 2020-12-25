@@ -117,28 +117,24 @@ class Sidebar extends Component {
               id: 1,
               name: "Home",
               to: "/dashboard",
-            //   className: "side_nav_item",
               iconClassName: "fas fa-home"
             },
             {
               id: 2,
               name: "Transactions",
               to: "/transactions",
-            //   className: "side_nav_item",
               iconClassName: "fas fa-exchange-alt"
             },
             {
               id: 3,
               name: "Store",
               to: "/store",
-            //   className: "side_nav_item",
               iconClassName: "fas fa-store"
             },
             {
               id :4,
               name: "Cart",
               to: "/cart",
-            //   className: "side_nav_item",
               iconClassName: "fab fa-opencart"
             },
 
@@ -146,16 +142,8 @@ class Sidebar extends Component {
               id: 5,
               name: "Help",
               to: "/help",
-            //   className: "side_nav_item",
               iconClassName: "fas fa-info"
             },
-            {
-                id: 6,
-                name: "Notifications",
-                to: "/notifications",
-                // className: "side_nav_item",
-                iconClassName: "fas fa-bell"
-              }
           ], 
           activeLink: this.props.activeLink,
           itemCount:""

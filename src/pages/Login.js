@@ -2,6 +2,8 @@ import '../public/css/auth.css'
 import React, {useState} from 'react'
 import { MDBInput } from "mdbreact";
 import {Link} from 'react-router-dom'
+import { css } from "@emotion/core";
+import HashLoader from "react-spinners/HashLoader";
 
 import { useMutation, useQuery, gql} from '@apollo/client'
 import getUserQuery from '../queries/getUser'
@@ -11,24 +13,19 @@ const Login = (props) => {
 
 
     let [email, SetEmail] = useState(""),
-        [password, SetPassword] = useState("")
+        [password, SetPassword] = useState(""),
+        [errors, setErrors] = useState([])
 
 
-    const {data, error, refetch} = useQuery(getUserQuery)
+    const {data, refetch} = useQuery(getUserQuery)
     if(data){
         const{user} = data
         if(user){
             props.history.push('/dashboard')
         }
     }
-    if (error){
+    const [loginUser, {data:mutationData, loading, error:mutationError}] = useMutation(mutation)
 
-    }
-    const [loginUser, {data:mutationData, loading :mutationLoading, error:mutationError}] = useMutation(mutation)
-
-    if(mutationLoading){
-        return( <div>Loading...</div> )
-    }
     if(mutationData){
         const {token} = mutationData.tokenAuth
         localStorage.setItem('token', token)
@@ -40,45 +37,73 @@ const Login = (props) => {
     const onSubmit =(e)=>{
         e.preventDefault()
         loginUser({
-            variables:{email,password},
-           
+            variables:{email,password},  
+        }).catch((e)=>{
+            setErrors([e.message])
         })
+    
     } 
 
+    const override = css`
+        position:absolute;
+        top: 40%;
+        left:40%;
 
+        
+    `;
 
     return(
         <div className = "login">
+            {
+                loading &&
+                <div className = "overlay">
+                    <HashLoader
+                        css = {override}
+                        className = "overlay"
+                        size={80}
+                        color={"#A1168A"}
+                    />
+                </div>
+            }
+            
+
             <div className="row">
                 <div className="col-md-6">
-                <h1 className = "logo"> ENNET </h1>
-                    <div className = "welcome-text">
-                        <h1> Welcome to ENNET.</h1>
-                     </div>
+                    <h1 className = "logo"> ENNET </h1> 
+                    <h1  className = "animate__animated animate__fadeInDownBig welcome-text"> Welcome to ENNET.</h1>
                 </div>
                 <div className="col-md-6">
+                    <h1 className = "logo"> ENNET </h1>
                     <div>
                         <form onSubmit= {onSubmit} className = "form">
-                            <h5> Ready to Save? Login</h5>
-
+                            <h4> Ready to Save?  <span> Login </span> </h4>
+                                
                             <MDBInput 
                             onChange = {e=>{SetEmail(e.target.value)}}
                             value = {email}
                             className = "form-control"
                             type = "email" 
-                            hint = "Email" />
+                            label = "Email" />
 
                             <MDBInput  
                             onChange = {e=>{SetPassword(e.target.value)}}
                             value = {password}
                             className = "form-control" 
                             type = "password" 
-                            hint = "Password" />
-                            <button className = "btn btn-primary"> Login</button>
+                            label = "Password" />
 
+                            <div className = "auth-error">
+                                { errors?.map((error)=>{
+                                return <div key = {error}> {error} </div> 
+                                }) }
+                            </div>
+                            <span className = "submit-span">
+                                <button className = "login-btn"> Login</button>
+                            </span>
                         </form>
-                       <div> 
-                            Don't have an account with us yet? Register <Link to = "/signup"> here </Link>
+                        
+                       <div className = "to-signup"> 
+                            Don't have an account with us yet? Register <Link to = "/signup" className="here"> here </Link>
                        </div>
                     </div>
                 </div>

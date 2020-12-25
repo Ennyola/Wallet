@@ -2,17 +2,22 @@ import React, { useState,} from 'react'
 import {MDBInput} from 'mdbreact'
 import {Link} from 'react-router-dom'
 import {gql, useMutation, useQuery} from '@apollo/client'
-
 import getUserQuery from '../queries/getUser'
+import * as EmailValidator from 'email-validator';
+import { css } from "@emotion/core";
+import PropagateLoader from "react-spinners/PropagateLoader";
+
+
 import '../public/css/auth.css'
 
 
+
 const Signup =(props)=>{
-        let [firstName, SetFirstName] = useState(""),
-            [lastName, SetLastName] = useState(""),
+        let [alias, SetAlias] = useState(""),
             [email, SetEmail] = useState(""),
             [password, SetPassword] = useState(""),
-            [verifyPassword, SetVerifyPassword] = useState("")
+            [verifyPassword, SetVerifyPassword] = useState(""),
+            [errors, setErrors] = useState([])
 
         const {data:userData, refetch} = useQuery(getUserQuery)
         if (userData){
@@ -22,33 +27,54 @@ const Signup =(props)=>{
             }
         }
         
-        const [registerUser, {data, error, loading}] = useMutation(mutation)
-        if(loading){
-            return(
-                <div>Loading...</div>
-            )
-        }
+        const [registerUser, {data, loading}] = useMutation(mutation)
         if(data){
             const {token} = data.createUser.tokenAuth
             localStorage.setItem('token', token)
             refetch()     
         }
-        if(error){
-            return(
-                <div>{error.message}</div>
-            )
-        }  
+        
+            
+       
 
         const onSubmit =(e)=>{
             e.preventDefault()
+            if(password !== verifyPassword){
+                setErrors(["Passwords Do Not Match"])
+                return
+            }
+            if(!EmailValidator.validate(email)){
+                setErrors(["Please Use a Valid Email Address"])
+                return
+            }
             registerUser({
-                variables:{firstName, lastName, email,password},
+                variables:{alias,email,password},
                
+            }).catch((error)=>{
+                setErrors([error.message])
             })
-        }     
+        } 
+        
+        const override = css`
+            position:absolute;
+            top: 40%;
+            left:40%;  
+        `;
         
         return(
             <div className = "signup">
+                {
+                loading &&
+                    <div className = "overlay">
+                        <PropagateLoader
+                            css = {override}
+                            className = "overlay"
+                            size={20}
+                            color={"#f192e2"}
+                        />
+                    </div>
+                }
+
                 <div className="row">
                     <div className="col-md-5">
                     <h1 className = "logo"> ENNET </h1>
@@ -56,16 +82,10 @@ const Signup =(props)=>{
                             <h4>Ready to save? <span id = "signup-text"> Signup </span></h4>
 
                             <MDBInput 
-                            onChange =  {e => SetFirstName(e.target.value)}
-                            value = {firstName}
+                            onChange =  {e => SetAlias(e.target.value)}
+                            value = {alias}
                             type= "text"
-                            label = "First Name" />
-
-                            <MDBInput 
-                            onChange =  {e => SetLastName(e.target.value)}
-                            value = {lastName}
-                            type = "text"
-                            label = "Last Name" />
+                            label = "Alias" />
 
 
                             <MDBInput
@@ -85,16 +105,26 @@ const Signup =(props)=>{
                             value = {verifyPassword}
                             type = "password" 
                             label = "Verify password"/>
-                            <button className = " btn btn-outline-primary"  type = "submit"> Signup →</button>
+
+                            <div className = "auth-error">
+                                { errors?.map((error)=>{
+                                return <div key = {error}> {error} </div> 
+                                }) }
+                            </div>
+
+                            <span className = "submit-span">
+                                <button className = " btn btn-outline-primary"  type = "submit"> Signup →</button>
+                            </span>                        
                         </form>
+                        
 
                         <div>
-                            Already have an account with us, Login <Link to= "/login">here</Link> 
+                            Already have an account with us, Login <Link to= "/login" className="here">here</Link> 
                         </div>
 
                     </div>
                     <div className="col-md-7">
-                        <div className = "welcome-text">
+                        <div className = "animate__animated animate__fadeInTopRight welcome-text">
                         
                            <h1> Welcome to ENNET.</h1>
                         </div>
@@ -110,16 +140,15 @@ const Signup =(props)=>{
 
 
 const mutation = gql`
-mutation RegisterUser($email:String!, $firstName: String!, $lastName:String!, $password:String!){
-    createUser(email:$email, firstName:$firstName, lastName: $lastName, password:$password ){
+mutation RegisterUser($email:String!, $alias:String!, $password:String!){
+    createUser(email:$email, alias:$alias, password:$password ){
       tokenAuth(username:$email, password:$password){
         token
       }
       user{
         id
         email
-        firstName
-        lastName
+        username
       }
     }
   }

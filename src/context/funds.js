@@ -1,5 +1,5 @@
-import React, {createContext, useState} from "react";
-import {useMutation, gql, useQuery} from '@apollo/client'
+import React, {createContext} from "react";
+import {useQuery} from '@apollo/client'
 
 import getTransactionQuery from '../queries/getTransaction'
 import getFundsQuery from '../queries/getFunds'

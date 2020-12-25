@@ -7,6 +7,8 @@
 .login .logo {
     color: #A1168A;
     position: relative;
+    top: 20px;
+    left: 20px;
 }
 
 .login .row>div:first-child {
@@ -16,8 +18,48 @@
     background-blend-mode: soft-light;
 }
 
+.login .row>div:last-child>.logo {
+    display: none;
+}
+
 .login form {
-    padding: 50px;
+    margin-top: 90px;
+    padding: 35px 70px 30px 70px;
+}
+
+.login input {
+    border-bottom: 1px solid #EEAADD !important;
+}
+
+.login-btn {
+    border-radius: 30px;
+    padding: 7px 40px;
+    background-color: #d64fc0;
+    color: white;
+    border-color: transparent;
+    font-family: 'Lily Script One';
+    transition: .3s ease-in all;
+}
+
+.login-btn:hover {
+    background-color: white;
+    border: 2px solid #d64fc0;
+    color: #d64fc0;
+}
+
+.login .to-signup {
+    padding: 10px 70px;
+}
+
+.login form h4 {
+    color: #3E2978;
+    padding: 20px 0px;
+}
+
+.login form h4 span {
+    font-family: 'Lily Script One';
+    font-weight: 600;
+    color: #A1168A;
 }
 
 .signup .logo {
@@ -49,7 +91,6 @@
 }
 
 .signup button {
-    float: right;
     border-radius: 45px;
     border-color: #A1168A !important;
     color: #A1168A !important;
@@ -78,19 +119,53 @@
     position: absolute;
     top: 40%;
     left: 30%;
-    color: white;
+    color: #3E2978;
+    font-weight: 400;
+}
+
+.signup .welcome-text {
+    position: absolute;
+    top: 40%;
+    left: 30%;
+    color: #fff;
+    font-weight: 400;
+}
+
+.auth-error {
+    color: red;
+    font-style: italic;
+    font-weight: bold;
+    margin: 30px 0px;
+}
+
+.here {
+    font-weight: 400;
+    font-style: italic;
+    color: #3E2978;
+}
+
+.submit-span {
+    display: flex;
+    justify-content: flex-end;
 }
 
 @media (max-width:767px) {
+    .login .row>div:last-child>.logo {
+        display: block;
+        padding-top: 20px;
+    }
+    .signup {
+        background-color: #ffffff !important;
+    }
     .signup .logo {
         color: #EEAADD;
     }
     .signup form h4 {
         color: #EEAADD;
     }
-    .signup span {
+    /* .signup span {
         color: white;
-    }
+    }  */
     .signup {
         background-color: #A1168A;
     }
@@ -107,5 +182,12 @@
     }
     .login .row>div:first-child {
         display: none;
+    }
+    .login form {
+        margin-top: 50px;
+        padding: 35px 40px 30px 40px;
+    }
+    .login .to-signup {
+        padding: 10px 40px;
     }
 }

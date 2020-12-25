@@ -1,7 +1,6 @@
 import React, {useContext} from 'react'
 import {useMutation} from '@apollo/client'
 import NumberFormat from 'react-number-format';
-import styled from "styled-components"
 
 import {FUND_WALLET} from '../mutations/MakeTransaction'
 import getTransactionQuery from '../queries/getTransaction'
@@ -11,14 +10,6 @@ import {PaystackForm} from "../components/PaystackForm"
 import {AccountSummary} from "../components/AccountSummary"
 import {Wrapper} from "../components/styles"
 
-const DashboardWrapper = styled.div`
-    /* padding-top: 97px;
-    padding-left: 200px;
-    padding-right:30px;
-    background-color:#fff;
-    height:1000px; */
-
-`
 
 const Dashboard =()=>{
     document.title="Home"
