@@ -22,7 +22,7 @@ const Transactions = (props)=>{
               const [transactionDate, transactionTime] = timeOfTransaction.split('T') 
               const time = transactionTime.slice(0,15).split('+')[0]
               const utc = transactionTime.slice(15)
-              const dateTimeString = window.Date.parse(`${transactionDate} ${time}`, 'YYYY-MM-DD HH:mm:ss')
+              const dateTimeString = date.parse(`${transactionDate} ${time}`, 'YYYY-MM-DD HH:mm:ss')
               const fulldateTimeString = dateTimeString.toString()
               const utcDay = dateTimeString.toUTCString().slice(0, 16)
               const localeTimeString = dateTimeString.toLocaleTimeString()        

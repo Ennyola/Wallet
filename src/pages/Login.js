@@ -1,28 +1,23 @@
 import '../public/css/auth.css'
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import { MDBInput } from "mdbreact";
 import {Link} from 'react-router-dom'
 import { css } from "@emotion/core";
 import HashLoader from "react-spinners/HashLoader";
 
-import { useMutation, useQuery, gql} from '@apollo/client'
-import getUserQuery from '../queries/getUser'
+import {AuthContext} from "../context/Auth"
+import { useMutation, gql} from '@apollo/client'
 
 
 const Login = (props) => {
-
+    const {user,refetch} = useContext(AuthContext)
 
     let [email, SetEmail] = useState(""),
         [password, SetPassword] = useState(""),
         [errors, setErrors] = useState([])
 
-
-    const {data, refetch} = useQuery(getUserQuery)
-    if(data){
-        const{user} = data
-        if(user){
-            props.history.push('/dashboard')
-        }
+    if(user){
+        props.history.push('/dashboard')
     }
     const [loginUser, {data:mutationData, loading, error:mutationError}] = useMutation(mutation)
 
@@ -59,7 +54,6 @@ const Login = (props) => {
                 <div className = "overlay">
                     <HashLoader
                         css = {override}
-                        className = "overlay"
                         size={80}
                         color={"#A1168A"}
                     />

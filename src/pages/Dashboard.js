@@ -70,7 +70,7 @@ const Dashboard =()=>{
                         <h4 id = "overview">Account Overview</h4>
                         <div id = "fund-div">
                             <span id = "current-balance">
-                            <div >Current Balance</div>  
+                                <div>Current Balance</div>  
                                 <NumberFormat value={currentBalance?.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  />
                             </span>
 

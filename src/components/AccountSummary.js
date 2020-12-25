@@ -4,7 +4,7 @@ import styled from "styled-components"
 
 
 const Wrapper = styled.div`
-    margin-top: 40px;
+    margin-top: 90px;
     display:grid;
     grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
     grid-column-gap:30px;
@@ -33,6 +33,9 @@ const Wrapper = styled.div`
                 color: white !important;
             }
         }
+    }
+    @media (max-width:430px) {
+        margin-top:130px;
     }
 
 

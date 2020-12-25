@@ -1,6 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component, } from 'react'
 import {Link, withRouter} from 'react-router-dom'
 import styled from "styled-components"
+
+import {AuthContext} from "../context/Auth"
 
 
 
@@ -186,7 +188,10 @@ class Sidebar extends Component {
                 <SideBar className = "sidebar"> 
                     <h4 className = "logo">ENNET</h4>
                     <WelcomeText>
-                        Hello! <span>Eniola</span> 
+                        Hello! 
+                        <AuthContext.Consumer>
+                          {(value)=> (<span> {value.user?.username}</span>) }
+                        </AuthContext.Consumer>    
                     </WelcomeText>
                     {
                         this.state.links.map((link)=>(

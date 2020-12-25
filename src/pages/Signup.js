@@ -1,31 +1,29 @@
-import React, { useState,} from 'react'
+import React, { useState, useContext} from 'react'
 import {MDBInput} from 'mdbreact'
 import {Link} from 'react-router-dom'
-import {gql, useMutation, useQuery} from '@apollo/client'
-import getUserQuery from '../queries/getUser'
+import {gql, useMutation} from '@apollo/client'
+
 import * as EmailValidator from 'email-validator';
 import { css } from "@emotion/core";
 import PropagateLoader from "react-spinners/PropagateLoader";
 
-
+import {AuthContext} from "../context/Auth"
 import '../public/css/auth.css'
 
 
 
 const Signup =(props)=>{
+        const {user,refetch} = useContext(AuthContext)
+
         let [alias, SetAlias] = useState(""),
             [email, SetEmail] = useState(""),
             [password, SetPassword] = useState(""),
             [verifyPassword, SetVerifyPassword] = useState(""),
             [errors, setErrors] = useState([])
 
-        const {data:userData, refetch} = useQuery(getUserQuery)
-        if (userData){
-            const {user} = userData
-            if (user){
+            if(user){
                 props.history.push('/dashboard')
             }
-        }
         
         const [registerUser, {data, loading}] = useMutation(mutation)
         if(data){

@@ -10,10 +10,10 @@ import SearchedItems from "../components/SearchedItems"
 
 const Grid = styled.div`
     position:relative;
-    left:18%;
     margin-top:30px;
+    margin-left:15%;
     display:grid;
-    padding:30px;
+    padding:10px;
     grid-template-columns: repeat(2, minmax(300px,150px));
     grid-template-rows:repeat(1, 1fr);
     >div:nth-child(1){
@@ -55,11 +55,17 @@ const Grid = styled.div`
 
         }
     }
-    @media(max-width:780px){
-        /* grid-template-columns: repeat(1, minmax(300px,150px));
-        justify-items:center */
+    @media(max-width:730px){
+        margin-left:0;
+        grid-template-rows: repeat(2, 1fr);
+        grid-template-columns: repeat(1, minmax(300px,150px));
+        grid-row-gap:30px;
+        justify-items:center;
+        >div:nth-child(2){
+            
+            grid-row:2/3;
+        }
     }
-    
     
 
 `
@@ -120,9 +126,6 @@ export default (props)=>{
     }
 
     const getValueAfterPercentage = (value)=>{
-        // console.log(props.match.params.id.split("&")[1])
-        // const priceMinusPercentage = value-(value*(random/100))
-        // console.log(priceAfterPercentage)
         return(
             <div>
                 <NumberFormat value={Math.floor(priceAfterPercentage)} displayType={'text'} thousandSeparator={true} prefix={'₦'}  /> <br/> 

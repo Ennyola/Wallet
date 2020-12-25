@@ -4,6 +4,8 @@ import ReactPaginate from 'react-paginate';
 import {Link} from 'react-router-dom'
 import {Wrapper} from "../components/styles"
 import NumberFormat from 'react-number-format';
+import { css } from "@emotion/core";
+import MoonLoader from "react-spinners/MoonLoader";
 
 const ImageWrapper  = styled.div`
     padding:30px;
@@ -34,13 +36,28 @@ const StoreError = styled.div`
     right:30px; */
 `
 
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+  margin-top:50px;
+`;
 
 export default () => {
     const [data, setData] = useState({})
     const [page, setPage] = useState(1)
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("")
     const fetchPhotos = async ()=>{
-        const response = await (await fetch(`https://api.unsplash.com/search/photos/?query=shoes&client_id=oAZ8DyQ4FRcZKSz3083vOLdX7yCv3uEJhGTigrC5wi0&page=${page}&per_page=20`)).json()
-        setData(response)
+        try {
+            const response = await (await fetch(`https://api.unsplash.com/search/photos/?query=shoes&client_id=oAZ8DyQ4FRcZKSz3083vOLdX7yCv3uEJhGTigrC5wi0&page=${page}&per_page=20`)).json()
+            setData(response)
+            setLoading(false)
+        } catch (error) {
+            setError(error.message)
+        }
+       
+       
     }
 
     const displayData = ()=>{
@@ -75,9 +92,8 @@ export default () => {
       };
     return(
         <Wrapper>
-        
             <h4>Store</h4>            
-            {Object.entries(data).length!==0 ? ([
+            {!loading ? ([
                 displayData(),
                 <ReactPaginate
                 key ={2}
@@ -97,12 +113,18 @@ export default () => {
                 containerClassName={'pagination'}
                 />
             ]) :(
-                <StoreError>
-                    Error showing Store
-                </StoreError>
+                <div>
+                    <MoonLoader
+                        css = {override}
+                        size={50}
+                        color={"#A1168A"}
+                    />
+                </div>
             )
             }
-            
+            <StoreError>
+                {error}
+            </StoreError>
             
         </Wrapper>
     )

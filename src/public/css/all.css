@@ -137,18 +137,32 @@ body {
 }
 
 #fund-div {
-    padding: 10px;
+    padding: 40px 0px;
     height: 80px;
     display: flex;
     justify-content: space-between;
 }
 
 #fund-wallet {
+    position: relative;
+    right: 20px;
     background-color: #A1168A !important;
     color: white;
+    padding: 10px 20px;
     border-radius: 40px;
+    height: 40px;
     text-align: center;
-    margin-right: 100px;
+}
+
+@media (max-width:430px) {
+    #current-balance {
+        position: relative;
+        margin-left: 20px;
+    }
+    #fund-wallet {
+        right: 10px;
+        top: 60px;
+    }
 }
 
 #fund-wallet:hover {

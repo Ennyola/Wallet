@@ -5,6 +5,7 @@ import {createHttpLink} from 'apollo-link-http'
 import { setContext } from 'apollo-link-context'
 
 import {FundsContextProvider} from '../context/funds'
+import {AuthContextProvider} from "../context/Auth"
 import Routes from "../routes/routes"
 
 
@@ -34,9 +35,11 @@ const App = ()=> {
   return (
     <div className="App">
       <ApolloProvider client = {client}>
-        <FundsContextProvider>
-          <Routes/>
-        </FundsContextProvider>
+        <AuthContextProvider>
+          <FundsContextProvider>
+            <Routes/>
+          </FundsContextProvider>
+        </AuthContextProvider>
       </ApolloProvider>
     </div>
   );
