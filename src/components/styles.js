@@ -32,13 +32,6 @@ export const Wrapper = styled.div `
             width:100%;
             padding:10px;
         }
-    /* .current-page-link,
-    .next-link,
-    .previous-link,
-    .break-link {
-        width: 100%;
-        display: block;
-        } */
     .active {
       background-color: #A1168A;
       color: #fff;
@@ -48,6 +41,21 @@ export const Wrapper = styled.div `
     @media (max-width:950px){
         padding-left: 0px;
         padding-right:10px;
+    }
+    @media (max-width:479px){
+        .pagination {
+        justify-content:center;
+        right:0px;
+        li{
+            margin-left: 15px;
+        }
+        li a{
+            display:block;
+            width:100%;
+            padding:5px;
+        }
+        }
+        
     }
 
 `

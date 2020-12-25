@@ -161,7 +161,7 @@ body {
     }
     #fund-wallet {
         right: 10px;
-        top: 60px;
+        /* top: 60px; */
     }
 }
 
@@ -175,6 +175,10 @@ body {
 
 
 /* transaction styles */
+
+.transactions {
+    overflow: hidden;
+}
 
 .transactions h4 {
     text-align: center;
@@ -199,6 +203,7 @@ body {
     margin: 30px;
     border-radius: 10px;
     perspective: 1000px;
+    font-size: 18px;
 }
 
 .inner {
@@ -242,10 +247,11 @@ body {
     border-radius: 10px;
 }
 
-.transaction .left>span:first-child,
+
+/* .transaction .left>span:first-child,
 .right>span:first-child {
     font-size: 20px;
-}
+} */
 
 .transactions .left .moneyAdded-text {
     display: block;
@@ -364,6 +370,18 @@ body {
     }
 }
 
-@media(max-width:819px) {}
+@media(max-width:500px) {
+    .transaction {
+        height: 180px;
+        max-width: 320px;
+        font-size: 16px;
+    }
+}
 
-@media (max-width:767px) {}
+@media(max-width:360px) {
+    .transaction {
+        height: 180px;
+        max-width: 280px;
+        font-size: 15px;
+    }
+}

@@ -55,6 +55,7 @@ export default () => {
             setLoading(false)
         } catch (error) {
             setError(error.message)
+            setLoading(false)
         }
        
        
@@ -92,7 +93,10 @@ export default () => {
       };
     return(
         <Wrapper>
-            <h4>Store</h4>            
+            <h4>Store</h4> 
+            <StoreError>
+                {error}
+            </StoreError>           
             {!loading ? ([
                 displayData(),
                 <ReactPaginate
@@ -122,9 +126,7 @@ export default () => {
                 </div>
             )
             }
-            <StoreError>
-                {error}
-            </StoreError>
+            
             
         </Wrapper>
     )

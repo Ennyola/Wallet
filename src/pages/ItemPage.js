@@ -9,14 +9,15 @@ import SearchedItems from "../components/SearchedItems"
 
 
 const Grid = styled.div`
-    position:relative;
+    display:flex;
+    justify-content:center;
     margin-top:30px;
-    margin-left:15%;
-    display:grid;
-    padding:10px;
-    grid-template-columns: repeat(2, minmax(300px,150px));
-    grid-template-rows:repeat(1, 1fr);
+    flex-wrap:wrap;
+    
+    
+    
     >div:nth-child(1){
+            padding:0px 30px;
             img{
             width:200px;
             height:200px;
@@ -34,12 +35,14 @@ const Grid = styled.div`
     }
 
     >div:nth-child(2){
+        display:block;
         #item-desc{
         text-transform:uppercase;
         font-weight: 400;
         font-size:19px;
         }
         button{
+            display:block;
             min-width:200px;
             height:40px;
             border-radius:20px;
@@ -66,10 +69,19 @@ const Grid = styled.div`
             grid-row:2/3;
         }
     }
+    @media(max-width:639px){
+        #item-desc{
+        text-align:center;
+        }
+        button{
+            margin:0 auto;
+        }
+    }
     
 
 `
 const Price = styled.div`
+    
     span:nth-child(1){
         font-weight:bold;
         font-size:24px;
@@ -89,13 +101,26 @@ const Price = styled.div`
         border-radius:3px;
         
     }
+    @media(max-width:639px){
+        text-align:center;
+    }
+
 `
 
 
 const Input = styled.input`
+    display:block;
+    
     min-width:200px;
-    margin:20px 0px;
+    margin-top:20px;
+    margin-bottom:20px;
     padding:8px;
+    @media(max-width:639px){
+        margin:0 auto;
+        margin-top:20px;
+        margin-bottom:20px;
+
+    }
 
 `
 
