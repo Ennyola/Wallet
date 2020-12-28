@@ -61,8 +61,7 @@ export default () => {
        
     }
 
-    const displayData = ()=>{
-        
+    const displayData = ()=>{  
         return(
             <ImageWrapper key = {1}>
             {data?.results?.map(({id, urls, alt_description})=>{
@@ -73,9 +72,7 @@ export default () => {
                         <p>{alt_description?.length>31 ? `(${alt_description?.substring(0,32)})....`: alt_description}</p>
                         <strong><NumberFormat value={random} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  /></strong>
                     </Link>
-                )
-                
-                
+                )  
             })
             }
             </ImageWrapper>
@@ -90,33 +87,11 @@ export default () => {
 
     const handlePageClick = (data) => {
         setPage(data.selected+1)
-      };
-    return(
-        <Wrapper>
-            <h4>Store</h4> 
-            <StoreError>
-                {error}
-            </StoreError>           
-            {!loading ? ([
-                displayData(),
-                <ReactPaginate
-                key ={2}
-                previousLabel={'<'}
-                nextLabel={'>'}
-                breakLabel={'...'}
-                pageClassName={"current-page"}
-                activeClassName={"active"}
-                previousClassName={"previous-page"}
-                nextLinkClassName={"next-link"}
-                breakLinkClassName={"break-link"}
-                previousLinkClassName={"previous-link"}
-                pageCount={data.total_pages}
-                marginPagesDisplayed={2}
-                pageRangeDisplayed={2}
-                onPageChange={handlePageClick}
-                containerClassName={'pagination'}
-                />
-            ]) :(
+    };
+
+    const returnRespectiveData = ()=>{
+        if(loading){
+            return(
                 <div>
                     <MoonLoader
                         css = {override}
@@ -125,7 +100,44 @@ export default () => {
                     />
                 </div>
             )
-            }
+        }
+        else if(!loading && error === ""){
+            return(
+                [
+                    displayData(),
+                    <ReactPaginate
+                    key ={2}
+                    previousLabel={'<'}
+                    nextLabel={'>'}
+                    breakLabel={'...'}
+                    pageClassName={"current-page"}
+                    activeClassName={"active"}
+                    previousClassName={"previous-page"}
+                    nextLinkClassName={"next-link"}
+                    breakLinkClassName={"break-link"}
+                    previousLinkClassName={"previous-link"}
+                    pageCount={data.total_pages}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={2}
+                    onPageChange={handlePageClick}
+                    containerClassName={'pagination'}
+                    />
+                ]
+            )
+        }
+        else{
+            return(
+                <StoreError>
+                {error}
+                </StoreError>
+            )       
+        }
+    }
+
+    return(
+        <Wrapper>
+            <h4>Store</h4> 
+            {returnRespectiveData()}
             
             
         </Wrapper>

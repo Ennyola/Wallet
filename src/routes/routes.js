@@ -15,12 +15,16 @@ import PrivateRoute from "./utils/PrivateRoute"
 import DashboardLayout from "../layout/dashboardlayout"
 import ItemPage from "../pages/ItemPage"
 import Cart from "../pages/cart"
+import VerifyUser from "../pages/VerifyUser"
+import LandingPage from "../pages/Landing"
 export default ()=>{
     return(
         <BrowserRouter>
           <Switch>
+            
             <Route path = "/login" component = {Login}/>
             <Route path = "/signup" component = {Signup}/>
+            <Route path = "/verify/:token" component ={VerifyUser} />
             <PrivateRoute path = "/dashboard" layout = {DashboardLayout} component = { requireAuth(Dashboard)} activeLink = {1} />   
             <PrivateRoute path = "/funds" layout = {DashboardLayout} component = {requireAuth(Funds)}/>
             <PrivateRoute path = "/help" layout = {DashboardLayout} component = {requireAuth(Help)} activeLink = {5}/>
@@ -31,6 +35,7 @@ export default ()=>{
             <PrivateRoute path= "/transactions" layout = {DashboardLayout}  component = {requireAuth(Transactions)} activeLink = {2}/>
             <PrivateRoute path = "/store/:id" layout = {DashboardLayout} component = {ItemPage}/>
             <PrivateRoute path = "/cart" layout = {DashboardLayout} component = {requireAuth(Cart)} activeLink = {4}/>
+            <Route path = "/" component = {LandingPage} />
           </Switch>
       </BrowserRouter>
     )

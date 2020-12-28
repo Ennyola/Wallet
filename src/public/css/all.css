@@ -3,6 +3,7 @@ html {
 }
 
 body {
+    margin: 0;
     padding: 0;
 }
 
@@ -50,14 +51,6 @@ body {
 
 
 /* dahboard styles */
-
-
-/* 
-.body {
-    padding-top: 97px;
-    padding-left: 180px;
-    overflow: hidden;
-} */
 
 #overview {
     text-align: center;
@@ -161,7 +154,8 @@ body {
     }
     #fund-wallet {
         right: 10px;
-        /* top: 60px; */
+        top: 10px;
+        font-size: 11.5px;
     }
 }
 

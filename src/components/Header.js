@@ -102,7 +102,7 @@ const Header = ()=>{
         <HeaderWrapper className = "header" >
             <div>
                 <BurgerButton onClick = {openSidebar} id = "burger-wrapper"> <i className="fas fa-bars"></i></BurgerButton>
-                <h2 className = "logo">ENNET</h2>
+                <Link to= "/dashboard"><h2 className = "logo">ENNET</h2></Link>
             </div>
            
        

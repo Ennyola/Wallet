@@ -186,7 +186,7 @@ class Sidebar extends Component {
         return(
             <Overlay className = "sidebar-wrap" onClick = {this.closeSidebar}>
                 <SideBar className = "sidebar"> 
-                    <h4 className = "logo">ENNET</h4>
+                <h4 className = "logo">ENNET</h4>
                     <WelcomeText>
                         Hello! 
                         <AuthContext.Consumer>
