@@ -18,7 +18,7 @@ const HeaderWrapper = styled.div`
     flex-wrap: nowrap;
 
     .logo {
-    color: #A1168A;
+    color: #884d7e;
     margin-top:10px;
     }
     @media (max-width:950px){

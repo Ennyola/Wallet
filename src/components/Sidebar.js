@@ -22,7 +22,7 @@ const SideBar = styled.div`
     overflow:auto;
     width:219px;
     h4{
-        color:#A1168A;
+        color:#884d7e;
         font-size:30px;
         position:relative;
         left:10px;
@@ -32,9 +32,9 @@ const SideBar = styled.div`
 
     .active{
         color: white;
-        background-color: #A1168A;
+        background-color:#884d7e;
         #cart-length{
-          color: #A1168A;
+          color:#884d7e;
           background-color:#fff;
         }
     }
@@ -42,7 +42,7 @@ const SideBar = styled.div`
  a {
     position: relative;
     font-size: 17px;
-    color: #A1168A;
+    color:#884d7e;
     display: block;
     padding: 25px 30px;
     transition: .5s all ease;
@@ -54,7 +54,7 @@ const SideBar = styled.div`
         border-radius:50px;
         top: 18px;
         left:34px;
-				background-color:#A1168A;
+				background-color:#884d7e;
         color:white;
         font-size:11px;
     }
@@ -69,9 +69,9 @@ const SideBar = styled.div`
  a:hover {
     cursor: pointer;
     color: white;
-    background-color: #A1168A;
+    background-color:#884d7e;
     #cart-length{
-      color: #A1168A;
+      color:#884d7e;
       background-color:#fff;
     }
 }
@@ -104,7 +104,8 @@ const WelcomeText = styled.div`
     font-style:italic;
 
     span{
-        color: #e26fcf;
+        color: #884d7e;
+        font-weight:normal;
     }
     @media (max-width:950px){
       margin-top:50px;

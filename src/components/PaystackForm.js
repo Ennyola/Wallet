@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import { PaystackButton } from 'react-paystack'
 import { MDBInput } from 'mdbreact';
+import NumberFormat from 'react-number-format';
 
 export const PaystackForm = (props)=>{
     let  [amount, setAmount] = useState("")
@@ -24,6 +25,7 @@ export const PaystackForm = (props)=>{
                         value = {amount}
                         hint = {"Amount"}
                         type = "number"/>
+                        {/* <NumberFormat/> */}
 
                         <PaystackButton
                         className = "paystack-button"

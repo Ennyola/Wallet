@@ -21,16 +21,23 @@ const Wrapper = styled.div`
         font-weight: 400;
         border-radius: 10px;
         transition: .7s all ease;
+        p{
+            color:#A1168A;
+        }
         span{
-            color:green;
+        
         }
         :hover{
-            background-color: #A1168A;
+            /* background-color: #884d7e; */
             margin-top: 40px;
-            color: white;
+            /* color: white; */
+            border:3px solid #884d7e;
             span{
                 transition: .7s all ease;
-                color: white !important;
+                /* color: white !important; */
+            }
+            p{
+                /* color:white; */
             }
         }
     }
@@ -52,12 +59,12 @@ export const AccountSummary =(props)=>{
             </div>
             <div className= "summary">
                 <p>Money Funded</p>
-                <NumberFormat value={props?.moneyAdded?.toFixed(2)||0.00.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  />
+                <NumberFormat className = "text-success" value={props?.moneyAdded?.toFixed(2)||0.00.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  />
         
             </div>
             <div className= "summary"> 
                 <p>Money Deducted</p>
-                <NumberFormat className = "text-danger" value={props?.moneyRemoved?.toFixed(2)|| 0.00.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  />
+                <NumberFormat className="text-danger"  value={props?.moneyRemoved?.toFixed(2)|| 0.00.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  />
         
             </div>
             <div className= "summary">
