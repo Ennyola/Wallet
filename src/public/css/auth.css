@@ -34,7 +34,7 @@
 .login-btn {
     border-radius: 30px;
     padding: 7px 40px;
-    background-color: #d64fc0;
+    background-color: #884d7e;
     color: white;
     border-color: transparent;
     font-family: 'Lily Script One';
@@ -43,8 +43,8 @@
 
 .login-btn:hover {
     background-color: white;
-    border: 2px solid #d64fc0;
-    color: #d64fc0;
+    border: 2px solid#884d7e;
+    color: #884d7e;
 }
 
 .login .to-signup {
@@ -118,8 +118,10 @@
     position: absolute;
     top: 40%;
     left: 30%;
-    color: #3E2978;
+    color: #884d7e;
     font-weight: 400;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 40px;
 }
 
 .signup .welcome-text {

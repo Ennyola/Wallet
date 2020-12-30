@@ -15,11 +15,15 @@ body {
 
 /* header style */
 
-.header [alt="user-icon"] {
-    width: 30px;
-    height: 30px;
-    border-radius: 45px;
-    object-fit: cover;
+#user-icon {
+    background-color: #884d7e;
+    color: white;
+    padding: 10px 10px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    text-transform: uppercase;
+    font-weight: 600;
 }
 
 .header div:nth-child(1) {
@@ -44,15 +48,13 @@ body {
 
 .switch {
     background-color: #884d7e;
+    padding: 30px 30px 20px 30px !important;
 }
 
 .header div:nth-child(2) {
     padding: 10px 10px;
     /* margin-right: 30px; */
 }
-
-
-/* sidebar Styles */
 
 
 /* dahboard styles */
@@ -157,7 +159,7 @@ body {
     }
     #fund-wallet {
         right: 10px;
-        top: 10px;
+        top: 1px;
         font-size: 11.5px;
     }
 }
@@ -293,6 +295,7 @@ body {
 .help ul {
     margin-top: 40px;
     list-style-type: none;
+    font-weight: normal;
 }
 
 .help li::before {
@@ -350,8 +353,6 @@ body {
     font-weight: bold;
 }
 
-.account .account-image img:hover {}
-
 @media (max-width:950px) {
     .body {
         padding-left: 0px;
@@ -373,6 +374,9 @@ body {
         height: 180px;
         max-width: 320px;
         font-size: 16px;
+    }
+    .switch {
+        padding: 13px !important;
     }
 }
 

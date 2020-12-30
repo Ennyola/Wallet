@@ -25,7 +25,18 @@ export const PaystackForm = (props)=>{
                         value = {amount}
                         hint = {"Amount"}
                         type = "number"/>
-                        {/* <NumberFormat/> */}
+
+                        {/* <NumberFormat 
+                        customInput={MDBInput} 
+                        onChange = {e=>{
+                            setAmount(e.target.value)
+                            console.log(typeof(amount))
+                            }}
+                        value = {amount}
+                        
+                        hint="Amount"
+                        type={"Number"}
+                        /> */}
 
                         <PaystackButton
                         className = "paystack-button"

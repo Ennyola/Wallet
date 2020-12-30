@@ -18,9 +18,9 @@ const Login = (props) => {
 
     if(user){
         props.history.push('/dashboard')
-        const token = localStorage.token
-        const link = `http://localhost:3000/verify/${token}`
-        console.log(link)
+        // const token = localStorage.token
+        // const link = `http://localhost:3000/verify/${token}`
+        // console.log(link)
     }
     const [loginUser, {data:mutationData, loading, error:mutationError}] = useMutation(mutation)
 
@@ -58,7 +58,7 @@ const Login = (props) => {
                     <HashLoader
                         css = {override}
                         size={80}
-                        color={"#A1168A"}
+                        color={"#884d7e"}
                     />
                 </div>
             }

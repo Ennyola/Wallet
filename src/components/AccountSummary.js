@@ -23,6 +23,7 @@ const Wrapper = styled.div`
         transition: .7s all ease;
         p{
             color:#A1168A;
+            font-weight:400;
         }
         span{
         

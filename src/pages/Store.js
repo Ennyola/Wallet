@@ -16,7 +16,9 @@ const ImageWrapper  = styled.div`
     place-items:center;
     
     p, strong{
-        color: black !important;
+        color: black;
+        text-transform:capitalize;
+        font-weight:normal;
     }
     
     img{
@@ -24,6 +26,10 @@ const ImageWrapper  = styled.div`
         height:150px;
         object-fit: cover;  
         border-radius: 5px;   
+    }
+    .price{
+        color: #884d7e;
+        font-weight:900;
     }
 `
 const StoreError = styled.div`
@@ -69,8 +75,8 @@ export default () => {
                 return(
                     <Link key={id} to = {`/store/${id}&${random}`}>
                         <img  src={urls.small} alt={alt_description}/>
-                        <p>{alt_description?.length>31 ? `(${alt_description?.substring(0,32)})....`: alt_description}</p>
-                        <strong><NumberFormat value={random} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  /></strong>
+                        <p className="description">{alt_description?.length>31 ? `${alt_description?.substring(0,30)}....`: alt_description}</p>
+                        <strong className ="price"><NumberFormat value={random} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  /></strong>
                     </Link>
                 )  
             })

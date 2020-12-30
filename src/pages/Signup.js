@@ -68,7 +68,7 @@ const Signup =(props)=>{
                             css = {override}
                             className = "overlay"
                             size={20}
-                            color={"#f192e2"}
+                            color={"#884d7e"}
                         />
                     </div>
                 }

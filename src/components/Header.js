@@ -1,8 +1,8 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import {Link} from 'react-router-dom'
 import styled from "styled-components"
 
-import image from "../public/images/IMG_20200605_171344.jpg"
+import {AuthContext} from "../context/Auth"
 
 
 const HeaderWrapper = styled.div`
@@ -55,7 +55,7 @@ const BurgerButton = styled.span`
 `
 const DropDown = styled.span`
     cursor:pointer;
-    padding:20px;
+    padding-left:13px;
     
 
 `
@@ -78,9 +78,15 @@ const DropDownMenu = styled.div`
   
     
 `
+document.body.addEventListener("click",(e)=>{
+    const dropMenu  = document.querySelector(".dropMenu")
+    if(dropMenu.classList.contains("open")){
+        dropMenu.classList.toggle("open")
+    }
+})
 
 const Header = ()=>{
-
+    const {user} = useContext(AuthContext)
     const openSidebar = (e)=>{
        const sidebar =  document.querySelector(".sidebar")
        const sidebarWrapper = document.querySelector(".sidebar-wrap")
@@ -98,6 +104,7 @@ const Header = ()=>{
         window.location.reload()
     }
     
+    
     return(
         <HeaderWrapper className = "header" >
             <div>
@@ -108,9 +115,9 @@ const Header = ()=>{
        
            <div>
                 <span className= "user-info">
-                    <img src={image} alt="user-icon"/>
+                    <span id="user-icon">{user?.username.substring(0,2)}</span>
                     <DropDownMenu className="dropMenu" >
-                        <Link to = "/account" > Account Setting</Link>
+                        {/* <Link to = "/account" > Account Setting</Link> */}
                         <Link to = "" onClick={logout}>Logout</Link>
                     </DropDownMenu>
                 </span>

@@ -14,13 +14,14 @@ const Overlay = styled.div`
 const SideBar = styled.div`
     position: fixed;
     top: 70px;
-    /* background-color: #E5C1CD; */
     background-color: #f4f7fa;
     height: 100vh;
     transition: 0.5s all;
     z-index:2;
-    overflow:auto;
+    overflow-x:hidden;
+    overflow-y:auto;
     width:219px;
+    font-weight:normal;
     h4{
         color:#884d7e;
         font-size:30px;

@@ -1,4 +1,4 @@
-import React from "react"
+import React,{useRef, useState} from "react"
 import styled from "styled-components"
 import {Link} from "react-router-dom"
 import bgImage from "../public/images/fabian-irsara-67l-QujB14w-unsplash.jpg"
@@ -9,8 +9,11 @@ const Wrapper = styled.div`
 const Header = styled.header`
     position:fixed;
     width:100%;
+    top:0;
+    left:0;
     z-index:1;
-    padding:20px 40px 0px 40px;
+    padding:40px 40px 20px 40px;
+    transition:0.6s;
     nav{
         display:flex;
         justify-content:space-between;
@@ -21,23 +24,36 @@ const Header = styled.header`
         span{
             position:relative;
             top:10px;
-            right:10px;
             a{
                 margin:20px 40px ;
                 color: #fff;
                 padding:5px;
+                transition:0.6s;
                 :hover{
                     text-decoration:none;
                     border-bottom:3px solid#A1168A;
                 }
             }
+            @media (max-width:870px){
+                :nth-child(2n){
+                    display:none;
+                }
+                
+            }
         }
     }
+
+    @media (max-width:500px){
+       padding:20px 20px;
+    
+    }
+                
+
     
 `
 const GetStarted = styled.div`
         background-color: #884d7e;
-        height:90vh;
+        height:100vh;
         width:100%;
         text-align:center;
         padding:200px 30px 0px 30px;
@@ -46,23 +62,27 @@ const GetStarted = styled.div`
         background-size: cover;
         background-attachment: fixed;
         background-blend-mode: soft-light;
-    
+        background-position: center;
         h2{
-            color: #fff;
-            font-weight:400;
-            margin-top:40px;
+            color:  #fff;
+            font-weight:600;
+            margin-top:30px;
+            letter-spacing:1.5px;
+            line-height:1.2;
+            font-size:40px;
         }
         a{
-            border: 1px solid white;
+            border: 3px solid white;
             border-radius:90px;
             padding:13px 30px;
             position:relative;
-            top:70px;
+            top:50px;
             color:white;
             font-weight:400;
             :hover{
                 color: #b835a2;
                 background-color:white;
+                font-weight:900;
             }
         }
     
@@ -72,10 +92,11 @@ const GetStarted = styled.div`
 const Features = styled.section`
     display:block;
     margin:0 auto;
-    margin-top:150px;
+    margin-top:80px;
     padding: 0px 80px;
     
     h1{
+        padding-top:100px;
         color: #884d7e;
         text-align:center;
         font-weight:400;
@@ -86,7 +107,6 @@ const Features = styled.section`
         margin-top:80px;
         display:grid;
         grid-template-columns:repeat(3, 1fr);
-        /* grid-template-rows:repeat(1, 1fr); */
         grid-column-gap:30px;
 
         .feature{
@@ -131,12 +151,13 @@ const About = styled.section`
         text-align:center;
         font-weight:400;
         letter-spacing:-0.7px;
-        padding:20px 0px;
+        padding-top:100px;
     }
     p{
         margin-top:40px;
         font-weight:normal;
         font-size:18px;
+        letter-spacing:1.5px;
     }
     @media (max-width:600px){
         padding:30px;
@@ -161,33 +182,104 @@ const Footer = styled.div`
     }
     
 `
-window.addEventListener("scroll",(e)=>{
-    const header = document.querySelector(".header")
-    // header.classList.toggle("change", (window.scrollY>50 && window.scrollY<600))
-    header.classList.toggle("switch", window.scrollY>8)
+const BurgerButton = styled.span`
+    display:none;
+    color:white;
+    font-size:24px;  
+    margin-top:-4px;
+    @media (max-width:870px){
+        display:block;        
+    }
     
+
+`
+const SideBar = styled.div`
+    position:fixed;
+    width:100%;
+    height:100%;
+    div{
+        margin-left:-200px;
+        width:200px;
+        background-color: #f4f7fa;
+        height:100%;
+        transition: 0.5s all !important; 
+        a{
+            padding:30px;
+            display:block;
+            text-align:center;
+            border-bottom:3px solid #eee;
+            color:#884d7e;
+            font-weight:normal;
+        }
+        
+    }
+    @media (min-width:870px){
+        display:none;
+    }
+
+`
+
+window.addEventListener("scroll",(e)=>{
+    const header = document.querySelector(".landing-header")
+    const features = document.querySelector(".features-wrapper")
+    header?.classList?.toggle("switch", window.scrollY>8)
+    if(window.scrollY>100){
+        features?.classList?.add("animate__fadeInRight")
+    } 
 })
 
 
 export default ()=>{
+    const featuresRef = useRef(null)
+    const aboutRef = useRef(null)
+    const executeScroll = (ref) => ref.current.scrollIntoView()
+   
+    const openSidebar=()=>{
+        const sidebar = document.querySelector(".landing-sidebar");
+        const sidebarChild = document.querySelector(".sidebar-div");
+        sidebar.classList.remove("close")
+        sidebarChild.classList.add("show")
+
+    }
+    const closeSidebar=(e)=>{
+        const sidebar = document.querySelector(".landing-sidebar");
+        const sidebarChild = document.querySelector(".sidebar-div");
+        if(e.target.classList.contains("landing-sidebar")){
+            sidebar.classList.add("close")
+            sidebarChild.classList.remove("show")
+        }
+    }
+    
+
     return(
         <Wrapper>
-            <Header className ="header">
+        
+            <SideBar className = "landing-sidebar overlay close" onClick={closeSidebar}>
+                <div className="sidebar-div">
+                    <Link to="/login">SiGN-IN</Link>
+                    <Link to ="" onClick ={()=> executeScroll(featuresRef)} >FEATURES </Link>
+                    <Link to ="" onClick ={()=> executeScroll(aboutRef)}>ABOUT </Link>
+                </div>
+            </SideBar>
+
+            <Header className ="landing-header">
                 <nav>
                     <Link to="/dashboard"> <h1 className = "logo"> ENNET </h1></Link> 
                     <span>
-                        <Link>FEATURES</Link>
-                        <Link>ABOUT </Link>
+                        <Link to ="" onClick ={()=> executeScroll(featuresRef)} >FEATURES </Link>
+                        <Link to ="" onClick ={()=> executeScroll(aboutRef)}>ABOUT </Link>
                         <Link to="/login">SiGN-IN</Link>
-                    </span>    
+                    </span> 
+                    <BurgerButton onClick={openSidebar}> 
+                        <i className="fas fa-bars"></i>
+                    </BurgerButton>
                 </nav>
-               
             </Header>
-            <GetStarted >
-                    <h2>AUTOMATE YOUR SAVING PROCESS WHILE HAVING FUN</h2>
+            <GetStarted className="">
+                    <h2 className="animate__animated animate__slideInDown">AUTOMATE YOUR SAVING PROCESS.</h2>
                     <Link to="/signup" className="get-started">GET STARTED</Link>
             </GetStarted>
-            <Features >
+            <Features ref ={featuresRef} className="animate__animated features-wrapper" >
                 <h1>Features</h1>
                 <div className="features">
                     <div className="feature">
@@ -213,22 +305,23 @@ export default ()=>{
                     
                 </div>         
             </Features>
-            <About className="container">
+            <About ref = {aboutRef} className="about-wrapper container">
                 <h1>About</h1>
-                <p> Ever Felt Broke? Well, that was the same reason i built this. Ennet is an E-wallet Application that Automates the saving process. You can save up to Any Amount and the money's all yours(Or so i use to console myself)
-                It stores no real money nor is any real money being spent.
+                <p> Ever Felt Broke? Well, that was the same reason Ennet was built. Ennet is an E-wallet Application that Automates the saving process. 
+                You can save up to Any Amount and the money's all yours(Just imagine having Trillions at your Disposal).
+                Though It stores no real money nor is any real money being spent, you can still get the thrill of being richer than Jeff Bezos.
                 An In-house Mini store is provided to facilitate and Ensure you can spend the money Saved up.
-                Wanna Know how you can save, why don't you Sign-in to Find out 😉
+                Wanna Know how you can save, why don't you <Link to="/signup">Sign-up</Link>  to Find out 😉
                 </p>
             </About>
 
             <Footer>
                   <p>Contact The Developer</p> 
                  <div>
-                    <a href="https://medunoyeeni@gmail.com" target="_blank"> <i class="far fa-envelope"></i> </a>
-                    <a href="https://twitter.com/la_yhemy" target="_blank"> <i class="fab fa-twitter"></i> </a>
-                    <a href="https://www.linkedin.com/in/eniola-medunoye/" target="_blank"> <i class="fab fa-linkedin"></i> </a>
-                    <a href="https://github.com/Ennyola" target="_blank"> <i class="fab fa-github"></i> </a>
+                    <a href="https://medunoyeeni@gmail.com" target="_blank"> <i className="far fa-envelope"></i> </a>
+                    <a href="https://twitter.com/la_yhemy" target="_blank"> <i className="fab fa-twitter"></i> </a>
+                    <a href="https://www.linkedin.com/in/eniola-medunoye/" target="_blank"> <i className="fab fa-linkedin"></i> </a>
+                    <a href="https://github.com/Ennyola" target="_blank"> <i className="fab fa-github"></i> </a>
                  </div>
                  <p>©ENNET ALL RIGHTS RESERVED. </p>
             </Footer>
