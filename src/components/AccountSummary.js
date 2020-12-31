@@ -59,7 +59,7 @@ export const AccountSummary =(props)=>{
         
             </div>
             <div className= "summary"> 
-                <p>Money Deducted</p>
+                <p>Money Spent</p>
                 <NumberFormat className="text-danger"  value={props?.moneyRemoved?.toFixed(2)|| 0.00.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  />
         
             </div>

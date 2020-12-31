@@ -1,7 +1,7 @@
 import React,{useContext} from 'react'
 import {Link} from 'react-router-dom'
 import styled from "styled-components"
-
+import FadeLoader from "react-spinners/FadeLoader";
 import {AuthContext} from "../context/Auth"
 
 
@@ -86,7 +86,7 @@ document.body.addEventListener("click",(e)=>{
 })
 
 const Header = ()=>{
-    const {user} = useContext(AuthContext)
+    const {user,loading} = useContext(AuthContext)
     const openSidebar = (e)=>{
        const sidebar =  document.querySelector(".sidebar")
        const sidebarWrapper = document.querySelector(".sidebar-wrap")
@@ -115,7 +115,9 @@ const Header = ()=>{
        
            <div>
                 <span className= "user-info">
-                    <span id="user-icon">{user?.username.substring(0,2)}</span>
+                    <span id="user-icon">
+                    {!loading ? 
+                    user?.username.substring(0,2): "..."}</span>
                     <DropDownMenu className="dropMenu" >
                         {/* <Link to = "/account" > Account Setting</Link> */}
                         <Link to = "" onClick={logout}>Logout</Link>

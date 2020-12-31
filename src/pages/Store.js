@@ -49,24 +49,12 @@ const override = css`
   margin-top:50px;
 `;
 
-export default () => {
+const Store =  () => {
     document.title = "Store"
     const [data, setData] = useState({})
     const [page, setPage] = useState(1)
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState("")
-    const fetchPhotos = async ()=>{
-        try {
-            const response = await (await fetch(`https://api.unsplash.com/search/photos/?query=shoes&client_id=${process.env.REACT_APP_UNSPLASH_ACCESS_KEY}&page=${page}&per_page=20`)).json()
-            setData(response)
-            setLoading(false)
-        } catch (error) {
-            setError(error.message)
-            setLoading(false)
-        }
-       
-       
-    }
+    const [error, setError] = useState("")  
 
     const displayData = ()=>{  
         return(
@@ -88,6 +76,16 @@ export default () => {
     }
 
     useEffect(()=>{
+        const fetchPhotos = async ()=>{
+            try {
+                const response = await (await fetch(`https://api.unsplash.com/search/photos/?query=shoes&client_id=${process.env.REACT_APP_UNSPLASH_ACCESS_KEY}&page=${page}&per_page=20`)).json()
+                setData(response)
+                setLoading(false)
+            } catch (error) {
+                setError(error.message)
+                setLoading(false)
+            }      
+        }
         fetchPhotos()
        
     },[page])
@@ -150,3 +148,5 @@ export default () => {
         </Wrapper>
     )
 }
+
+export default Store

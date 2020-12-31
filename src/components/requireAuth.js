@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default (WrappedComponent) => {
+const RequireAuth = (WrappedComponent) => {
     const RequireAuth = (props) => {
         const token = localStorage.getItem('token')
             if(!token){
@@ -10,3 +10,5 @@ export default (WrappedComponent) => {
     }
     return RequireAuth
 }
+
+export default RequireAuth

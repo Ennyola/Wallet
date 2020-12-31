@@ -21,7 +21,7 @@ const Transactions = (props)=>{
             return transactions.map(({id,moneySaving, moneySpending, timeOfTransaction})=>{
               const [transactionDate, transactionTime] = timeOfTransaction.split('T') 
               const time = transactionTime.slice(0,15).split('+')[0]
-              const utc = transactionTime.slice(15)
+              // const utc = transactionTime.slice(15)
               const dateTimeString = date.parse(`${transactionDate} ${time}`, 'YYYY-MM-DD HH:mm:ss')
               const fulldateTimeString = dateTimeString.toString()
               const utcDay = dateTimeString.toUTCString().slice(0, 16)

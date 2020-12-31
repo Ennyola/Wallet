@@ -9,7 +9,7 @@ export const FundsContext = createContext({})
 
 export const FundsContextProvider = ({children})=>{
     const {data : fundsQuery, loading: fundsLoading} = useQuery(getFundsQuery)
-    const {data : transactionQuery, loading:transLoading} = useQuery(getTransactionQuery)
+    const {data : transactionQuery, loading:transLoading, error:transError} = useQuery(getTransactionQuery)
     return(
         <FundsContext.Provider
         value = {{
@@ -19,7 +19,8 @@ export const FundsContextProvider = ({children})=>{
             previousBalance:fundsQuery?.funds?.previousBalance,
             transactionQuery,
             fundsLoading,
-            transLoading
+            transLoading,
+            transError
         }}
         >
             {children}

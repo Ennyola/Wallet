@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Route, BrowserRouter, Switch } from 'react-router-dom'
 
 import Login from '../pages/Login'
@@ -16,7 +16,7 @@ import ItemPage from "../pages/ItemPage"
 import Cart from "../pages/cart"
 // import VerifyUser from "../pages/VerifyUser"
 import LandingPage from "../pages/Landing"
-export default ()=>{
+const Routes = ()=>{
     return(
         <BrowserRouter>
           <Switch>
@@ -37,3 +37,5 @@ export default ()=>{
       </BrowserRouter>
     )
 }
+
+export default Routes

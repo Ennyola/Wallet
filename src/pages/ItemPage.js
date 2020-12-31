@@ -12,7 +12,7 @@ const Grid = styled.div`
     display:flex;
     justify-content:center;
     margin-top:30px;
-    flex-wrap:wrap;
+    /* flex-wrap:wrap; */
     
     
     
@@ -39,7 +39,7 @@ const Grid = styled.div`
         #item-desc{
         text-transform:uppercase;
         font-weight: 400;
-        font-size:19px;
+        font-size:18px;
         }
         button{
             display:block;
@@ -58,20 +58,11 @@ const Grid = styled.div`
 
         }
     }
-    @media(max-width:730px){
-        margin-left:0;
-        grid-template-rows: repeat(2, 1fr);
-        grid-template-columns: repeat(1, minmax(300px,150px));
-        grid-row-gap:30px;
-        justify-items:center;
-        >div:nth-child(2){
-            
-            grid-row:2/3;
-        }
-    }
-    @media(max-width:639px){
+    @media(max-width:550px){
+        flex-wrap:wrap;
         #item-desc{
         text-align:center;
+        padding:10px 20px;
         }
         button{
             margin:0 auto;
@@ -101,7 +92,7 @@ const Price = styled.div`
         border-radius:3px;
         
     }
-    @media(max-width:639px){
+    @media(max-width:550px){
         text-align:center;
     }
 
@@ -115,7 +106,7 @@ const Input = styled.input`
     margin-top:20px;
     margin-bottom:20px;
     padding:8px;
-    @media(max-width:639px){
+    @media(max-width:550px){
         margin:0 auto;
         margin-top:20px;
         margin-bottom:20px;
@@ -125,17 +116,14 @@ const Input = styled.input`
 `
 
 
-export default (props)=>{
+const ItemPage = (props)=>{
     const [random] = useState(Math.floor(Math.random()*30+1))
     const [result, setResult] = useState({})
     const [quantity, setQuantity] = useState("")
     const [price] = useState(props.match.params.id.split("&")[1])
+    const [id] = useState(props.match.params.id.split("&")[0])
     const [priceAfterPercentage] = useState(price-(price*(random/100)))
-    const getItem = async ()=>{
-        const id = props.match.params.id.split("&")[0]
-        const data = await (await fetch(`https://api.unsplash.com/photos/${id}?client_id=${process.env.REACT_APP_UNSPLASH_ACCESS_KEY}`)).json()
-        setResult(data)
-    }
+   
     const addToCart=()=>{
         if(!quantity){
             notify("Please select a Quantity", "error")
@@ -164,7 +152,11 @@ export default (props)=>{
    
 
     useEffect(()=>{
-     getItem()
+        const getItem = async ()=>{
+            const data = await (await fetch(`https://api.unsplash.com/photos/${id}?client_id=${process.env.REACT_APP_UNSPLASH_ACCESS_KEY}`)).json()
+            setResult(data)
+        }
+        getItem()
     },[])
 
     
@@ -193,3 +185,5 @@ export default (props)=>{
 
 
 }
+
+export default ItemPage

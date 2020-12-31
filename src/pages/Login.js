@@ -23,7 +23,7 @@ const Login = (props) => {
         // const link = `http://localhost:3000/verify/${token}`
         // console.log(link)
     }
-    const [loginUser, {data:mutationData, loading, error:mutationError}] = useMutation(mutation)
+    const [loginUser, {data:mutationData, loading}] = useMutation(mutation)
 
     if(mutationData){
         const {token} = mutationData.tokenAuth

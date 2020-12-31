@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react"
 import styled from "styled-components"
-import {Link, withRouter} from 'react-router-dom'
+import { withRouter} from 'react-router-dom'
 import NumberFormat from 'react-number-format';
 
 const SearchedItems = styled.div`
@@ -42,17 +42,18 @@ const SearchedItems = styled.div`
 
 const Search  = (props)=>{
     const [results, setResults] = useState([])
-    const getSearchesData = async ()=>{
-        if( props.tags &&  props.tags.length !== 0){
-            const random =  Math.floor(Math.random() * props?.tags?.length)+0
-            const itemToSearch = props?.tags[random].title
-            const data = await (await fetch(`https://api.unsplash.com/search/photos/?query=${itemToSearch}s&client_id=${process.env.REACT_APP_UNSPLASH_ACCESS_KEY}&page=${random}&per_page=10`)).json()
-            setResults(data?.results)
-        }
-       
-    }
+    
 
     useEffect(()=>{
+        const getSearchesData = async ()=>{
+            if( props.tags &&  props.tags.length !== 0){
+                const random =  Math.floor(Math.random() * props?.tags?.length)+0
+                const itemToSearch = props?.tags[random].title
+                const data = await (await fetch(`https://api.unsplash.com/search/photos/?query=${itemToSearch}s&client_id=${process.env.REACT_APP_UNSPLASH_ACCESS_KEY}&page=${random}&per_page=10`)).json()
+                setResults(data?.results)
+            }
+           
+        }
         getSearchesData()
     },[props?.tags])
 

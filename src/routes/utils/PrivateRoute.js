@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Route, BrowserRouter, } from 'react-router-dom'
+import React  from 'react';
+import { Route } from 'react-router-dom'
 
-export default ({
+const PrivateRoute = ({
     component: Component,
     layout: Layout,
     activeLink,
@@ -22,3 +22,5 @@ export default ({
         
     )
 }
+
+export default PrivateRoute

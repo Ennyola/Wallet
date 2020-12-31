@@ -1,4 +1,4 @@
-import React,{useRef, useState} from "react"
+import React,{useRef} from "react"
 import styled from "styled-components"
 import {Link} from "react-router-dom"
 import bgImage from "../public/images/fabian-irsara-67l-QujB14w-unsplash.jpg"
@@ -229,7 +229,7 @@ window.addEventListener("scroll",(e)=>{
 })
 
 
-export default ()=>{
+const Landing = ()=>{
     document.title = "ENNET"
     const featuresRef = useRef(null)
     const aboutRef = useRef(null)
@@ -320,10 +320,10 @@ export default ()=>{
             <Footer>
                   <p>Contact The Developer</p> 
                  <div>
-                    <a href="https://medunoyeeni@gmail.com" target="_blank"> <i className="far fa-envelope"></i> </a>
-                    <a href="https://twitter.com/la_yhemy" target="_blank"> <i className="fab fa-twitter"></i> </a>
-                    <a href="https://www.linkedin.com/in/eniola-medunoye/" target="_blank"> <i className="fab fa-linkedin"></i> </a>
-                    <a href="https://github.com/Ennyola" target="_blank"> <i className="fab fa-github"></i> </a>
+                    <a href="https://medunoyeeni@gmail.com" target="_blank" rel="noreferrer"> <i className="far fa-envelope"></i> </a>
+                    <a href="https://twitter.com/la_yhemy" target="_blank" rel="noreferrer"> <i className="fab fa-twitter"></i> </a>
+                    <a href="https://www.linkedin.com/in/eniola-medunoye/" target="_blank" rel="noreferrer"> <i className="fab fa-linkedin"></i> </a>
+                    <a href="https://github.com/Ennyola" target="_blank" rel="noreferrer"> <i className="fab fa-github"></i> </a>
                  </div>
                  <p>©ENNET ALL RIGHTS RESERVED. </p>
             </Footer>
@@ -331,3 +331,5 @@ export default ()=>{
         </Wrapper>
     )
 }
+
+export default Landing

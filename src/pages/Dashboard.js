@@ -13,7 +13,7 @@ import {Wrapper} from "../components/styles"
 
 const Dashboard =()=>{
     document.title="Home"
-    const {currentBalance,fundsLoading, moneyAdded,moneyRemoved,previousBalance,transactionQuery,transLoading} = useContext(FundsContext)
+    const {currentBalance, moneyAdded,moneyRemoved,previousBalance,transactionQuery} = useContext(FundsContext)
 
     const [fundWallet] = useMutation(FUND_WALLET)
  
@@ -37,13 +37,6 @@ const Dashboard =()=>{
                 }
             ]    
         })
-    }
-
-    
-    if (fundsLoading && transLoading) {
-        return( 
-        <div>Loading...</div>
-        )
     }
 
     const getTotalMoney = (type)=>{
@@ -76,7 +69,7 @@ const Dashboard =()=>{
                         <div id = "fund-div">
                             <span id = "current-balance">
                                 <div>Current Balance</div>  
-                                <NumberFormat value={currentBalance?.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  />
+                                <NumberFormat value={currentBalance?.toFixed(2)||0.00.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  />
                             </span>
 
                             <button 

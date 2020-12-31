@@ -5,7 +5,7 @@ import styled from "styled-components"
 
 const Wrapper = styled.div`
 `
-export default (props)=>{
+ const DashboardLayout = (props)=>{
     return(
         <Wrapper>
             <Header/>
@@ -14,3 +14,4 @@ export default (props)=>{
         </Wrapper>
     )
 }
+export default DashboardLayout

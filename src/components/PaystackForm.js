@@ -1,7 +1,6 @@
 import React,{useState} from 'react';
 import { PaystackButton } from 'react-paystack'
 import { MDBInput } from 'mdbreact';
-import NumberFormat from 'react-number-format';
 
 export const PaystackForm = (props)=>{
     let  [amount, setAmount] = useState("")
@@ -37,7 +36,6 @@ export const PaystackForm = (props)=>{
                             paystackForm.classList.add("close")
                             setAmount("")
                             props.fundWallet(amount)
-                            alert("Transaction Succesful")
                         }}
                         onClose = {()=>{
                             const  paystackForm= document.querySelector(".fundwallet-form")

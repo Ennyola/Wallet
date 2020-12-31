@@ -8,11 +8,12 @@ export const AuthContext = createContext({})
 
 export const AuthContextProvider = ({children})=>{
 
-    const {data, refetch} =  useQuery(getUser)
+    const {data, loading, refetch} =  useQuery(getUser)
     return(
         <AuthContext.Provider
         value = {{
             user:data?.user,
+            loading,
             refetch
         }}
         >

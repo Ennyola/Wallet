@@ -195,7 +195,7 @@ class Sidebar extends Component {
                     <WelcomeText>
                         Hello! 
                         <AuthContext.Consumer>
-                          {(value)=> (<span> {value.user?.username}</span>) }
+                          {(value)=> (<span> {!value.loading? value.user?.username: "..."}</span>) }
                         </AuthContext.Consumer>    
                     </WelcomeText>
                     {

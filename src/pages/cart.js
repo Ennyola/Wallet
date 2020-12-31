@@ -154,14 +154,13 @@ const NoItem = styled.div`
     font-size:20px;
 
 `
-
-export default (props)=>{
+const Cart = (props)=>{
     document.title = "Cart"
-    const {currentBalance} = useContext(FundsContext)
+    const {currentBalance,fundsLoading} = useContext(FundsContext)
     const [items, setItems] =useState([])
     const [total, setTotal] = React.useState();
     const getItemforStorage = async ()=>{
-        let cart = new Array
+        let cart = []
         cart = await JSON.parse(localStorage.getItem("ennet_cart"))
         setItems(cart)
         setTotal(()=> 
@@ -216,7 +215,7 @@ export default (props)=>{
                 <div>
                     <i onClick = {toggleModal} className="fas fa-times"></i>
                     <div>Current Balance : <NumberFormat value={currentBalance} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  /></div>
-                    <div>Amount to be paid : <NumberFormat value={total} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  /></div>
+                    <div>Amount to be paid : <NumberFormat value={!fundsLoading? total: "..."} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  /></div>
                     <button
                     onClick ={()=>{
                         if(total>currentBalance){
@@ -294,3 +293,5 @@ export default (props)=>{
     )           
 
 }
+
+export default Cart
