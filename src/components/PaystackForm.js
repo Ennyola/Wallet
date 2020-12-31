@@ -26,23 +26,11 @@ export const PaystackForm = (props)=>{
                         hint = {"Amount"}
                         type = "number"/>
 
-                        {/* <NumberFormat 
-                        customInput={MDBInput} 
-                        onChange = {e=>{
-                            setAmount(e.target.value)
-                            console.log(typeof(amount))
-                            }}
-                        value = {amount}
-                        
-                        hint="Amount"
-                        type={"Number"}
-                        /> */}
-
                         <PaystackButton
                         className = "paystack-button"
                         email = {"medunoyeeni@gmail.com"} 
                         amount = {amount*100}
-                        publicKey = {"pk_test_78d9cf26ee96f7b50fddb3f5353344f4e44f9226"} 
+                        publicKey = {process.env.REACT_APP_PAYSTACK_PUBLIC_KEY} 
                         text = {"Fund"}
                         onSuccess = {()=> {
                             const  paystackForm= document.querySelector(".fundwallet-form")

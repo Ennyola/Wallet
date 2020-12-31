@@ -56,7 +56,7 @@ export default () => {
     const [error, setError] = useState("")
     const fetchPhotos = async ()=>{
         try {
-            const response = await (await fetch(`https://api.unsplash.com/search/photos/?query=shoes&client_id=oAZ8DyQ4FRcZKSz3083vOLdX7yCv3uEJhGTigrC5wi0&page=${page}&per_page=20`)).json()
+            const response = await (await fetch(`https://api.unsplash.com/search/photos/?query=shoes&client_id=${process.env.REACT_APP_UNSPLASH_ACCESS_KEY}&page=${page}&per_page=20`)).json()
             setData(response)
             setLoading(false)
         } catch (error) {

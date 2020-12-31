@@ -46,19 +46,37 @@ const Dashboard =()=>{
         )
     }
 
-    const getTotalMoneyAdded = ()=>{
+    const getTotalMoney = (type)=>{
         if(transactionQuery){
             const transactions = transactionQuery?.transactions
             let totalMoney 
-            if(transactions.length!==0){
+            if(transactions.length!==0 && type === "saved"){
                 const totalMoneyAdded =  transactions.map(({moneySaving})=> moneySaving)
                 totalMoney = totalMoneyAdded.reduce((a,b)=> a+b).toFixed(2)
-            }else{
+            }
+            else if(transactions.length!==0 && type === "spent"){
+                const totalMoneySpent =  transactions.map(({moneySpending})=> moneySpending)
+                totalMoney = totalMoneySpent.reduce((a,b)=> a+b).toFixed(2)
+            }
+            else{
                 totalMoney = 0.00.toFixed(2)
             }
             return totalMoney
         }
     }
+    // const getTotalMoneySpent = ()=>{
+    //     if(transactionQuery){
+    //         const transactions = transactionQuery?.transactions
+    //         let totalMoney 
+    //         if(transactions.length!==0){
+    //             const totalMoneySpent =  transactions.map(({moneySpending})=> moneySpending)
+    //             totalMoney = totalMoneyAdded.reduce((a,b)=> a+b).toFixed(2)
+    //         }else{
+    //             totalMoney = 0.00.toFixed(2)
+    //         }
+    //         return totalMoney
+    //     }
+    // }
        
         return(
             <>
@@ -91,7 +109,7 @@ const Dashboard =()=>{
                         previousBalance={previousBalance}
                         moneyAdded={moneyAdded}
                         moneyRemoved={moneyRemoved}
-                        getTotalMoneyAdded={getTotalMoneyAdded}
+                        getTotalMoney={getTotalMoney}
                         />
                         
                     </div>     

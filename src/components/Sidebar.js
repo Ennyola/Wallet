@@ -100,13 +100,16 @@ const WelcomeText = styled.div`
     padding:20px;
     margin:25px 0px 20px 0px;
     position:relative;
-    left:20px;
+    left:17px;
     font-size:18px;
     font-style:italic;
+    line-height:1.6;
 
     span{
         color: #884d7e;
         font-weight:normal;
+        text-transform:uppercase;
+        word-wrap:break-word;
     }
     @media (max-width:950px){
       margin-top:50px;

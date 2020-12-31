@@ -21,24 +21,19 @@ const Wrapper = styled.div`
         font-weight: 400;
         border-radius: 10px;
         transition: .7s all ease;
+        
         p{
             color:#A1168A;
             font-weight:400;
         }
-        span{
-        
-        }
         :hover{
-            /* background-color: #884d7e; */
-            margin-top: 40px;
-            /* color: white; */
-            border:3px solid #884d7e;
+            background-color: #884d7e;
             span{
                 transition: .7s all ease;
-                /* color: white !important; */
+                color: white !important;
             }
             p{
-                /* color:white; */
+                color:white;
             }
         }
     }
@@ -70,8 +65,12 @@ export const AccountSummary =(props)=>{
             </div>
             <div className= "summary">
                 <p>Total Money Added</p>
-                <NumberFormat value={props?.getTotalMoneyAdded()} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  />
-            </div>         
+                <NumberFormat value={props?.getTotalMoney("saved")} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  />
+            </div>    
+            <div className= "summary">
+                <p>Total Money Spent</p>
+                <NumberFormat value={props?.getTotalMoney("spent")} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  />
+            </div>       
         </Wrapper>
     )
 

@@ -133,7 +133,7 @@ export default (props)=>{
     const [priceAfterPercentage] = useState(price-(price*(random/100)))
     const getItem = async ()=>{
         const id = props.match.params.id.split("&")[0]
-        const data = await (await fetch(`https://api.unsplash.com/photos/${id}?client_id=oAZ8DyQ4FRcZKSz3083vOLdX7yCv3uEJhGTigrC5wi0`)).json()
+        const data = await (await fetch(`https://api.unsplash.com/photos/${id}?client_id=${process.env.REACT_APP_UNSPLASH_ACCESS_KEY}`)).json()
         setResult(data)
     }
     const addToCart=()=>{

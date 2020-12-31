@@ -80,8 +80,8 @@ const DropDownMenu = styled.div`
 `
 document.body.addEventListener("click",(e)=>{
     const dropMenu  = document.querySelector(".dropMenu")
-    if(dropMenu.classList.contains("open")){
-        dropMenu.classList.toggle("open")
+    if(dropMenu?.classList?.contains("open")){
+        dropMenu?.classList?.toggle("open")
     }
 })
 

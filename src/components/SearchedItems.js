@@ -26,8 +26,16 @@ const SearchedItems = styled.div`
             margin:20px;
         }
         p, strong{
-        color: black !important;
-    }
+        font-weight:normal
+        }
+        .price{
+            color: #884d7e;
+            font-weight:900;
+            position:relative;
+            right:20px;
+
+        }
+        
     }
 
 `
@@ -38,7 +46,7 @@ const Search  = (props)=>{
         if( props.tags &&  props.tags.length !== 0){
             const random =  Math.floor(Math.random() * props?.tags?.length)+0
             const itemToSearch = props?.tags[random].title
-            const data = await (await fetch(`https://api.unsplash.com/search/photos/?query=${itemToSearch}s&client_id=oAZ8DyQ4FRcZKSz3083vOLdX7yCv3uEJhGTigrC5wi0&page=${random}&per_page=10`)).json()
+            const data = await (await fetch(`https://api.unsplash.com/search/photos/?query=${itemToSearch}s&client_id=${process.env.REACT_APP_UNSPLASH_ACCESS_KEY}&page=${random}&per_page=10`)).json()
             setResults(data?.results)
         }
        
@@ -66,8 +74,8 @@ const Search  = (props)=>{
                             return(
                                 <span key={id} onClick={()=> goToPage(id,random)} to = {`/store/${id}&${random}`}>
                                     <img  src={urls.thumb} alt={alt_description}/>
-                                    <p>{alt_description}</p>
-                                    <strong><NumberFormat value={random} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  /></strong>
+                                    <p className="description">{alt_description?.length>31 ? `${alt_description?.substring(0,30)}....`: alt_description}</p>
+                                    <strong className ="price"><NumberFormat value={random} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  /></strong>
                                 </span>
                             )
                         })}
