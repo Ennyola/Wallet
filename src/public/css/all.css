@@ -246,12 +246,6 @@ body {
     border-radius: 10px;
 }
 
-
-/* .transaction .left>span:first-child,
-.right>span:first-child {
-    font-size: 20px;
-} */
-
 .transactions .left .moneyAdded-text {
     display: block;
 }
@@ -264,6 +258,22 @@ body {
 
 .transaction-moneyAdded {
     display: block;
+}
+
+.transactions-error {
+    text-align: center;
+    margin-top: 60px;
+    font-weight: 400;
+    font-size: 24px;
+    color: red;
+}
+
+.no-transaction {
+    margin-top: 60px;
+    font-weight: 400;
+    text-align: center;
+    color: #884d7e;
+    font-size: 18px;
 }
 
 

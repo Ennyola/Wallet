@@ -19,9 +19,6 @@ const Login = (props) => {
 
     if(user){
         props.history.push('/dashboard')
-        // const token = localStorage.token
-        // const link = `http://localhost:3000/verify/${token}`
-        // console.log(link)
     }
     const [loginUser, {data:mutationData, loading}] = useMutation(mutation)
 

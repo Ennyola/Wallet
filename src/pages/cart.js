@@ -2,6 +2,7 @@ import React, {useState, useEffect, useContext} from "react"
 import styled from "styled-components"
 import NumberFormat from 'react-number-format';
 import {useMutation} from "@apollo/client"
+import BeatLoader from "react-spinners/BeatLoader"
 
 import {PAY_AMOUNT} from "../mutations/MakeTransaction"
 import {FundsContext} from "../context/funds"
@@ -78,22 +79,22 @@ const Modal = styled.div`
     width: 100%;
     height: 120%;
     z-index: +3;
+    display:flex;
+    align-items:center;
+    justify-content:center;
     >div{
+        position:relative;
+        bottom: 140px;
         background-color:#fff;
         border-radius:10px;
-        padding:100px 10px;
-        position:absolute;
-        left:40%;
-        top:20%;
+        padding:90px 10px;
         width:350px;
         text-align:center;
         div:nth-of-type(1){
             font-weight:400;
-
             span{
                 color:green;
-            }
-            
+            }     
         }
         div:nth-of-type(2){
             margin-top:20px;
@@ -122,6 +123,9 @@ const Modal = styled.div`
             border-radius:20px;
             padding:2px 40px;
 
+        }
+        @media (max-width:450px){
+            width:300px;
         }
     }
 `
@@ -168,20 +172,27 @@ const Cart = (props)=>{
         )
     
     }
-
-    const [pay, {data}] = useMutation(PAY_AMOUNT)
-
-    if(data){
-        localStorage.removeItem("ennet_cart");
-        props.history.push("/dashboard") 
-        window.location.reload()
-    }
-   
+    
     useEffect(()=>{
+        
         getItemforStorage()
 
     }, [])
 
+
+    const [pay, {data,loading,error}] = useMutation(PAY_AMOUNT)
+
+    if(data){
+        notify("Item Bought Successfully", "success") 
+        localStorage.removeItem("ennet_cart");
+        props.history.push("/dashboard")
+        window.location.reload()    
+    }
+    if(error){
+        notify("An Error Occured", "error")
+    }
+   
+  
    
 
     const deleteItem = (id)=>{
@@ -215,21 +226,22 @@ const Cart = (props)=>{
                 <div>
                     <i onClick = {toggleModal} className="fas fa-times"></i>
                     <div>Current Balance : <NumberFormat value={currentBalance} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  /></div>
-                    <div>Amount to be paid : <NumberFormat value={!fundsLoading? total: "..."} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  /></div>
-                    <button
+                    <div>Amount to be paid : <NumberFormat value={!fundsLoading? total?.toFixed(2): "..."} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  /></div>
+                   {!loading ? <button
                     onClick ={()=>{
                         if(total>currentBalance){
                             const modal = document.querySelector(".checkout-modal")
-                            notify("Insufficent Funds. Please Fund Wallet or Delete Items From Cart","error")
+                            notify("Insufficent Funds. Please Fund Wallet or Delete Item(s) From Cart","error")
                             modal.classList.toggle('close')
                             return
-
                         }
                         pay({
                         variables:{amount:total, timeOfTransaction:getDate()}
                          })
                     }}
-                    >Pay</button> 
+                    >Pay</button>
+                    : <BeatLoader size={10} margin={2} color={"#884d7e"} />
+                     }  
                 </div> 
             </Modal>
 
@@ -260,8 +272,8 @@ const Cart = (props)=>{
                                         </td>
                                         
                                         <td><NumberFormat value={quantity} displayType={'text'} thousandSeparator={true}  /></td>
-                                        <td><NumberFormat value={price} displayType={'text'} thousandSeparator={true} prefix ={"₦"} /></td>
-                                        <td><NumberFormat value={Number(quantity) * price} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  /></td>
+                                        <td><NumberFormat value={price?.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix ={"₦"} /></td>
+                                        <td><NumberFormat value={(Number(quantity) * price)?.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  /></td>
                                     </tr>
                                 ))}
                             
@@ -270,7 +282,7 @@ const Cart = (props)=>{
                                     <td></td>
                                     <td></td>
                                     <Checkout>
-                                        <p><NumberFormat value={total} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  /></p>
+                                        <p><NumberFormat value={total?.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  /></p>
                                         <button onClick={toggleModal}>Checkout</button>
                                     </Checkout>
                                    

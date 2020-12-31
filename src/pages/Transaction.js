@@ -1,27 +1,31 @@
-import React from 'react'
-import {useQuery} from '@apollo/client'
+import React,{useContext} from 'react'
 import NumberFormat from 'react-number-format';
 import date from 'date-and-time'
 import {Wrapper} from "../components/styles"
+import MoonLoader from "react-spinners/MoonLoader";
+import { css } from "@emotion/core";
 
+import {FundsContext} from "../context/funds"
 
-import getTransactionQuery from '../queries/getTransaction'
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+  margin-top:50px;
 
+`
 
-
-
-const Transactions = (props)=>{
+const Transactions = ()=>{
     document.title = "Transactions"
-    const {data} = useQuery(getTransactionQuery)
-    
+    const {transactionQuery,transLoading} = useContext(FundsContext)
     
     const displayTransactions = ()=>{
-          if (data){
-            const {transactions} = data
-            return transactions.map(({id,moneySaving, moneySpending, timeOfTransaction})=>{
+          if (transactionQuery){
+            const {transactions} = transactionQuery
+            return transactions.length !== 0 ? 
+            (transactions?.map(({id,moneySaving, moneySpending, timeOfTransaction})=>{
               const [transactionDate, transactionTime] = timeOfTransaction.split('T') 
               const time = transactionTime.slice(0,15).split('+')[0]
-              // const utc = transactionTime.slice(15)
               const dateTimeString = date.parse(`${transactionDate} ${time}`, 'YYYY-MM-DD HH:mm:ss')
               const fulldateTimeString = dateTimeString.toString()
               const utcDay = dateTimeString.toUTCString().slice(0, 16)
@@ -50,7 +54,24 @@ const Transactions = (props)=>{
                 )         
 
               }
+            )):(
+              <div className = "no-transaction">
+                No Available Transaction
+              </div>
             ) 
+          }
+          else if(transLoading){
+            return(
+                  <div>
+                    <MoonLoader
+                        css ={override}
+                        size={50}
+                        color={"#A1168A"}
+                    />
+                  </div>
+          )}
+          else{
+            return <div className = "transactions-error">Error, Please Reload</div>
           }
        }
     

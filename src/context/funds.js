@@ -8,7 +8,7 @@ import getFundsQuery from '../queries/getFunds'
 export const FundsContext = createContext({})
 
 export const FundsContextProvider = ({children})=>{
-    const {data : fundsQuery, loading: fundsLoading} = useQuery(getFundsQuery)
+    const {data : fundsQuery, loading: fundsLoading, error:fundsError} = useQuery(getFundsQuery)
     const {data : transactionQuery, loading:transLoading, error:transError} = useQuery(getTransactionQuery)
     return(
         <FundsContext.Provider
@@ -20,7 +20,8 @@ export const FundsContextProvider = ({children})=>{
             transactionQuery,
             fundsLoading,
             transLoading,
-            transError
+            transError,
+            fundsError
         }}
         >
             {children}

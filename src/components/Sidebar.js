@@ -110,6 +110,7 @@ const WelcomeText = styled.div`
         font-weight:normal;
         text-transform:uppercase;
         word-wrap:break-word;
+        padding-right:10px;
     }
     @media (max-width:950px){
       margin-top:50px;

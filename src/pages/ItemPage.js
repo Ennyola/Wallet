@@ -12,6 +12,7 @@ const Grid = styled.div`
     display:flex;
     justify-content:center;
     margin-top:30px;
+    padding:10px;
     /* flex-wrap:wrap; */
     
     

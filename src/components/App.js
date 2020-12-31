@@ -36,9 +36,7 @@ const App = ()=> {
     <div className="App">
       <ApolloProvider client = {client}>
         <AuthContextProvider>
-          <FundsContextProvider>
             <Routes/>
-          </FundsContextProvider>
         </AuthContextProvider>
       </ApolloProvider>
     </div>

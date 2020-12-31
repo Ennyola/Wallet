@@ -1,5 +1,4 @@
 import React from "react";
-import NumberFormat from 'react-number-format';
 import styled from "styled-components"
 
 
@@ -21,6 +20,9 @@ const Wrapper = styled.div`
         font-weight: 400;
         border-radius: 10px;
         transition: .7s all ease;
+        .text-success{
+            color: #2d832d !important;
+        }
         
         p{
             color:#A1168A;
@@ -51,26 +53,24 @@ export const AccountSummary =(props)=>{
         <Wrapper>
             <div className= "summary">
                 <p>Previous Balance</p>
-                <NumberFormat value={props?.previousBalance?.toFixed(2)||0.00.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  />
+                {props?.returnValueorError(props?.previousBalance)}
             </div>
             <div className= "summary">
                 <p>Money Funded</p>
-                <NumberFormat className = "text-success" value={props?.moneyAdded?.toFixed(2)||0.00.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  />
-        
+               <span className= "text-success"> {props?.returnValueorError(props?.moneyAdded)}</span>
             </div>
             <div className= "summary"> 
                 <p>Money Spent</p>
-                <NumberFormat className="text-danger"  value={props?.moneyRemoved?.toFixed(2)|| 0.00.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  />
-        
+                <span className= "text-danger"> {props?.returnValueorError(props?.moneyRemoved)} </span>
             </div>
             <div className= "summary">
                 <p>Total Money Added</p>
-                <NumberFormat value={props?.getTotalMoney("saved")} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  />
+                {props?.getTotalMoney("saved")}
             </div>    
             <div className= "summary">
                 <p>Total Money Spent</p>
-                <NumberFormat value={props?.getTotalMoney("spent")} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  />
-            </div>       
+                {props?.getTotalMoney("spent")}
+             </div>       
         </Wrapper>
     )
 

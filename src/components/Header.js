@@ -1,7 +1,6 @@
 import React,{useContext} from 'react'
 import {Link} from 'react-router-dom'
 import styled from "styled-components"
-import FadeLoader from "react-spinners/FadeLoader";
 import {AuthContext} from "../context/Auth"
 
 

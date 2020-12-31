@@ -13,10 +13,18 @@ import {Wrapper} from "../components/styles"
 
 const Dashboard =()=>{
     document.title="Home"
-    const {currentBalance, moneyAdded,moneyRemoved,previousBalance,transactionQuery} = useContext(FundsContext)
+    const {
+        currentBalance,
+        moneyAdded,
+        moneyRemoved,
+        previousBalance,
+        transactionQuery,
+        fundsLoading,
+        transLoading,
+        fundsError
+        } = useContext(FundsContext)
 
-    const [fundWallet] = useMutation(FUND_WALLET)
- 
+    const [fundWallet, {loading}] = useMutation(FUND_WALLET)
     const getDate=() =>{
         const dateObj = new Date()
         const date = dateObj.toLocaleDateString()
@@ -40,24 +48,51 @@ const Dashboard =()=>{
     }
 
     const getTotalMoney = (type)=>{
+        if (loading){
+            return <div>Loading...</div>
+        }
+
         if(transactionQuery){
             const transactions = transactionQuery?.transactions
-            let totalMoney 
+            let totalMoney
             if(transactions.length!==0 && type === "saved"){
                 const totalMoneyAdded =  transactions.map(({moneySaving})=> moneySaving)
                 totalMoney = totalMoneyAdded.reduce((a,b)=> a+b).toFixed(2)
+                return <NumberFormat value={totalMoney} displayType={'text'} thousandSeparator={true} prefix ={"₦"} />
             }
             else if(transactions.length!==0 && type === "spent"){
                 const totalMoneySpent =  transactions.map(({moneySpending})=> moneySpending)
                 totalMoney = totalMoneySpent.reduce((a,b)=> a+b).toFixed(2)
+                return <NumberFormat value={totalMoney} displayType={'text'} thousandSeparator={true} prefix ={"₦"} />
             }
             else{
-                totalMoney = 0.00.toFixed(2)
+                return <NumberFormat value={0.00.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix ={"₦"} />
             }
-            return totalMoney
+        }
+        else if(transLoading  ){
+            return <div>Loading...</div>
+        }
+        else{
+            return <div>Error...</div>
         }
     }
-       
+
+    const returnValueorError = (value)=>{
+        if(fundsLoading || loading){
+            return <div>Loading...</div>
+        }
+        else if(fundsError){
+            return <div>Error</div>
+        }
+        else{
+            return  <NumberFormat value={value?.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  />
+        }
+
+    }
+
+
+
+
         return(
             <>
                 <PaystackForm fundWallet = {addToWallet}/>
@@ -69,7 +104,7 @@ const Dashboard =()=>{
                         <div id = "fund-div">
                             <span id = "current-balance">
                                 <div>Current Balance</div>  
-                                <NumberFormat value={currentBalance?.toFixed(2)||0.00.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  />
+                                {returnValueorError(currentBalance)}
                             </span>
 
                             <button 
@@ -90,6 +125,7 @@ const Dashboard =()=>{
                         moneyAdded={moneyAdded}
                         moneyRemoved={moneyRemoved}
                         getTotalMoney={getTotalMoney}
+                        returnValueorError={returnValueorError}
                         />
                         
                     </div>     
