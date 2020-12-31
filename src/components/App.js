@@ -4,14 +4,12 @@ import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client'
 import {createHttpLink} from 'apollo-link-http'
 import { setContext } from 'apollo-link-context'
 
-import {FundsContextProvider} from '../context/funds'
 import {AuthContextProvider} from "../context/Auth"
 import Routes from "../routes/routes"
 
 
 const link = new createHttpLink({
-  uri : 'http://127.0.0.1:8000/graphiql/',
-  credentials: 'same-origin'
+  uri : 'https://ennet.herokuapp.com/graphiql/',
 })
 
 const authLink = setContext((_, { headers }) => {
