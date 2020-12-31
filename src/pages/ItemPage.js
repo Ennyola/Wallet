@@ -149,7 +149,7 @@ export default (props)=>{
         props.history.push("/cart")
         window.location.reload()
     }
-
+    document.title = "Item"
     const getValueAfterPercentage = (value)=>{
         return(
             <div>

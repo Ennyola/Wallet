@@ -230,6 +230,7 @@ window.addEventListener("scroll",(e)=>{
 
 
 export default ()=>{
+    document.title = "ENNET"
     const featuresRef = useRef(null)
     const aboutRef = useRef(null)
     const executeScroll = (ref) => ref.current.scrollIntoView()
@@ -257,6 +258,7 @@ export default ()=>{
             <SideBar className = "landing-sidebar overlay close" onClick={closeSidebar}>
                 <div className="sidebar-div">
                     <Link to="/login">SiGN-IN</Link>
+                    <Link to="/signup">SIGN-UP</Link>
                     <Link to ="" onClick ={()=> executeScroll(featuresRef)} >FEATURES </Link>
                     <Link to ="" onClick ={()=> executeScroll(aboutRef)}>ABOUT </Link>
                 </div>

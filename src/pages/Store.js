@@ -50,6 +50,7 @@ const override = css`
 `;
 
 export default () => {
+    document.title = "Store"
     const [data, setData] = useState({})
     const [page, setPage] = useState(1)
     const [loading, setLoading] = useState(true);

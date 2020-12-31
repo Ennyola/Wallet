@@ -13,6 +13,7 @@ import '../public/css/auth.css'
 
 
 const Signup =(props)=>{
+        document.title = "SIGN-UP"
         const {user,refetch} = useContext(AuthContext)
 
         let [alias, SetAlias] = useState(""),
@@ -75,7 +76,7 @@ const Signup =(props)=>{
 
                 <div className="row">
                     <div className="col-md-5">
-                    <h1 className = "logo"> ENNET </h1>
+                     <h1 > <Link to ="/" className = "logo"> ENNET </Link> </h1>
                         <form onSubmit = {onSubmit}>
                             <h4>Ready to save? <span id = "signup-text"> Signup </span></h4>
 

@@ -4,6 +4,7 @@ import {Wrapper} from "../components/styles"
 
 class Help extends Component{
     render(){
+        document.title = "Help"
         return(
             <Wrapper className = "help">
                 <div className = "body">

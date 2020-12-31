@@ -64,19 +64,6 @@ const Dashboard =()=>{
             return totalMoney
         }
     }
-    // const getTotalMoneySpent = ()=>{
-    //     if(transactionQuery){
-    //         const transactions = transactionQuery?.transactions
-    //         let totalMoney 
-    //         if(transactions.length!==0){
-    //             const totalMoneySpent =  transactions.map(({moneySpending})=> moneySpending)
-    //             totalMoney = totalMoneyAdded.reduce((a,b)=> a+b).toFixed(2)
-    //         }else{
-    //             totalMoney = 0.00.toFixed(2)
-    //         }
-    //         return totalMoney
-    //     }
-    // }
        
         return(
             <>

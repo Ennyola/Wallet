@@ -4,13 +4,6 @@
     overflow: hidden;
 }
 
-.login .logo {
-    color: #A1168A;
-    position: relative;
-    top: 20px;
-    left: 20px;
-}
-
 .login .row>div:first-child {
     height: 100vh;
     background-image: url('../images/20-banknote-on-black-leather-bag-3943732.jpg');
@@ -18,7 +11,15 @@
     background-blend-mode: soft-light;
 }
 
-.login .row>div:last-child>.logo {
+.login .row>div:first-child .logo {
+    color: #A1168A;
+    position: relative;
+    top: 20px;
+    left: 20px;
+    width: 180px;
+}
+
+.login .row>div:last-child .logo {
     display: none;
 }
 
@@ -61,14 +62,15 @@
     color: #A1168A;
 }
 
-.signup .logo {
-    color: #A1168A;
-}
-
 .signup {
     height: 100vh;
     width: 100vw;
     overflow: hidden;
+}
+
+.signup .logo {
+    color: #A1168A;
+    width: 140px;
 }
 
 .signup form {
@@ -151,18 +153,23 @@
 }
 
 @media (max-width:767px) {
-    .login .row>div:last-child>.logo {
+    .login .row>div:last-child .logo {
+        position: relative;
+        top: 30px;
+        left: 30px;
         display: block;
-        padding-top: 20px;
+        padding-top: 10px;
+        width: 140px;
+        color: #A1168A;
     }
     .signup {
         background-color: #ffffff !important;
     }
     .signup .logo {
-        color: #EEAADD;
+        color: #884d7e;
     }
     .signup form h4 {
-        color: #EEAADD;
+        color: #A1168A;
     }
     /* .signup span {
         color: white;

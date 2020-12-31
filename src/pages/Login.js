@@ -10,6 +10,7 @@ import { useMutation, gql} from '@apollo/client'
 
 
 const Login = (props) => {
+    document.title = "Login"
     const {user,refetch} = useContext(AuthContext)
 
     let [email, SetEmail] = useState(""),
@@ -66,14 +67,14 @@ const Login = (props) => {
 
             <div className="row">
                 <div className="col-md-6">
-                    <h1 className = "logo"> ENNET </h1> 
+                    <h1> <Link to ="/" className = "logo">ENNET</Link> </h1>
                     <h1  className = "animate__animated animate__fadeInDownBig welcome-text"> Welcome to ENNET.</h1>
                 </div>
                 <div className="col-md-6">
-                    <h1 className = "logo"> ENNET </h1>
+                <h1 ><Link to ="/" className = "logo"> ENNET </Link></h1>
                     <div>
                         <form onSubmit= {onSubmit} className = "form">
-                            <h4> Ready to Save?  <span> Login </span> </h4>
+                            <h4> Ready to Save? <span> Login </span> </h4> 
                                 
                             <MDBInput 
                             onChange = {e=>{SetEmail(e.target.value)}}
