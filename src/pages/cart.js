@@ -217,7 +217,6 @@ const Cart = (props)=>{
         const date = dateObj.toLocaleDateString()
         const time = dateObj.toTimeString()
         const dateAndTime = `${date},${time}`
-        console.log(dateAndTime)
         return dateAndTime
     }
     return(

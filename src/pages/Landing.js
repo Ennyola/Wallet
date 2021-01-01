@@ -53,7 +53,7 @@ const Header = styled.header`
 `
 const GetStarted = styled.div`
         background-color: #884d7e;
-        height:100vh;
+        height:90vh;
         width:100%;
         text-align:center;
         padding:200px 30px 0px 30px;
