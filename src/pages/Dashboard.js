@@ -9,6 +9,8 @@ import {FundsContext} from "../context/funds"
 import {PaystackForm} from "../components/PaystackForm"
 import {AccountSummary} from "../components/AccountSummary"
 import {Wrapper} from "../components/styles"
+import notify from "../utils/toast"
+
 
 
 const Dashboard =()=>{
@@ -25,6 +27,7 @@ const Dashboard =()=>{
         } = useContext(FundsContext)
 
     const [fundWallet, {loading}] = useMutation(FUND_WALLET)
+    
     const getDate=() =>{
         const dateObj = new Date()
         const date = dateObj.toLocaleDateString()
@@ -34,6 +37,7 @@ const Dashboard =()=>{
     }
 
     const addToWallet=(amount)=>{
+        const  paystackForm= document.querySelector(".fundwallet-form")
         fundWallet({
             variables:{amount, timeOfTransaction: getDate()},
             refetchQueries:[
@@ -45,12 +49,20 @@ const Dashboard =()=>{
                 }
             ]    
         })
+        .then(()=>{
+            notify("Wallet Funded Successfully", "success")
+            paystackForm.classList.add("close")
+        })
+        .catch(()=>{
+            paystackForm.classList.add("close")
+            notify("An Error Occured. Please Reload", "error")
+        })
     }
 
     const getTotalMoney = (type)=>{
-        if (loading){
-            return <div>Loading...</div>
-        }
+        // if (loading){
+        //     return <div>Loading...</div>
+        // }
 
         if(transactionQuery){
             const transactions = transactionQuery?.transactions
@@ -78,7 +90,7 @@ const Dashboard =()=>{
     }
 
     const returnValueorError = (value)=>{
-        if(fundsLoading || loading){
+        if(fundsLoading){
             return <div>Loading...</div>
         }
         else if(fundsError){
@@ -95,7 +107,7 @@ const Dashboard =()=>{
 
         return(
             <>
-                <PaystackForm fundWallet = {addToWallet}/>
+                <PaystackForm loading={loading} fundWallet = {addToWallet}/>
                 <Wrapper className = "dashboard-wrapper"> 
                     
 
