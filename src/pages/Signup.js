@@ -50,7 +50,7 @@ const Signup =(props)=>{
                 variables:{alias,email,password},
                
             }).catch((error)=>{
-                setErrors([error.message])
+                setErrors(["An Error Occured"])
             })
         } 
         

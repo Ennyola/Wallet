@@ -35,7 +35,7 @@ const Login = (props) => {
         loginUser({
             variables:{email,password},  
         }).catch((e)=>{
-            setErrors([e.message])
+            setErrors(["An error Occured"])
         })
     
     } 
