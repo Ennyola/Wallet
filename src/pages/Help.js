@@ -26,7 +26,7 @@ class Help extends Component{
                         </li>
                         
                         <li>
-                            To check Transactions made, check the Transactions page.
+                            To check Transactions made, go to the Transactions page. Hover Over each Card to see the full details of the transaction
                         </li>
                     </ul>
 
