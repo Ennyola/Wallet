@@ -3,7 +3,7 @@ import { MDBInput } from 'mdbreact';
 import NumberFormat from 'react-number-format';
 import FadeLoader from "react-spinners/FadeLoader"
 import { css } from "@emotion/core";
-// import notify from "../utils/toast"
+import notify from "../utils/toast"
 
 
 const override = css`
@@ -45,7 +45,22 @@ export const PaystackForm = (props)=>{
                                 <button 
                                     className="paystack-button"
                                     onClick={()=> {
-                                        props?.fundWallet(amount.replace("₦","").split(",").join(''))
+                                        const amountInFloat = parseFloat(amount.replace("₦","").split(",").join(''))
+                                        if(amountInFloat === 0){
+                                            notify("Please Enter a Valid Amount", "error")
+                                            return
+                                        }
+                                        else if(amountInFloat < 0){
+                                            notify("Please Enter a Non Negative Value", "error")
+                                            return
+                                        }
+                                        else{
+                                            if(amount.replace("₦","").split(",").join('').length>9){
+                                                notify("Please Enter an Amount in The Millions Category. You can't become Jeff Bezos Overnight","error")
+                                                return
+                                            }
+                                            props?.fundWallet(amount.replace("₦","").split(",").join(''))
+                                        }
                                         setAmount("")
                                         }}
                                     >

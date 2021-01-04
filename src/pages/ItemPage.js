@@ -131,7 +131,6 @@ const ItemPage = (props)=>{
             return
         }
         const items = localStorage?.ennet_cart ? JSON.parse(localStorage?.ennet_cart) :[]
-        console.log(items)
         const index = items.findIndex((item)=> item.id === result.id)
         index === -1 ? items.push({...result, price:priceAfterPercentage,quantity}): (items[index] = {...result, price:priceAfterPercentage, quantity})
         localStorage.setItem("ennet_cart", JSON.stringify(items))

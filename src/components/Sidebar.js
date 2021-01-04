@@ -129,16 +129,17 @@ class Sidebar extends Component {
             },
             {
               id: 2,
-              name: "Transactions",
-              to: "/transactions",
-              iconClassName: "fas fa-exchange-alt"
-            },
-            {
-              id: 3,
               name: "Store",
               to: "/store",
               iconClassName: "fas fa-store"
             },
+            {
+              id: 3,
+              name: "Transactions",
+              to: "/transactions",
+              iconClassName: "fas fa-exchange-alt"
+            },
+           
             {
               id :4,
               name: "Cart",

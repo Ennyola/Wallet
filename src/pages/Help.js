@@ -18,10 +18,11 @@ class Help extends Component{
                              It just seamlessly automates a real E-wallet
                         </li>
                         <li> 
-                            To make a add money to your wallet, click on the Fund Wallet button on the homepage.
+                            To add money to your wallet, click on the Fund button on the homepage.
                         </li>
                         <li>
                            The Store provides a variety of Items that can be purchased at a given price. Irrespective of the Item, no real purchase is being made. The Store just provides an avenue for the money added to be spent.
+                           It is worthy to note that the items are Just Pictures fetched from a resource and given a random price. So due to that, you might see random pictures(Varying from Objects to Nature) with a random Price.
                         </li>
                         
                         <li>

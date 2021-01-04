@@ -26,8 +26,8 @@ const Routes = ()=>{
               <PrivateRoute path = "/dashboard" layout = {DashboardLayout} component = { requireAuth(Dashboard)} activeLink = {1} />   
               <PrivateRoute path = "/help" layout = {DashboardLayout} component = {requireAuth(Help)} activeLink = {5}/>
               <PrivateRoute path = "/store/:id" exact layout = {DashboardLayout} component = {requireAuth(ItemPage)} />
-              <PrivateRoute path = "/store" exact layout = {DashboardLayout} component = {requireAuth(Store)} activeLink = {3}/>
-              <PrivateRoute path= "/transactions" layout = {DashboardLayout}  component = {requireAuth(Transactions)} activeLink = {2}/>
+              <PrivateRoute path = "/store" exact layout = {DashboardLayout} component = {requireAuth(Store)} activeLink = {2}/>
+              <PrivateRoute path= "/transactions" layout = {DashboardLayout}  component = {requireAuth(Transactions)} activeLink = {3}/>
               <PrivateRoute path = "/cart" layout = {DashboardLayout} component = {requireAuth(Cart)} activeLink = {4}/>
             </FundsContextProvider>
           </Switch>

@@ -312,7 +312,7 @@ const Landing = ()=>{
                 <p> Ever Felt Broke? Well, that was the same reason Ennet was built. Ennet is an E-wallet Application that Automates the saving process. 
                 You can save up to Any Amount and the money's all yours(Just imagine having Trillions at your Disposal).
                 Though It stores no real money nor is any real money being spent, you can still get the thrill of being richer than Jeff Bezos.
-                An In-house Mini store is provided to facilitate and Ensure you can spend the money Saved up.
+                An In-house Mini store is provided to facilitate and ensure you can spend the money Saved up.
                 Wanna Know how you can save, why don't you <Link to="/signup">Sign-up</Link>  to Find out 😉
                 </p>
             </About>

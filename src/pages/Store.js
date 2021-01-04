@@ -19,6 +19,7 @@ const ImageWrapper  = styled.div`
         color: black;
         text-transform:capitalize;
         font-weight:normal;
+        display:block;
     }
     
     img{
@@ -78,7 +79,7 @@ const Store =  () => {
     useEffect(()=>{
         const fetchPhotos = async ()=>{
             try {
-                const response = await (await fetch(`https://api.unsplash.com/search/photos/?query=sneaker&client_id=${process.env.REACT_APP_UNSPLASH_ACCESS_KEY}&page=${page}&per_page=20`)).json()
+                const response = await (await fetch(`https://api.unsplash.com/search/photos/?query=electronics&client_id=${process.env.REACT_APP_UNSPLASH_ACCESS_KEY}&page=${page}&per_page=20`)).json()
                 setData(response)
                 setLoading(false)
             } catch (error) {

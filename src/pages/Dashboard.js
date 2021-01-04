@@ -97,7 +97,7 @@ const Dashboard =()=>{
             return <div>Error</div>
         }
         else{
-            return  <NumberFormat value={value?.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  />
+            return  <NumberFormat className={"funds-displayed"} value={value?.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix ={"₦"}  />
         }
 
     }
@@ -128,7 +128,7 @@ const Dashboard =()=>{
                             className = "btn btn-primary" 
                             id ="fund-wallet"
                             >
-                                Fund Wallet
+                                Fund
                             </button>
                         </div>
 
